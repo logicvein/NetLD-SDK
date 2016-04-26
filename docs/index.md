@@ -1,17 +1,24 @@
-# Welcome to MkDocs
+## Overview
 
-For full documentation visit [mkdocs.org](http://mkdocs.org).
+This document provides technical details of the Net LineDancer integration API.  The Net LineDancer server exposes a JSON-RPC^1  2.0 API over HTTPS for language neutral integration from external systems. There are many JSON-RPC 2.0 client libraries available for all major languages^2.  See the *Examples* directory for sample scripts in various languages that use common libraries available for those languages.
 
-## Commands
+The use of JSON-RPC means that the underlying data sent to or received from the server is in JSON (JavaScript Object Notation) format.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
+In addition to the JSON-RPC 2.0 API, some import/export functions are accessed over standard HTTP
+mechanisms using GET/POST semantics.
 
-## Project layout
+The REST access URL for Net LineDancer is:
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+https://```server```/rest?j_username=```username```&amp;j_password=```password```
+
+Where ```server```, ```username```, and ```password``` are values correct for your installation.
+
+<p></p>
+
+The API documentation shows examples of "raw" JSON requests, but it is recommended that you use JSON-RPC libraries appropriate for your
+language of choice, which will handle the JSON generation for you.
+
+^1 <http://www.jsonrpc.org/specification><br/>
+^2 <http://en.wikipedia.org/wiki/JSON-RPC#Implementations>
+
+------------------------------------------------------
