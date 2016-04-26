@@ -15,6 +15,8 @@
 import sys
 import os
 
+import recommonmark
+from recommonmark.transform import AutoStructify
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -290,3 +292,10 @@ source_parsers = {
 	'.md': CommonMarkParser,
 	'.markdown': CommonMarkParser,
 }
+
+def setup(app):
+    app.add_config_value('recommonmark_config', {
+            'url_resolver': lambda url: github_doc_root + url,
+            'auto_toc_tree_section': 'Contents',
+            }, True)
+    app.add_transform(AutoStructify)
