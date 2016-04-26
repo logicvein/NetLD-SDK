@@ -1,5 +1,3 @@
-## Appendix A
-
 ### Device Adapter IDs
 
 | Adapter ID       |

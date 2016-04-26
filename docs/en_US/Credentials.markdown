@@ -1,4 +1,4 @@
-## Credentials
+## Overview
 
 The credentials API provides the core functionality for device authentication credentials in Net LineDancer.
 
@@ -155,14 +155,14 @@ Retrieves a single credential configuration (``CredentialConfig``) object.
 ### ```Credentials.saveCredentialConfig```
 
 Save a single credential configuration.  This method can be used to save a new configuration, or renaming an existing one.  Note: after call this method you must call the ``commitEdits``
-or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are should be made before a final call to ``commitEdits``. 
+or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are should be made before a final call to ``commitEdits``.
 
 #### Parameters
 | Parameter        | Type          | Description      |
 | ---------------- | ------------- | --------------   |
 | network          | UTF-8 String  | Name of an existing network, e.g. "Default" |
 | oldConfigName    | UTF-8 String  | When *renaming* a credential configuration, this value should be the "old" (original) name of the configuration, and object in the ``credentialConfig`` parameter should contain the new name. This can be ``null`` in all other cases. |
-| credentialConfig | Object        | A ``CredentialConfig`` object 
+| credentialConfig | Object        | A ``CredentialConfig`` object
 
 #### Return: the updated ``CredentialConfig`` object
 
@@ -194,7 +194,7 @@ or ``discardEdits`` method.  If you are making many changes, it is recommended t
 ### ```Credentials.deleteCredentialConfig```
 
 Delete a single credential configuration.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are
-should be made before a final call to ``commitEdits``. 
+should be made before a final call to ``commitEdits``.
 
 #### Parameters
 | Parameter     | Type          | Description      |
@@ -311,7 +311,7 @@ associated with.
 ### ```Credentials.saveCredentialSets```
 
 Save a collection of credential sets.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are
-should be made before a final call to ``commitEdits``. 
+should be made before a final call to ``commitEdits``.
 
 #### Parameters
 | Parameter        | Type          | Description      |
@@ -355,7 +355,7 @@ should be made before a final call to ``commitEdits``.
 ### ```Credentials.deleteCredentialSets```
 
 Delete a collection of credential sets.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are
-should be made before a final call to ``commitEdits``. 
+should be made before a final call to ``commitEdits``.
 
 #### Parameters
 | Parameter        | Type          | Description      |

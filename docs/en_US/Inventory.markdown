@@ -1,4 +1,4 @@
-## Inventory
+## Overview
 
 The inventory API provides the core functionality of manipulating devices in the Net LineDancer inventory, including: adding devices, deleting devices, modifying devices, searching devices, etc.
 

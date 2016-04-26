@@ -1,4 +1,4 @@
-## Configuration
+## Overview
 
 The configuration API provides the core functionality of retrieving configuration history and managing draft configurations.
 
