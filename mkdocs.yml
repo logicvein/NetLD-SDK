@@ -1,0 +1,8 @@
+site_name: netLD SDK
+pages:
+- Overview: en_US/API.markdown
+- Configuration: en_US/Configuration.markdown
+- Inventory: en_US/Inventory.markdown
+- Credentials: en_US/Credentials.markdown
+- Appendix A: en_US/Appendix_A.markdown
+theme: readthedocs
