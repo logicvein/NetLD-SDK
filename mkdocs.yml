@@ -1,6 +1,6 @@
 site_name: netLD SDK
 pages:
-- index.md
+- Overview: index.md
 - Configuration: en_US/Configuration.markdown
 - Inventory: en_US/Inventory.markdown
 - Credentials: en_US/Credentials.markdown
