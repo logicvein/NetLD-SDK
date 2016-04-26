@@ -284,8 +284,9 @@ latex_elements = {
 from recommonmark.parser import CommonMarkParser
 
 # The suffix of source filenames.
-source_suffix = ['.rst', '.md']
+source_suffix = ['.rst', '.md', '.markdown']
 
 source_parsers = {
 	'.md': CommonMarkParser,
+	'.markdown': CommonMarkParser,
 }
