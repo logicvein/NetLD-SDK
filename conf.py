@@ -15,9 +15,6 @@
 import sys
 import os
 
-import recommonmark
-from recommonmark.transform import AutoStructify
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -285,17 +282,10 @@ latex_elements = {
 
 from recommonmark.parser import CommonMarkParser
 
-# The suffix of source filenames.
-source_suffix = ['.rst', '.md', '.markdown']
+# The suffix of source filenames.  '.rst'
+source_suffix = ['.md', '.markdown']
 
 source_parsers = {
 	'.md': CommonMarkParser,
 	'.markdown': CommonMarkParser,
 }
-
-def setup(app):
-    app.add_config_value('recommonmark_config', {
-            'url_resolver': lambda url: github_doc_root + url,
-            'auto_toc_tree_section': 'Contents',
-            }, True)
-    app.add_transform(AutoStructify)
