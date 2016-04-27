@@ -1,4 +1,4 @@
-#### LogicVein Net LineDancer SDK
+#### LogicVein Net LineDancer Integration SDK
 
 Online documention can be found [here](http://netld-sdk.readthedocs.org/en/latest/).
 
