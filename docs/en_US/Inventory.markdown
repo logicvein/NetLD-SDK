@@ -254,6 +254,8 @@ When ```offset``` + ```pageSize``` is greater than or equal to ```total``` there
                            "offset": 0,
                            "pageSize": 100
                           }
+              "sortColumn": "ipAddress",
+              "descending": false
              },
    "id": 1
 }
