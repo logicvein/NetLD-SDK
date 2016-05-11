@@ -12,16 +12,6 @@ Get the compliance ruleset for the given ID
 | ruleSetId | Integer | The ID of the desired RuleSet object |
 
 ##### Return: the ```RuleSet``` object or ```null```
-##### RuleSet object fields:
-| Field         | Type          | Description      |
-| ------------- | ------------- | --------------   |
-| ruleSetId     | Integer       | The rule set's ID |
-| ruleSetName   | UTF-8 String  | The name of the rule set |
-| adapterId     | UTF-8 String  | The Adapter ID of the device |
-| configPath    | UTF-8 String  | The device configuration this rule applies to |
-| ruleSetXml    | UTF-8 String  | The rule set definition |
-| networks      | Array         | An array of managed networks this rule set is available for |
-| readOnly      | Boolean       | A boolean flag indicating whether or not this rule set is editable |
 
 <p class="vspacer"></p>
 
@@ -71,6 +61,17 @@ Get the list of current violations for a given policy.
 <p class="vspacer"></p>
 
 ## Compliance Objects
+
+### RuleSet
+| Field         | Type          | Description      |
+| ------------- | ------------- | --------------   |
+| ruleSetId     | Integer       | The rule set's ID |
+| ruleSetName   | UTF-8 String  | The name of the rule set |
+| adapterId     | UTF-8 String  | The Adapter ID of the device |
+| configPath    | UTF-8 String  | The device configuration this rule applies to |
+| ruleSetXml    | UTF-8 String  | The rule set definition |
+| networks      | Array         | An array of managed networks this rule set is available for |
+| readOnly      | Boolean       | A boolean flag indicating whether or not this rule set is editable |
 
 ### PolicyInfo
 | Field            | Type         | Description      |
