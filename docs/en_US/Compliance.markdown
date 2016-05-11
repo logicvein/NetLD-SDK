@@ -42,6 +42,7 @@ Get the policy definition by ID.
 | Parameter | Type    | Description |
 | --------- | ------- | ----------- |
 | policyId  | Integer | The ID of the desired policy |
+
 ##### Return: a ```Policy``` object or ```null```
 
 <p class="vspacer"></p>
@@ -53,6 +54,7 @@ Get the list of current violations for a given device.
 | --------- | ------------ | ----------- |
 | network   | UTF-8 String | The managed network of the device |
 | ipAddress | UTF-8 String | The IP address of the device |
+
 ##### Return: an array of ```Violation``` objects
 
 <p class="vspacer"></p>
@@ -63,6 +65,7 @@ Get the list of current violations for a given policy.
 | Parameter | Type    | Description |
 | --------- | ------- | ----------- |
 | policyId  | Integer | The ID of the desired violations' policy |
+
 ##### Return: an array of ```Violation``` objects
 
 <p class="vspacer"></p>
