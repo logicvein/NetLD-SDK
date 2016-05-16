@@ -26,17 +26,17 @@ A ```Change``` object is expressed in JSON format seen here:
 
 | Attribute     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| author        | UTF-8 String  | The netLD username who made the change that was recorded, if known.  'n/a' if not available. |
-| path          | UTF-8 String  | The filesystem path of the configuration on the device |
-| mimeType      | UTF-8 String  | The MIME-type of the configuration file.  Possible values are 'text/plain', 'application/octet-stream' (binary), 'application/x-tar' (binary). |
-| type          | UTF-8 String  | The kind of change recorded.  Possible values are 'M' (modification to existing configuration), 'A' (addition of a never before seen configuration), 'D' (a deleted configuration) |
+| author        | String  | The netLD username who made the change that was recorded, if known.  'n/a' if not available. |
+| path          | String  | The filesystem path of the configuration on the device |
+| mimeType      | String  | The MIME-type of the configuration file.  Possible values are 'text/plain', 'application/octet-stream' (binary), 'application/x-tar' (binary). |
+| type          | String  | The kind of change recorded.  Possible values are 'M' (modification to existing configuration), 'A' (addition of a never before seen configuration), 'D' (a deleted configuration) |
 | size          | Integer       | The size of the configuration in bytes |
 | previousChange| Integer       | The timestamp of the previous configuration revision in milliseconds (in Unix Epoch time).  Can be null. |
 | revisionTime  | Integer       | The timestamp when the configuration was backed up, in milliseconds (in Unix Epoch time). |
 | head          | Boolean       | "true" if this revision is the latest, "false" otherwise. |
 | hasMemo       | Boolean       | "true" is there is a memo for this configuration, "false" otherwise. |
-| mappingType   | UTF-8 String  | undocumented. |
-| mappingId     | UTF-8 String  | undocumented. |
+| mappingType   | String  | undocumented. |
+| mappingId     | String  | undocumented. |
 
 <p></p>
 
@@ -95,23 +95,24 @@ A ```Revision``` object is expressed in JSON format seen here:
 
 | Attribute     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| path          | UTF-8 String  | The filesystem path of the configuration on the device |
-| author        | UTF-8 String  | The netLD username who made the change that was recorded, if known.  'n/a' if not available. |
-| mimeType      | UTF-8 String  | The MIME-type of the configuration file.  Possible values are 'text/plain', 'application/octet-stream' (binary), 'application/x-tar' (binary). |
+| path          | String  | The filesystem path of the configuration on the device |
+| author        | String  | The netLD username who made the change that was recorded, if known.  'n/a' if not available. |
+| mimeType      | String  | The MIME-type of the configuration file.  Possible values are 'text/plain', 'application/octet-stream' (binary), 'application/x-tar' (binary). |
 | size          | Integer       | The size of the configuration in bytes |
 | previousChange| Integer       | The timestamp of the previous configuration revision in milliseconds (in Unix Epoch time).  Can be null. |
-| content       | UTF-8 String  | The configuration file content, encoded in Base64 format |
+| content       | String  | The configuration file content, encoded in Base64 format |
 
 <p class="vspacer"></p>
 
-### ```Configuration.retrieveSnapshotChangeLog```
+------------------------------------------------------------------------------------
+### Configuration.retrieveSnapshotChangeLog
 Retrieves the configuration history for the specified device.
 
 #### Parameters
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| network      | UTF-8 String   | Name of an existing network, e.g. "Default" |
-| ipAddress    | UTF-8 String   | IPv4 or IPv6 address |
+| network      | String   | Name of an existing network, e.g. "Default" |
+| ipAddress    | String   | IPv4 or IPv6 address |
 | pageData     | JSON Object    | A ```PageData``` object specifying the starting ```offset``` and ```pageSize```. |
 
 #### Return: a ```PageData``` object
@@ -190,16 +191,17 @@ results.  When ```offset``` + ```pageSize``` is greater than or equal to ```tota
 
 <p class="vspacer"></p>
 
-### ```Configuration.retrieveRevision```
+------------------------------------------------------------------------------------
+### Configuration.retrieveRevision
 
 Retrieve a revision of a configuration for the specified device.
 
 #### Parameters
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| network      | UTF-8 String   | Name of an existing network, e.g. "Default" |
-| ipAddress    | UTF-8 String   | IPv4 or IPv6 address |
-| configPath   | UTF-8 String   | The path of the configuration file to retrieve.  This should be the same value as the ```path``` attribute in a ```Change``` object. |
+| network      | String   | Name of an existing network, e.g. "Default" |
+| ipAddress    | String   | IPv4 or IPv6 address |
+| configPath   | String   | The path of the configuration file to retrieve.  This should be the same value as the ```path``` attribute in a ```Change``` object. |
 | timestamp    | Integer        | The timestamp (in Unix Epoch milliseconds) of the configuration to retrieve.  This should be the same value as the ```revisionTime``` attribute in a ```Change``` object returned by ``retrieveSnapshotChangeLog``. If timestamp is omitted, the latest revision is retrieved. |
 
 #### Return: a ```Revision``` object
@@ -250,12 +252,12 @@ implementation of highlighting word-level differences.
 #### Parameters
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| network      | UTF-8 String   | Name of an existing network, e.g. "Default" |
-| ipAddress    | UTF-8 String   | IPv4 or IPv6 address of the "left" device |
-| configPath   | UTF-8 String   | The path of the configuration file to retrieve.  This should be the same value as the ```path``` attribute in a ```Change``` object. |
+| network      | String   | Name of an existing network, e.g. "Default" |
+| ipAddress    | String   | IPv4 or IPv6 address of the "left" device |
+| configPath   | String   | The path of the configuration file to retrieve.  This should be the same value as the ```path``` attribute in a ```Change``` object. |
 | timestamp1    | Integer        | The timestamp (in Unix Epoch milliseconds) of the configuration to retrieve.  This should be the same value as the ```revisionTime``` attribute in a ```Change``` object. |
-| ipAddress2    | UTF-8 String   | IPv4 or IPv6 address of the "right" device to compare revisions for.  Should be the same as ```ipAddress``` for same device comparisons |
-| configPath2   | UTF-8 String   | The path of the configuration file to retrieve.  This should be the same value as the ```path``` attribute in a ```Change``` object. |
+| ipAddress2    | String   | IPv4 or IPv6 address of the "right" device to compare revisions for.  Should be the same as ```ipAddress``` for same device comparisons |
+| configPath2   | String   | The path of the configuration file to retrieve.  This should be the same value as the ```path``` attribute in a ```Change``` object. |
 | timestamp2    | Integer        | The timestamp (in Unix Epoch milliseconds) of the configuration to retrieve.  This should be the same value as the ```revisionTime``` attribute in a ```Change``` object. |
 
 #### Return: an XML string with change markup
