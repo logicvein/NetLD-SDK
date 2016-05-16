@@ -54,7 +54,10 @@ Get the list of current violations for a given policy.
 ##### Parameters
 | Parameter | Type    | Description |
 | --------- | ------- | ----------- |
-| policyId  | Integer | The ID of the desired violations' policy |
+| pageData  | JSON Object  | A ``JobPageData`` object specifying the starting *offset* and *pageSize*. |
+| networks  | Array        | An array of managed network names to search for jobs in. |
+| sortColumn  | UTF-8 String | A string indicating the ``JobData`` object attribute the results should be sorted by (*null* for default). |
+| descending  | Boolean | A boolean flag indicating whether results should be sorted in descending or ascending order. |
 
 ##### Return: an array of ```Violation``` objects
 
@@ -70,18 +73,17 @@ Get the list of current violations for a given policy.
 | description     | UTF-8 String  | The description of the job |
 | managedNetworks | Array         | An array of managed network names this job set is available in |
 | jobType         | UTF-8 String  | One of the pre-defined NetLD job types (see below) |
+| jobParameters   | Map           | A map (hash) of job parameter name/value pairs that are specific to each *jobType* (see below) |
 | isAccessLimited | Boolean       | ``true`` if the caller has limited visibility to the networks defined for this job (read-only) |
 | isGlobal        | Boolean       | ``true`` if the specified job is a "global" (aka system) job (read-only) |
 
-### PolicyInfo
+### JobPageData
 | Field            | Type         | Description      |
 | ---------------- | ------------ | --------------   |
-| policyId         | Integer      | The policy's ID |
-| policyName       | UTF-8 String | The name of the policy |
-| network          | UTF-8 String | The managed network the policy is in |
-| enabled          | Boolean      | A boolean flag indicating whether or not this policy is enabled |
-| coveredDevice    | Integer      | The number of devices covered by this policy
-| violatingDevices | Integer      | The number of devices in violation of this policy |
+| offset           | Integer      | The starting offset in the results to begin retrieving pageSize number of ``JobData`` objects. |
+| pageSize         | Integer      | The maximum number of ``JobData`` objects to retrieve in a single method call. |
+| total            | Integer      | This value is set and retrieved from the server when an offset of zero (0) is passed. This indicates the total number of ``JobData`` objects available. (read-only) |
+| jobData          | Array        | An array of ``JobData`` objects |
 
 ### Policy
 | Field            | Type         | Description      |
@@ -94,12 +96,28 @@ Get the list of current violations for a given policy.
 | resolutionScheme | UTF-8 String | A single scheme name or comma-separated list of scheme names |
 | resolutionData   | UTF-8 String | The query associated with the scheme(s) specified |
 
-### Violation
-| Field     | Type         | Description      |
-| --------- | ------------ | --------------   |
-| policyId  | Integer      | The ID of the Policy in violation |
-| ruleSetId | Integer      | The ID of the RuleSet in violation |
-| ipAddress | UTF-8 String | The IP Address of the device in violation |
-| network   | UTF-8 String | The managed network of the device in violation |
-| message   | UTF-8 String | The violation message |
-| severity  | Integer      | The violation severity. 1 for WARNING, 2 for ERROR |
+----------------------------------------------------------------------------------
+
+## Job Types
+| Type Name              | Type Description     |
+| ---------------------- | -------------------  |
+| "Discover Devices"     | Network device discovery. |
+| "Backup Configuration" | Network device configuration backup. |
+| "Telemetry"            | Network device neighbor information collection. |
+| "Script Tool Job"      | Pre-definied read/write tool execution. |
+| "Bulk Update"          | SmartChange execution. |
+| "Report"               | Pre-definied report execution. |
+
+## Job Parameters (per Job Type)
+
+*All* job parameter names and values are UTF-8 strings.  Even "boolean" and "integer" values are represented as strings such as *"true"* or *"5432"*.
+
+### "Discover Devices"
+| Name             | Type           | Value Description      |
+| ---------------- | -------------- | --------------------   |
+| communityStrings | UTF-8 String   | Additional SNMP community string or comma-separated list of strings |
+| boundaryNetworks | UTF-8 String   | Comma-separated list of discovery boundary networks (CIDR) |
+| crawl            | UTF-8 String   | A "boolean" value indicating whether the discovery should use neighbor/peer information to discover additional devices |
+| includeInventory | UTF-8 String   | A "boolean" value indicating whether the discovery should automatically include current inventory devices.  This option is only meaningful when "crawl" is also set to *"true"* |
+| addresses        | UTF-8 String   | A comma-separated list of IP address "shapes" to include in the discovery.  See below. |
+
