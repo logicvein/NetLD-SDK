@@ -66,9 +66,9 @@ Get the list of current violations for a given policy.
 
 <p class="vspacer"></p>
 
+-----------------------------------------------------------------------------------
 ## Scheduler Objects
 
------------------------------------------------------------------------------------
 ### JobData
 | Field           | Type          | Description      |
 | --------------- | ------------- | --------------   |
@@ -105,7 +105,6 @@ Get the list of current violations for a given policy.
 
 
 ----------------------------------------------------------------------------------
-
 ## Job Types
 | Type Name              | Type Description     |
 | ---------------------- | -------------------  |
@@ -116,6 +115,7 @@ Get the list of current violations for a given policy.
 | "Bulk Update"          | SmartChange execution. |
 | "Report"               | Pre-definied report execution. |
 
+-----------------------------------------------------------------------------------
 ## Job Parameters (per Job Type)
 
 *All* job parameter names and values are UTF-8 strings.  Even "boolean" and "integer" values are represented as strings such as *"true"* or *"5432"*.
