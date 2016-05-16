@@ -20,7 +20,5 @@ language of choice, which will handle the JSON generation for you.
 <p>
 
 
-<sup>1</sup> <http://www.jsonrpc.org/specification><br/>
-<sup>2</sup> <http://en.wikipedia.org/wiki/JSON-RPC#Implementations>
-
-------------------------------------------------------
+<sup>1</sup> [http://www.jsonrpc.org/specification](http://www.jsonrpc.org/specification) <br/>
+<sup>2</sup> [http://en.wikipedia.org/wiki/JSON-RPC](http://en.wikipedia.org/wiki/JSON-RPC#Implementations) <br/>
