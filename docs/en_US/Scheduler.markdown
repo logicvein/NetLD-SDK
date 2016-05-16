@@ -4,31 +4,31 @@ The scheduler API provides access to job management, scheduling and execution.  
 Smart Changes, and reports.
 
 -----------------------------------------------------------------------------------
-#### ``Scheduler.runNow``
+### Scheduler.runNow
 Execute a job defined by the specified ``JobData``.
 ##### Parameters
 | Parameter | Type    | Description |
 | --------- | ------- | ----------- |
 | jobData   | JSON Object | A ``JobData`` object |
 
-##### Return: an ``ExecutionData`` object.
+##### Return: an [``ExecutionData``](#executiondata) object.
 
 <p class="vspacer"></p>
 
 -----------------------------------------------------------------------------------
-### ``Scheduler.saveJob``
+### Scheduler.saveJob
 Save (or replace) the job defined by the specified ``JobData``.
 ##### Parameters
 | Parameter | Type         | Description |
 | --------- | ------------ | ----------- |
 | jobData   | JSON Object | A ``JobData`` object |
 
-##### Return: the ``JobData`` object with ``jobId`` property populated.
+##### Return: the [``JobData``](#jobdata) object with ``jobId`` property populated.
 
 <p class="vspacer"></p>
 
 -----------------------------------------------------------------------------------
-### ``Scheduler.deleteJob``
+### Scheduler.deleteJob
 Get the policy definition by ID.
 ##### Parameters
 | Parameter | Type    | Description |
@@ -40,19 +40,19 @@ Get the policy definition by ID.
 <p class="vspacer"></p>
 
 -----------------------------------------------------------------------------------
-### ``Scheduler.getJob``
+### Scheduler.getJob
 Get the list of current violations for a given device.
 ##### Parameters
 | Parameter | Type         | Description |
 | --------- | ------------ | ----------- |
 | jobId     | Integer      | The ID of the Job |
 
-##### Return: a ``JobData`` object.
+##### Return: a [``JobData``](#jobdata) object.
 
 <p class="vspacer"></p>
 
 -----------------------------------------------------------------------------------
-### ``Scheduler.searchJobs``
+### Scheduler.searchJobs
 Get the list of current violations for a given policy.
 ##### Parameters
 | Parameter | Type    | Description |
@@ -62,7 +62,7 @@ Get the list of current violations for a given policy.
 | sortColumn  | UTF-8 String | A string indicating the ``JobData`` object attribute the results should be sorted by (*null* for default). |
 | descending  | Boolean | A boolean flag indicating whether results should be sorted in descending or ascending order. |
 
-##### Return: a [JobPageData](#JobPageData) object containing search results
+##### Return: a [JobPageData](#jobpagedata) object containing search results
 
 <p class="vspacer"></p>
 
@@ -88,6 +88,20 @@ Get the list of current violations for a given policy.
 | pageSize         | Integer      | The maximum number of ``JobData`` objects to retrieve in a single method call. |
 | total            | Integer      | This value is set and retrieved from the server when an offset of zero (0) is passed. This indicates the total number of ``JobData`` objects available. (read-only) |
 | jobData          | Array        | An array of ``JobData`` objects |
+
+### ExecutionData
+| Field            | Type         | Description      |
+| ---------------- | ------------ | --------------   |
+| id               | Integer      | The execution ID |
+| jobName          | UTF-8 String  | The name of the job |
+| managedNetworks  | Array         | An array of managed network names the job was associated with |
+| executor         | UTF-8 String  | The user name of the user who executed the job |
+| startTime        | 64-bit Integer  | The start time of the job as a Unix epoch value |
+| endTime          | 64-bit Integer  | The end time of the job as a Unix epoch value |
+| completionState  | Integer      | 0=normal, 1=cancelled, 2=misfired (schedule missed) |
+| status           | UTF-8 String | One of: "OK", "WARN", "ERROR", "ABORT" |
+| isPartialView    | Boolean       | ``true`` if the caller has limited visibility to the networks defined for this job |
+| isGlobal         | Boolean       | ``true`` if the specified job is a "global" (aka system) job |
 
 
 ----------------------------------------------------------------------------------
