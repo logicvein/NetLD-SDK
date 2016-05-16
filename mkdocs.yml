@@ -4,6 +4,7 @@ pages:
 - Configuration: en_US/Configuration.markdown
 - Inventory: en_US/Inventory.markdown
 - Credentials: en_US/Credentials.markdown
+- Scheduler: en_US/Scheduler.markdown
 - Compliance: en_US/Compliance.markdown
 - Appendix A: en_US/Appendix_A.markdown
 theme: readthedocs
