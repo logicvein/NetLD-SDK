@@ -5,7 +5,7 @@ Smart Changes, and reports.
 
 -----------------------------------------------------------------------------------
 ### Scheduler.runNow
-Execute a job defined by the specified ``JobData``.
+Execute a job defined by the specified [``JobData``](#jobdata).
 ##### Parameters
 | Parameter | Type    | Description |
 | --------- | ------- | ----------- |
@@ -17,7 +17,7 @@ Execute a job defined by the specified ``JobData``.
 
 -----------------------------------------------------------------------------------
 ### Scheduler.saveJob
-Save (or replace) the job defined by the specified ``JobData``.
+Save (or replace) the job defined by the specified [``JobData``](#jobdata).
 ##### Parameters
 | Parameter | Type         | Description |
 | --------- | ------------ | ----------- |
@@ -62,7 +62,7 @@ Get the list of current violations for a given policy.
 | sortColumn  | UTF-8 String | A string indicating the ``JobData`` object attribute the results should be sorted by (*null* for default). |
 | descending  | Boolean | A boolean flag indicating whether results should be sorted in descending or ascending order. |
 
-##### Return: a [JobPageData](#jobpagedata) object containing search results
+##### Return: a [``JobPageData``](#jobpagedata) object containing search results
 
 <p class="vspacer"></p>
 
