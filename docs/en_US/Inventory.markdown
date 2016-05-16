@@ -62,9 +62,9 @@ message is returned.
 #### Parameters
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| network      | UTF-8 String   | Name of an existing network, e.g. "Default" |
-| ipAddress    | UTF-8 String   | IPv4 or IPv6 address |
-| adapterId    | UTF-8 String   | The ID of the adapter to use for backup, see Appendix A |
+| network      | String   | Name of an existing network, e.g. "Default" |
+| ipAddress    | String   | IPv4 or IPv6 address |
+| adapterId    | String   | The ID of the adapter to use for backup, see Appendix A |
 
 #### Return: an error message or ```null```
 
@@ -78,8 +78,8 @@ Delete a device from the inventory.
 #### Parameters
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| network      | UTF-8 String   | Name of an existing network, e.g. "Default" |
-| ipAddress    | UTF-8 String   | IPv4 or IPv6 address |
+| network      | String   | Name of an existing network, e.g. "Default" |
+| ipAddress    | String   | IPv4 or IPv6 address |
 
 #### Return: ```null```
 
@@ -93,8 +93,8 @@ The ``Inventory.getDevice`` method returns a ``Device`` object as described abov
 #### Parameters
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| network       | UTF-8 String   | Name of an existing network, e.g. "Default" |
-| ipAddress     | UTF-8 String   | IPv4 or IPv6 address |
+| network       | String   | Name of an existing network, e.g. "Default" |
+| ipAddress     | String   | IPv4 or IPv6 address |
 
 #### Return: ```Device``` object or ```null```
 
@@ -108,12 +108,12 @@ all other parameters are optional.
 
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| network       | UTF-8 String  | Name of the device’s network |
-| ipAddress     | UTF-8 String  | IPv4 or IPv6 address |
-| newIpAddress  | UTF-8 String  | A new IP address for the device, or null |
-| newNetwork    | UTF-8 String  | A new Network name for the device, or null |
-| newAdapterId  | UTF-8 String  | A new AdapterId for the device, or null |
-| newHostname   | UTF-8 String  | A new Hostname for the device, or null |
+| network       | String  | Name of the device’s network |
+| ipAddress     | String  | IPv4 or IPv6 address |
+| newIpAddress  | String  | A new IP address for the device, or null |
+| newNetwork    | String  | A new Network name for the device, or null |
+| newAdapterId  | String  | A new AdapterId for the device, or null |
+| newHostname   | String  | A new Hostname for the device, or null |
 
 #### Return: ```null```
 
@@ -141,9 +141,9 @@ The ``Inventory.updateDevices`` method updates Adapter IDs and/or custom field v
 
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| ipCsv         | UTF-8 String  | A comma separated list of devices of the form IPAddress@network |
-| adapterId     | UTF-8 String  | The new adapter ID or ```null``` if it should remain unmodified. |
-| customFields  | UTF-8 String Array | An indexed array of custom fields |
+| ipCsv         | String  | A comma separated list of devices of the form IPAddress@network |
+| adapterId     | String  | The new adapter ID or ```null``` if it should remain unmodified. |
+| customFields  | String Array | An indexed array of custom fields |
 
 The ``ipCsv`` parameter is a comma separated list of devices of the form IPAddress@network (e.g. *192.168.0.254@NetworkA,10.0.0.1@NetworkB*).
 
@@ -176,11 +176,11 @@ The ``Inventory.search`` method is the fundemental way of retrieving devices fro
 
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| network       | UTF-8 String  | Name of the network to search. It is not possible to search across multiple networks in the same operation. |
-| scheme        | UTF-8 String  | A single scheme name, or comma-separated list of scheme names (see table below) |
-| query         | UTF-8 String  | The query associated with the scheme(s) specified.  If there are multiple schemes specified, the query parameter should contain new-line (\n) characters between each query string |
+| network       | String  | Name of the network to search. It is not possible to search across multiple networks in the same operation. |
+| scheme        | String  | A single scheme name, or comma-separated list of scheme names (see table below) |
+| query         | String  | The query associated with the scheme(s) specified.  If there are multiple schemes specified, the query parameter should contain new-line (\n) characters between each query string |
 | pageData      | Object        | A ``PageData`` object defining the offset where retrieval should begin and page size |
-| sortColumn    | UTF-8 String  | A string indicating the ``Device`` object attribute the results should be sorted by |
+| sortColumn    | String  | A string indicating the ``Device`` object attribute the results should be sorted by |
 | descending    | Boolean       | A boolean flag indicating whether results should be sorted in descending or ascending order |
 
 The ``scheme`` parameter is a single value or a comma separated list of search schemes from the following table:
@@ -317,23 +317,23 @@ When ``offset`` + ``pageSize`` is greater than or equal to ``total`` there are n
 ### Device
 | Field           | Type          | Description      |
 | --------------- | ------------- | --------------   |
-| ipAddress       | UTF-8 String    | The IPv4 or IPv6 address of the device |
-| hostname        | UTF-8 String    | The hostname of the device |
-| network         | UTF-8 String    | The name of the managed network that the device resides in |
-| adapterId       | UTF-8 String    | The NetLD "Adapter ID" used to manage this device |
-| deviceType      | UTF-8 String    | The type of the device, "router", "switch", "firewall", etc. |
-| hardwareVendor  | UTF-8 String    | The hardware vendor who manufactured the device |
-| model           | UTF-8 String    | The model number of the device |
-| softwareVendor  | UTF-8 String    | The operating system vendor of the device |
-| osVersion       | UTF-8 String    | The vendor specific OS version number string |
-| backupStatus    | UTF-8 String    | The backup status of the device (SUCCESS, FAILURE, INVALID_CREDENTIAL, etc.) |
+| ipAddress       | String    | The IPv4 or IPv6 address of the device |
+| hostname        | String    | The hostname of the device |
+| network         | String    | The name of the managed network that the device resides in |
+| adapterId       | String    | The NetLD "Adapter ID" used to manage this device |
+| deviceType      | String    | The type of the device, "router", "switch", "firewall", etc. |
+| hardwareVendor  | String    | The hardware vendor who manufactured the device |
+| model           | String    | The model number of the device |
+| softwareVendor  | String    | The operating system vendor of the device |
+| osVersion       | String    | The vendor specific OS version number string |
+| backupStatus    | String    | The backup status of the device (SUCCESS, FAILURE, INVALID_CREDENTIAL, etc.) |
 | complianceState | Integer         | The compliance status of the device (0=compliant, 1=unsaved changes, 2=policy violations) |
 | lastBackup      | Integer         | The timestamp of the most recent backup (in Unix Epoch time milliseconds) |
 | lastTelemetry   | Integer         | The timestamp of the most recent neighbor collection (in Unix Epoch time milliseconds) |
-| memoSummary     | UTF-8 String    | The first 60 characters of the device memo, or *null* |
-| custom1         | UTF-8 String    | The custom1 value, or *null* |
-| custom2         | UTF-8 String    | The custom2 value, or *null* |
-| custom3         | UTF-8 String    | The custom3 value, or *null* |
-| custom4         | UTF-8 String    | The custom4 value, or *null* |
-| custom5         | UTF-8 String    | The custom5 value, or *null* |
-| serialNumber    | UTF-8 String    | The chassis serial number of the device, or *null* if not available |
+| memoSummary     | String    | The first 60 characters of the device memo, or *null* |
+| custom1         | String    | The custom1 value, or *null* |
+| custom2         | String    | The custom2 value, or *null* |
+| custom3         | String    | The custom3 value, or *null* |
+| custom4         | String    | The custom4 value, or *null* |
+| custom5         | String    | The custom5 value, or *null* |
+| serialNumber    | String    | The chassis serial number of the device, or *null* if not available |
