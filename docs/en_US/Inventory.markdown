@@ -54,7 +54,8 @@ The ```search``` API returns a ```PageData``` object, as well as accepting a ```
 
 <p class="vspacer"></p>
 
-### ```Inventory.createDevice```
+-----------------------------------------------------------------------------------
+### Inventory.createDevice
 Add a device to the inventory, in the specified network.  If there are no user-defined networks then "Default" should be used as the ``network`` value.  If the device was created successfully, the return value is ```null```, otherwise an error
 message is returned.
 
@@ -69,7 +70,8 @@ message is returned.
 
 <p class="vspacer"></p>
 
-### ```Inventory.deleteDevice```
+-----------------------------------------------------------------------------------
+### Inventory.deleteDevice
 
 Delete a device from the inventory.
 
@@ -83,7 +85,8 @@ Delete a device from the inventory.
 
 <p class="vspacer"></p>
 
-### ```Inventory.getDevice```
+-----------------------------------------------------------------------------------
+### Inventory.getDevice
 
 The ``Inventory.getDevice`` method returns a ``Device`` object as described above, or ``null`` if the requested device does not exist.
 
@@ -95,46 +98,10 @@ The ``Inventory.getDevice`` method returns a ``Device`` object as described abov
 
 #### Return: ```Device``` object or ```null```
 
-#### Device object fields:
-
-| Field         | Type          | Description      |
-| ------------- | ------------- | --------------   |
-| ipAddress       | UTF-8 String  | IPv4 or IPv6 address |
-| hostname        | UTF-8 String  | The hostname of the device |
-| adapterId        | UTF-8 String  | The Adapter ID of the device |
-
-```javascript
-{  
-   "jsonrpc": "2.0",
-   "id": 1,
-   "result": {
-      "ipAddress": "10.0.3.6",
-      "hostname": "C2611-2",
-      "adapterId": "Cisco::IOS",
-      "deviceType": "Router",
-      "hardwareVendor": "Cisco",
-      "model": "CISCO2611XM-2FE",
-      "softwareVendor": "Cisco",
-      "osVersion": "12.4(12)",
-      "backupStatus": "SUCCESS",
-      "complianceState": 0,
-      "lastBackup": 1410324618367,
-      "lastTelemetry": null,
-      "memoSummary": null,
-      "custom1": "",
-      "custom2": "",
-      "custom3": "",
-      "custom4": "",
-      "custom5": "",
-      "network": "Default",
-      "serialNumber": "JAE07170Q8S"
-   }
-}
-```
-
 <p class="vspacer"></p>
 
-### ```Inventory.updateDevice```
+-----------------------------------------------------------------------------------
+### Inventory.updateDevice
 
 The ```Inventory.updateDevice``` method is used to update an existing device in the inventory.  It requires only ```network``` and ```ipAddress``` as parameters,
 all other parameters are optional.
@@ -167,9 +134,10 @@ all other parameters are optional.
 
 <p class="vspacer"></p>
 
-### ```Inventory.updateDevices```
+-----------------------------------------------------------------------------------
+### Inventory.updateDevices
 
-The ```Inventory.updateDevices``` method updates Adapter IDs and/or custom field values for multiple devices in a single operation.
+The ``Inventory.updateDevices`` method updates Adapter IDs and/or custom field values for multiple devices in a single operation.
 
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
@@ -177,13 +145,13 @@ The ```Inventory.updateDevices``` method updates Adapter IDs and/or custom field
 | adapterId     | UTF-8 String  | The new adapter ID or ```null``` if it should remain unmodified. |
 | customFields  | UTF-8 String Array | An indexed array of custom fields |
 
-The ```ipCsv``` parameter is a comma separated list of devices of the form IPAddress@network (e.g. *192.168.0.254@NetworkA,10.0.0.1@NetworkB*).
+The ``ipCsv`` parameter is a comma separated list of devices of the form IPAddress@network (e.g. *192.168.0.254@NetworkA,10.0.0.1@NetworkB*).
 
-The ```adapterId``` parameter is either a new Adapter ID to assign to the specified devices, or ```null``` to leave the device's Adapter ID at their current values.  See *Appendix A* for a list of valid Adapter IDs.
+The ``adapterId`` parameter is either a new Adapter ID to assign to the specified devices, or ``null`` to leave the device's Adapter ID at their current values.  See *Appendix A* for a list of valid Adapter IDs.
 
-The ```customFields``` parameter is an array of UTF-8 string values.  The first element of the array corresponds to the *Custom 1* custom field, and the fifth element corresponds to the *Custom 5* custom field.  Elements of the ```customFields``` array that are ```null``` will leave the corresponding custom fields at their current values.
+The ``customFields`` parameter is an array of UTF-8 string values.  The first element of the array corresponds to the *Custom 1* custom field, and the fifth element corresponds to the *Custom 5* custom field.  Elements of the ``customFields`` array that are ``null`` will leave the corresponding custom fields at their current values.
 
-#### Return: ```null```
+#### Return: ``null``
 
 #### Sample Request JSON:
 
@@ -201,20 +169,21 @@ The ```customFields``` parameter is an array of UTF-8 string values.  The first 
 
 <p class="vspacer"></p>
 
-### ```Inventory.search```
+-----------------------------------------------------------------------------------
+### Inventory.search
 
-The ```Inventory.search``` method is the fundemental way of retrieving devices from the inventory.  Search supports many criteria, and the criteria can be combined to perform powerful searches.
+The ``Inventory.search`` method is the fundemental way of retrieving devices from the inventory.  Search supports many criteria, and the criteria can be combined to perform powerful searches.
 
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
 | network       | UTF-8 String  | Name of the network to search. It is not possible to search across multiple networks in the same operation. |
 | scheme        | UTF-8 String  | A single scheme name, or comma-separated list of scheme names (see table below) |
 | query         | UTF-8 String  | The query associated with the scheme(s) specified.  If there are multiple schemes specified, the query parameter should contain new-line (\n) characters between each query string |
-| pageData      | Object        | A ```PageData``` object defining the offset where retrieval should begin and page size |
-| sortColumn    | UTF-8 String  | A string indicating the ```Device``` object attribute the results should be sorted by |
+| pageData      | Object        | A ``PageData`` object defining the offset where retrieval should begin and page size |
+| sortColumn    | UTF-8 String  | A string indicating the ``Device`` object attribute the results should be sorted by |
 | descending    | Boolean       | A boolean flag indicating whether results should be sorted in descending or ascending order |
 
-The ```scheme``` parameter is a single value or a comma separated list of search schemes from the following table:
+The ``scheme`` parameter is a single value or a comma separated list of search schemes from the following table:
 
 | Scheme             | Description     |
 | ------------------ | --------------- |
@@ -225,20 +194,20 @@ The ```scheme``` parameter is a single value or a comma separated list of search
 | serial             | Searches the inventory based on a specified serial number.  The specified serial number may be an exact serial number or a string with leading and/or trailing wildcard character (asterisk) |
 | status             | Searches the inventory based on the specified inventory status.  The status string (specified in the *query* parameter) must be one of these values: "N" (<i>NONE</i>), "S" (<i>SUCCESS</i>), "C" (<i>COMPLIANCE VIOLATION</i>), "I" (<i>INVALID CREDENTIALS</i>), "F" (<i>OTHER FAILURE</i>) |
 | lastChange         | Searches the inventory for devices whose configuration has changed during the specified time period.  Valid values are: "24h", "7d", "30d", or a range in this format: *YYYY-MM-DD/YYYY-MM-DD* (eg. *2012-01-01/2012-06-01*) |
-| custom             | Searches the inventory for devices whose custom field values match the specified values. The ```query``` parameter specifies a string that contains a comma-separated list of key/value pairs, i.e "custom2=tokyo*,custom4=12345". The value portion may contain leading and/or trailing wildcard characters. |
-| tag                | Searches the inventory for devices which are tagged with the tags specified in the ```query``` parameter.  The ```query``` parameter specifies a string that can contain tag names separated by "AND" or "OR", i.e. "tokyo AND firewall". |
+| custom             | Searches the inventory for devices whose custom field values match the specified values. The ``query`` parameter specifies a string that contains a comma-separated list of key/value pairs, i.e "custom2=tokyo*,custom4=12345". The value portion may contain leading and/or trailing wildcard characters. |
+| tag                | Searches the inventory for devices which are tagged with the tags specified in the ``query`` parameter.  The ``query`` parameter specifies a string that can contain tag names separated by "AND" or "OR", i.e. "tokyo AND firewall". |
 
-The ```query``` parameter defines the query criteria to be used and is in association with the schemes defined by the ```scheme``` parameter.
-For example, if you wish to search based on scheme ```ipAddress``` and ```hostname``` you would specify a ```scheme``` parameter of "ipaddress,hostname", and
-a ```query``` parameter of "192.168.0.0/24\ntokyo*".  Note the newline character between the ```ipAddress``` query value and the ```hostname``` query value.
+The ``query`` parameter defines the query criteria to be used and is in association with the schemes defined by the ``scheme`` parameter.
+For example, if you wish to search based on scheme ``ipAddress`` and ``hostname`` you would specify a ``scheme`` parameter of "ipaddress,hostname", and
+a ``query`` parameter of "192.168.0.0/24\ntokyo*".  Note the newline character between the ``ipAddress`` query value and the ``hostname`` query value.
 
-#### Return: A ```PageData``` object
+#### Return: A ``PageData`` object
 
-The ```PageData``` object that is returned will contain an attribute called ```devices```, which is an array
-of ```Device``` objects.  If the initial ```offset``` that is passed is zero (0), the returned ```PageData```
-object will also contain a populated ```total``` attribute, telling you how many total results are available.
-By incrementing the ```offset``` by ```pageSize``` you can retrieve subsequent pages of results.
-When ```offset``` + ```pageSize``` is greater than or equal to ```total``` there are no more results available.
+The ``PageData`` object that is returned will contain an attribute called ``devices``, which is an array
+of ``Device`` objects.  If the initial ``offset`` that is passed is zero (0), the returned ``PageData``
+object will also contain a populated ``total`` attribute, telling you how many total results are available.
+By incrementing the ``offset`` by ``pageSize`` you can retrieve subsequent pages of results.
+When ``offset`` + ``pageSize`` is greater than or equal to ``total`` there are no more results available.
 
 #### Sample Request JSON:
 
@@ -342,4 +311,29 @@ When ```offset``` + ```pageSize``` is greater than or equal to ```total``` there
 
 <p class="vspacer"></p>
 
-------------------------------------------------------
+-----------------------------------------------------------------------------------
+## Inventory Objects
+
+### Device
+| Field           | Type          | Description      |
+| --------------- | ------------- | --------------   |
+| ipAddress       | UTF-8 String    | The IPv4 or IPv6 address of the device |
+| hostname        | UTF-8 String    | The hostname of the device |
+| network         | UTF-8 String    | The name of the managed network that the device resides in |
+| adapterId       | UTF-8 String    | The NetLD "Adapter ID" used to manage this device |
+| deviceType      | UTF-8 String    | The type of the device, "router", "switch", "firewall", etc. |
+| hardwareVendor  | UTF-8 String    | The hardware vendor who manufactured the device |
+| model           | UTF-8 String    | The model number of the device |
+| softwareVendor  | UTF-8 String    | The operating system vendor of the device |
+| osVersion       | UTF-8 String    | The vendor specific OS version number string |
+| backupStatus    | UTF-8 String    | The backup status of the device (SUCCESS, FAILURE, INVALID_CREDENTIAL, etc.) |
+| complianceState | Integer         | The compliance status of the device (0=compliant, 1=unsaved changes, 2=policy violations) |
+| lastBackup      | Integer         | The timestamp of the most recent backup (in Unix Epoch time milliseconds) |
+| lastTelemetry   | Integer         | The timestamp of the most recent neighbor collection (in Unix Epoch time milliseconds) |
+| memoSummary     | UTF-8 String    | The first 60 characters of the device memo, or *null* |
+| custom1         | UTF-8 String    | The custom1 value, or *null* |
+| custom2         | UTF-8 String    | The custom2 value, or *null* |
+| custom3         | UTF-8 String    | The custom3 value, or *null* |
+| custom4         | UTF-8 String    | The custom4 value, or *null* |
+| custom5         | UTF-8 String    | The custom5 value, or *null* |
+| serialNumber    | UTF-8 String    | The chassis serial number of the device, or *null* if not available |
