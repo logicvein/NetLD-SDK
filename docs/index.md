@@ -18,7 +18,8 @@ All strings are encoded using UTF-8 encoding, no other encodings are supported.
 The API documentation shows examples of "raw" JSON requests, but it is recommended that you use JSON-RPC libraries appropriate for your
 language of choice, which will handle the JSON generation for you.
 
-^1 <http://www.jsonrpc.org/specification><br/>
-^2 <http://en.wikipedia.org/wiki/JSON-RPC#Implementations>
+
+<sup>1</sup> <http://www.jsonrpc.org/specification><br/>
+<sup>2</sup> <http://en.wikipedia.org/wiki/JSON-RPC#Implementations>
 
 ------------------------------------------------------
