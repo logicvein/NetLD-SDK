@@ -59,7 +59,7 @@ Get the list of current violations for a given policy.
 | --------- | ------- | ----------- |
 | pageData  | JSON Object  | A ``JobPageData`` object specifying the starting *offset* and *pageSize*. |
 | networks  | Array        | An array of managed network names to search for jobs in. |
-| sortColumn  | UTF-8 String | A string indicating the ``JobData`` object attribute the results should be sorted by (*null* for default). |
+| sortColumn  | String | A string indicating the ``JobData`` object attribute the results should be sorted by (*null* for default). |
 | descending  | Boolean | A boolean flag indicating whether results should be sorted in descending or ascending order. |
 
 ##### Return: a [``JobPageData``](#jobpagedata) object containing search results
@@ -73,10 +73,10 @@ Get the list of current violations for a given policy.
 | Field           | Type          | Description      |
 | --------------- | ------------- | --------------   |
 | jobId           | Integer       | The job's ID (read-only) |
-| jobName         | UTF-8 String  | The name of the job |
-| description     | UTF-8 String  | The description of the job |
+| jobName         | String  | The name of the job |
+| description     | String  | The description of the job |
 | managedNetworks | Array         | An array of managed network names this job set is available in |
-| jobType         | UTF-8 String  | One of the pre-defined NetLD job types (see below) |
+| jobType         | String  | One of the pre-defined NetLD job types (see below) |
 | jobParameters   | Map           | A map (hash) of job parameter name/value pairs that are specific to each *jobType* (see below) |
 | isAccessLimited | Boolean       | ``true`` if the caller has limited visibility to the networks defined for this job (read-only) |
 | isGlobal        | Boolean       | ``true`` if the specified job is a "global" (aka system) job (read-only) |
@@ -93,13 +93,13 @@ Get the list of current violations for a given policy.
 | Field            | Type         | Description      |
 | ---------------- | ------------ | --------------   |
 | id               | Integer      | The execution ID |
-| jobName          | UTF-8 String  | The name of the job |
+| jobName          | String  | The name of the job |
 | managedNetworks  | Array         | An array of managed network names the job was associated with |
-| executor         | UTF-8 String  | The user name of the user who executed the job |
+| executor         | String  | The user name of the user who executed the job |
 | startTime        | 64-bit Integer  | The start time of the job as a Unix epoch value |
 | endTime          | 64-bit Integer  | The end time of the job as a Unix epoch value |
 | completionState  | Integer      | 0=normal, 1=cancelled, 2=misfired (schedule missed) |
-| status           | UTF-8 String | One of: "OK", "WARN", "ERROR", "ABORT" |
+| status           | String | One of: "OK", "WARN", "ERROR", "ABORT" |
 | isPartialView    | Boolean       | ``true`` if the caller has limited visibility to the networks defined for this job |
 | isGlobal         | Boolean       | ``true`` if the specified job is a "global" (aka system) job |
 
@@ -123,9 +123,8 @@ Get the list of current violations for a given policy.
 ### "Discover Devices"
 | Name             | Type           | Value Description      |
 | ---------------- | -------------- | --------------------   |
-| communityStrings | UTF-8 String   | Additional SNMP community string or comma-separated list of strings |
-| boundaryNetworks | UTF-8 String   | Comma-separated list of discovery boundary networks (CIDR) |
-| crawl            | UTF-8 String   | A "boolean" value indicating whether the discovery should use neighbor/peer information to discover additional devices |
-| includeInventory | UTF-8 String   | A "boolean" value indicating whether the discovery should automatically include current inventory devices.  This option is only meaningful when "crawl" is also set to *"true"* |
-| addresses        | UTF-8 String   | A comma-separated list of IP address "shapes" to include in the discovery.  See below. |
-
+| communityStrings | String   | Additional SNMP community string or comma-separated list of strings |
+| boundaryNetworks | String   | Comma-separated list of discovery boundary networks (CIDR) |
+| crawl            | String   | A "boolean" value indicating whether the discovery should use neighbor/peer information to discover additional devices |
+| includeInventory | String   | A "boolean" value indicating whether the discovery should automatically include current inventory devices.  This option is only meaningful when "crawl" is also set to *"true"* |
+| addresses        | String   | A comma-separated list of IP address "shapes" to include in the discovery.  See below. |
