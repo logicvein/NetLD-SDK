@@ -1,11 +1,10 @@
-## Scheduler
+## Overview
 
 The scheduler API provides access to job management, scheduling and execution.  Job types include tools, configuration backup,
 Smart Changes, and reports.
 
-## Scheduler Service Methods
-
-### ``Scheduler.runNow``
+-----------------------------------------------------------------------------------
+#### ``Scheduler.runNow``
 Execute a job defined by the specified ``JobData``.
 ##### Parameters
 | Parameter | Type    | Description |
@@ -16,6 +15,7 @@ Execute a job defined by the specified ``JobData``.
 
 <p class="vspacer"></p>
 
+-----------------------------------------------------------------------------------
 ### ``Scheduler.saveJob``
 Save (or replace) the job defined by the specified ``JobData``.
 ##### Parameters
@@ -27,6 +27,7 @@ Save (or replace) the job defined by the specified ``JobData``.
 
 <p class="vspacer"></p>
 
+-----------------------------------------------------------------------------------
 ### ``Scheduler.deleteJob``
 Get the policy definition by ID.
 ##### Parameters
@@ -38,6 +39,7 @@ Get the policy definition by ID.
 
 <p class="vspacer"></p>
 
+-----------------------------------------------------------------------------------
 ### ``Scheduler.getJob``
 Get the list of current violations for a given device.
 ##### Parameters
@@ -49,6 +51,7 @@ Get the list of current violations for a given device.
 
 <p class="vspacer"></p>
 
+-----------------------------------------------------------------------------------
 ### ``Scheduler.searchJobs``
 Get the list of current violations for a given policy.
 ##### Parameters
@@ -59,12 +62,13 @@ Get the list of current violations for a given policy.
 | sortColumn  | UTF-8 String | A string indicating the ``JobData`` object attribute the results should be sorted by (*null* for default). |
 | descending  | Boolean | A boolean flag indicating whether results should be sorted in descending or ascending order. |
 
-##### Return: an array of ```Violation``` objects
+##### Return: a [JobPageData](#JobPageData) object containing search results
 
 <p class="vspacer"></p>
 
 ## Scheduler Objects
 
+-----------------------------------------------------------------------------------
 ### JobData
 | Field           | Type          | Description      |
 | --------------- | ------------- | --------------   |
@@ -85,16 +89,6 @@ Get the list of current violations for a given policy.
 | total            | Integer      | This value is set and retrieved from the server when an offset of zero (0) is passed. This indicates the total number of ``JobData`` objects available. (read-only) |
 | jobData          | Array        | An array of ``JobData`` objects |
 
-### Policy
-| Field            | Type         | Description      |
-| ---------------- | ------------ | --------------   |
-| policyId         | Integer      | The policy's ID |
-| policyName       | UTF-8 String | The name of the policy |
-| network          | UTF-8 String | The managed network the policy is in |
-| adapterId        | UTF-8 String | The Adapter ID of the device |
-| configPath       | UTF-8 String | The device configuration this policy applies to |
-| resolutionScheme | UTF-8 String | A single scheme name or comma-separated list of scheme names |
-| resolutionData   | UTF-8 String | The query associated with the scheme(s) specified |
 
 ----------------------------------------------------------------------------------
 
