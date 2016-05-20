@@ -2,57 +2,11 @@
 
 The inventory API provides the core functionality of manipulating devices in the Net LineDancer inventory, including: adding devices, deleting devices, modifying devices, searching devices, etc.
 
-Many of the inventory methods accept or return a "device object" (e.g. Device) which encapsulates the basic attributes of a device in Net LineDancer.  This ```Device``` is expressed in JSON format
-as shown in the following example:
-
-```javascript
-{  
-   "ipAddress": "10.0.3.6",
-   "hostname": "C2611-2",
-   "adapterId": "Cisco::IOS",
-   "deviceType": "Router",
-   "hardwareVendor": "Cisco",
-   "model": "CISCO2611XM-2FE",
-   "softwareVendor": "Cisco",
-   "osVersion": "12.4(12)",
-   "backupStatus": "SUCCESS",
-   "complianceState": 0,
-   "lastBackup": 1410324618367,
-   "lastTelemetry": null,
-   "memoSummary": null,
-   "custom1": "",
-   "custom2": "",
-   "custom3": "",
-   "custom4": "",
-   "custom5": "",
-   "network": "Default",
-   "serialNumber": "JAE07170S8Q"
-}
-```
-
 <p class="vspacer"></p>
 
 The ```search``` API returns a ```PageData``` object, as well as accepting a ```PageData``` as a parameter is expressed in JSON format seen here:
 
-```javascript
-{
-    "offset": 0,
-    "pageSize": 10,
-    "total": 27,
-    "devices": [<Device> objects]
-}
-```
-
 <p></p>
-
-| Attribute     | Type          | Description      |
-| ------------- | ------------- | --------------   |
-| offset        | Integer       | The starting ```offset``` in the results to begin retrieving ```pageSize``` number of ```Device``` objects.  This value is required when ```PageData``` is used as a parameter. |
-| pageSize      | Integer       | The maximum number of ```Device``` objects to retrieve in a single method call. This value is required when ```PageData``` is used as a parameter. |
-| total         | Integer       | This value is set and retrieved from the server when an ```offset``` of zero (0) is passed.  This indicates the total number of ```Device``` objects available.   This value is ignored when ```PageData``` is used as a parameter. |
-| devices       | Array         | An array of ```Device``` objects. This value is ignored when ```PageData``` is used as a parameter. |
-
-<p class="vspacer"></p>
 
 -----------------------------------------------------------------------------------
 ### Inventory.createDevice
@@ -337,3 +291,13 @@ When ``offset`` + ``pageSize`` is greater than or equal to ``total`` there are n
 | custom4         | String    | The custom4 value, or *null* |
 | custom5         | String    | The custom5 value, or *null* |
 | serialNumber    | String    | The chassis serial number of the device, or *null* if not available |
+
+### PageData
+| Attribute     | Type          | Description      |
+| ------------- | ------------- | --------------   |
+| offset        | Integer       | The starting ```offset``` in the results to begin retrieving ```pageSize``` number of ```Device``` objects.  This value is required when ```PageData``` is used as a parameter. |
+| pageSize      | Integer       | The maximum number of ```Device``` objects to retrieve in a single method call. This value is required when ```PageData``` is used as a parameter. |
+| total         | Integer  | This value is set and retrieved from the server when an ```offset``` of zero (0) is passed.  This indicates the total number of ``Device`` objects available.   This value is ignored when ```PageData``` is used as a parameter. |
+| devices       | Array | An array of ``Device`` objects. This value is ignored when ``PageData`` is used as a parameter. |
+
+<p class="vspacer"></p>

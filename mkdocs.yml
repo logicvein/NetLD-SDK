@@ -1,10 +1,10 @@
 site_name: netLD SDK
 pages:
-- API Overview: index.markdown
-- Configuration: en_US/Configuration.markdown
-- Inventory: en_US/Inventory.markdown
-- Credentials: en_US/Credentials.markdown
-- Scheduler: en_US/Scheduler.markdown
-- Compliance: en_US/Compliance.markdown
-- Appendix A: en_US/Appendix_A.markdown
+- API Overview: Welcome.md
+- Configuration: Configuration.md
+- Inventory: Inventory.md
+- Credentials: Credentials.md
+- Scheduler: Scheduler.md
+- Compliance: Compliance.md
+- Appendix A: Appendix_A.md
 theme: readthedocs

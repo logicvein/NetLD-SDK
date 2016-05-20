@@ -68,7 +68,6 @@ A ```PageData``` object is expressed in JSON format seen here:
     "changeLogs": [<ChangeLog> objects]
 }
 ```
-<p></p>
 
 | Attribute     | Type          | Description      |
 | ------------- | ------------- | --------------   |
@@ -91,7 +90,6 @@ A ```Revision``` object is expressed in JSON format seen here:
     "content": <BASE64 ENCODED STIRING>
 }
 ```
-<p></p>
 
 | Attribute     | Type          | Description      |
 | ------------- | ------------- | --------------   |
@@ -100,11 +98,9 @@ A ```Revision``` object is expressed in JSON format seen here:
 | mimeType      | String  | The MIME-type of the configuration file.  Possible values are 'text/plain', 'application/octet-stream' (binary), 'application/x-tar' (binary). |
 | size          | Integer       | The size of the configuration in bytes |
 | previousChange| Integer       | The timestamp of the previous configuration revision in milliseconds (in Unix Epoch time).  Can be null. |
-| content       | String  | The configuration file content, encoded in Base64 format |
+| content       | String  | The configuration file content, encoded in Base64 format | 
 
-<p class="vspacer"></p>
 
-------------------------------------------------------------------------------------
 ### Configuration.retrieveSnapshotChangeLog
 Retrieves the configuration history for the specified device.
 
@@ -189,9 +185,6 @@ results.  When ```offset``` + ```pageSize``` is greater than or equal to ```tota
 }
 ```
 
-<p class="vspacer"></p>
-
-------------------------------------------------------------------------------------
 ### Configuration.retrieveRevision
 
 Retrieve a revision of a configuration for the specified device.
@@ -290,8 +283,4 @@ difference XML snippet is as follows:
 <diff>
 </diff>
 ```
--->
 
-<p class="vspacer"></p>
-
-------------------------------------------------------
