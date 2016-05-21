@@ -1,35 +1,35 @@
-## Overview
+## Scheduler
 
 The scheduler API provides access to job management, scheduling and execution.  Job types include tools, configuration backup,
 Smart Changes, and reports.
 
------------------------------------------------------------------------------------
-### Scheduler.runNow
-Execute a job defined by the specified [``JobData``](#jobdata).
+#### Scheduler.runNow
+Execute a job defined by the specified ``JobData``.
+
 ##### Parameters
 | Parameter | Type    | Description |
 | --------- | ------- | ----------- |
 | jobData   | JSON Object | A ``JobData`` object |
 
-##### Return: an [``ExecutionData``](#executiondata) object.
+##### Return: an ``ExecutionData`` object.
+.. 
 
-<p class="vspacer"></p>
+------
 
------------------------------------------------------------------------------------
-### Scheduler.saveJob
-Save (or replace) the job defined by the specified [``JobData``](#jobdata).
+#### Scheduler.saveJob
+Save (or replace) the job defined by the specified ``JobData``.
+
 ##### Parameters
 | Parameter | Type         | Description |
 | --------- | ------------ | ----------- |
 | jobData   | JSON Object | A ``JobData`` object |
 
-##### Return: the [``JobData``](#jobdata) object with ``jobId`` property populated.
+##### Return: the ``JobData`` object with ``jobId`` property populated.
 
-<p class="vspacer"></p>
 
------------------------------------------------------------------------------------
-### Scheduler.deleteJob
+#### Scheduler.deleteJob
 Get the policy definition by ID.
+
 ##### Parameters
 | Parameter | Type    | Description |
 | --------- | ------- | ----------- |
@@ -37,42 +37,39 @@ Get the policy definition by ID.
 
 ##### Return: ``true`` if the Job was deleted successfully, ``false`` otherwise
 
-<p class="vspacer"></p>
 
------------------------------------------------------------------------------------
-### Scheduler.getJob
+#### Scheduler.getJob
 Get the list of current violations for a given device.
+
 ##### Parameters
 | Parameter | Type         | Description |
 | --------- | ------------ | ----------- |
 | jobId     | Integer      | The ID of the Job |
 
-##### Return: a [``JobData``](#jobdata) object.
+##### Return: a ``JobData`` object.
 
-<p class="vspacer"></p>
 
------------------------------------------------------------------------------------
-### Scheduler.searchJobs
+#### Scheduler.searchJobs
 Get the list of current violations for a given policy.
+
 ##### Parameters
 | Parameter | Type    | Description |
 | --------- | ------- | ----------- |
 | pageData  | JSON Object  | A ``JobPageData`` object specifying the starting *offset* and *pageSize*. |
 | networks  | Array        | An array of managed network names to search for jobs in. |
-| sortColumn  | String | A string indicating the ``JobData`` object attribute the results should be sorted by (*null* for default). |
+| sortColumn  | String | A string indicating the ``JobData`` object attribute the results should be sorted by, *null* for default. |
 | descending  | Boolean | A boolean flag indicating whether results should be sorted in descending or ascending order. |
 
-##### Return: a [``JobPageData``](#jobpagedata) object containing search results
+##### Return: a ``JobPageData`` object containing search results
 
 <p class="vspacer"></p>
 
------------------------------------------------------------------------------------
-## Scheduler Objects
+### Scheduler Objects
 
-### JobData
+#### JobData
 | Field           | Type          | Description      |
 | --------------- | ------------- | --------------   |
-| jobId           | Integer       | The job's ID (read-only) |
+| jobId           | Integer       | The job ID (read-only) |
 | jobName         | String  | The name of the job |
 | description     | String  | The description of the job |
 | managedNetworks | Array         | An array of managed network names this job set is available in |
@@ -81,7 +78,7 @@ Get the list of current violations for a given policy.
 | isAccessLimited | Boolean       | ``true`` if the caller has limited visibility to the networks defined for this job (read-only) |
 | isGlobal        | Boolean       | ``true`` if the specified job is a "global" (aka system) job (read-only) |
 
-### JobPageData
+#### JobPageData
 | Field            | Type         | Description      |
 | ---------------- | ------------ | --------------   |
 | offset           | Integer      | The starting offset in the results to begin retrieving pageSize number of ``JobData`` objects. |
@@ -89,7 +86,8 @@ Get the list of current violations for a given policy.
 | total            | Integer      | This value is set and retrieved from the server when an offset of zero (0) is passed. This indicates the total number of ``JobData`` objects available. (read-only) |
 | jobData          | Array        | An array of ``JobData`` objects |
 
-### ExecutionData
+
+#### ExecutionData
 | Field            | Type         | Description      |
 | ---------------- | ------------ | --------------   |
 | id               | Integer      | The execution ID |
@@ -104,8 +102,7 @@ Get the list of current violations for a given policy.
 | isGlobal         | Boolean       | ``true`` if the specified job is a "global" (aka system) job |
 
 
-----------------------------------------------------------------------------------
-## Job Types
+#### Job Types
 | Type Name              | Type Description     |
 | ---------------------- | -------------------  |
 | "Discover Devices"     | Network device discovery. |
@@ -115,12 +112,11 @@ Get the list of current violations for a given policy.
 | "Bulk Update"          | SmartChange execution. |
 | "Report"               | Pre-definied report execution. |
 
------------------------------------------------------------------------------------
-## Job Parameters (per Job Type)
+#### Job Parameters (per Job Type)
 
 *All* job parameter names and values are UTF-8 strings.  Even "boolean" and "integer" values are represented as strings such as *"true"* or *"5432"*.
 
-### "Discover Devices"
+##### "Discover Devices"
 | Name             | Type           | Value Description      |
 | ---------------- | -------------- | --------------------   |
 | communityStrings | String   | Additional SNMP community string or comma-separated list of strings |

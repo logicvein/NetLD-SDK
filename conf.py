@@ -13,6 +13,8 @@
 
 import sys, os
 
+# css theming see: http://stackoverflow.com/questions/23211695/modifying-sphinx-theme-read-the-docs
+
 # on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 

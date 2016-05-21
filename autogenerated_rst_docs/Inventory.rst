@@ -1,5 +1,5 @@
-Overview
---------
+Inventory
+---------
 
 The inventory API provides the core functionality of manipulating
 devices in the Net LineDancer inventory, including: adding devices,
@@ -16,22 +16,33 @@ The ``search`` API returns a ``PageData`` object, as well as accepting a
 
    <p></p>
 
-+--------------------------------------------------------------------------+
-| ### Inventory.createDevice Add a device to the inventory, in the         |
-| specified network. If there are no user-defined networks then "Default"  |
-| should be used as the ``network`` value. If the device was created       |
-| successfully, the return value is ``null``, otherwise an error message   |
-| is returned.                                                             |
-+--------------------------------------------------------------------------+
-| #### Parameters \| Parameter \| Type \| Description \| \| -------------  |
-| \| ------------- \| -------------- \| \| network \| String \| Name of an |
-| existing network, e.g. "Default" \| \| ipAddress \| String \| IPv4 or    |
-| IPv6 address \| \| adapterId \| String \| The ID of the adapter to use   |
-| for backup, see Appendix A \|                                            |
-+--------------------------------------------------------------------------+
-| #### Return: an error message or ``null``                                |
-+--------------------------------------------------------------------------+
-+--------------------------------------------------------------------------+
+Inventory.createDevice
+~~~~~~~~~~~~~~~~~~~~~~
+
+Add a device to the inventory, in the specified network. If there are no
+user-defined networks then "Default" should be used as the ``network``
+value. If the device was created successfully, the return value is
+``null``, otherwise an error message is returned.
+
+Parameters
+^^^^^^^^^^
+
++-------------+----------+-----------------------------------------------------------+
+| Parameter   | Type     | Description                                               |
++=============+==========+===========================================================+
+| network     | String   | Name of an existing network, e.g. "Default"               |
++-------------+----------+-----------------------------------------------------------+
+| ipAddress   | String   | IPv4 or IPv6 address                                      |
++-------------+----------+-----------------------------------------------------------+
+| adapterId   | String   | The ID of the adapter to use for backup, see Appendix A   |
++-------------+----------+-----------------------------------------------------------+
+
+Return: an error message or ``null``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <p class="vspacer"></p>
 
 Inventory.deleteDevice
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -56,20 +67,29 @@ Return: ``null``
 
    <p class="vspacer"></p>
 
-+--------------------------------------------------------------------------+
-| ### Inventory.getDevice                                                  |
-+--------------------------------------------------------------------------+
-| The ``Inventory.getDevice`` method returns a ``Device`` object as        |
-| described above, or ``null`` if the requested device does not exist.     |
-+--------------------------------------------------------------------------+
-| #### Parameters \| Parameter \| Type \| Description \| \| -------------  |
-| \| ------------- \| -------------- \| \| network \| String \| Name of an |
-| existing network, e.g. "Default" \| \| ipAddress \| String \| IPv4 or    |
-| IPv6 address \|                                                          |
-+--------------------------------------------------------------------------+
-| #### Return: ``Device`` object or ``null``                               |
-+--------------------------------------------------------------------------+
-+--------------------------------------------------------------------------+
+Inventory.getDevice
+~~~~~~~~~~~~~~~~~~~
+
+The ``Inventory.getDevice`` method returns a ``Device`` object as
+described above, or ``null`` if the requested device does not exist.
+
+Parameters
+^^^^^^^^^^
+
++-------------+----------+-----------------------------------------------+
+| Parameter   | Type     | Description                                   |
++=============+==========+===============================================+
+| network     | String   | Name of an existing network, e.g. "Default"   |
++-------------+----------+-----------------------------------------------+
+| ipAddress   | String   | IPv4 or IPv6 address                          |
++-------------+----------+-----------------------------------------------+
+
+Return: ``Device`` object or ``null``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <p class="vspacer"></p>
 
 Inventory.updateDevice
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -117,40 +137,56 @@ Sample Request JSON:
 
    <p class="vspacer"></p>
 
-+--------------------------------------------------------------------------+
-| ### Inventory.updateDevices                                              |
-+--------------------------------------------------------------------------+
-| The ``Inventory.updateDevices`` method updates Adapter IDs and/or custom |
-| field values for multiple devices in a single operation.                 |
-+--------------------------------------------------------------------------+
-| \| Parameter \| Type \| Description \| \| ------------- \| ------------- |
-| \| -------------- \| \| ipCsv \| String \| A comma separated list of     |
-| devices of the form IPAddress@network \| \| adapterId \| String \| The   |
-| new adapter ID or ``null`` if it should remain unmodified. \| \|         |
-| customFields \| String Array \| An indexed array of custom fields \|     |
-+--------------------------------------------------------------------------+
-| The ``ipCsv`` parameter is a comma separated list of devices of the form |
-| IPAddress@network (e.g. *192.168.0.254@NetworkA,10.0.0.1@NetworkB*).     |
-+--------------------------------------------------------------------------+
-| The ``adapterId`` parameter is either a new Adapter ID to assign to the  |
-| specified devices, or ``null`` to leave the device's Adapter ID at their |
-| current values. See *Appendix A* for a list of valid Adapter IDs.        |
-+--------------------------------------------------------------------------+
-| The ``customFields`` parameter is an array of UTF-8 string values. The   |
-| first element of the array corresponds to the *Custom 1* custom field,   |
-| and the fifth element corresponds to the *Custom 5* custom field.        |
-| Elements of the ``customFields`` array that are ``null`` will leave the  |
-| corresponding custom fields at their current values.                     |
-+--------------------------------------------------------------------------+
-| #### Return: ``null``                                                    |
-+--------------------------------------------------------------------------+
-| #### Sample Request JSON:                                                |
-+--------------------------------------------------------------------------+
-| ``javascript { "jsonrpc": "2.0", "method": "Inventory.updateDevices", "p |
-| arams": { "ipCsv": "192.168.0.254@NetworkA,192.168.0.252@NetworkA", "cus |
-| tomFields": ["Tokyo HQ", "Rack 1F-8"] }, "id": 1 }``                     |
-+--------------------------------------------------------------------------+
-+--------------------------------------------------------------------------+
+Inventory.updateDevices
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``Inventory.updateDevices`` method updates Adapter IDs and/or custom
+field values for multiple devices in a single operation.
+
++----------------+----------------+-------------------------------------------------------------------+
+| Parameter      | Type           | Description                                                       |
++================+================+===================================================================+
+| ipCsv          | String         | A comma separated list of devices of the form IPAddress@network   |
++----------------+----------------+-------------------------------------------------------------------+
+| adapterId      | String         | The new adapter ID or ``null`` if it should remain unmodified.    |
++----------------+----------------+-------------------------------------------------------------------+
+| customFields   | String Array   | An indexed array of custom fields                                 |
++----------------+----------------+-------------------------------------------------------------------+
+
+The ``ipCsv`` parameter is a comma separated list of devices of the form
+IPAddress@network (e.g. *192.168.0.254@NetworkA,10.0.0.1@NetworkB*).
+
+The ``adapterId`` parameter is either a new Adapter ID to assign to the
+specified devices, or ``null`` to leave the device's Adapter ID at their
+current values. See *Appendix A* for a list of valid Adapter IDs.
+
+The ``customFields`` parameter is an array of UTF-8 string values. The
+first element of the array corresponds to the *Custom 1* custom field,
+and the fifth element corresponds to the *Custom 5* custom field.
+Elements of the ``customFields`` array that are ``null`` will leave the
+corresponding custom fields at their current values.
+
+Return: ``null``
+^^^^^^^^^^^^^^^^
+
+Sample Request JSON:
+^^^^^^^^^^^^^^^^^^^^
+
+.. code:: javascript
+
+    {
+       "jsonrpc": "2.0",
+       "method": "Inventory.updateDevices",
+       "params": {
+                  "ipCsv": "192.168.0.254@NetworkA,192.168.0.252@NetworkA",
+                  "customFields": ["Tokyo HQ", "Rack 1F-8"]
+                 },
+       "id": 1
+    }
+
+.. raw:: html
+
+   <p class="vspacer"></p>
 
 Inventory.search
 ~~~~~~~~~~~~~~~~
@@ -325,13 +361,11 @@ Sample Request JSON combining two search schemes:
 
    <p class="vspacer"></p>
 
---------------
-
 Inventory Objects
------------------
+~~~~~~~~~~~~~~~~~
 
 Device
-~~~~~~
+^^^^^^
 
 +-------------------+-----------+---------------------------------------------------------------------------------------------+
 | Field             | Type      | Description                                                                                 |
@@ -378,7 +412,7 @@ Device
 +-------------------+-----------+---------------------------------------------------------------------------------------------+
 
 PageData
-~~~~~~~~
+^^^^^^^^
 
 +-------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Attribute   | Type      | Description                                                                                                                                                                                                                  |
@@ -391,9 +425,4 @@ PageData
 +-------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | devices     | Array     | An array of ``Device`` objects. This value is ignored when ``PageData`` is used as a parameter.                                                                                                                              |
 +-------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. raw:: html
-
-   <p class="vspacer"></p>
-
 

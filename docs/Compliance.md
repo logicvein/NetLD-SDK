@@ -1,11 +1,12 @@
-## Overview
+## Compliance
 
 The compliance API provides access to compliance policies, rules, and violation information.
 
-## Compliance Service Methods
+### Compliance Service Methods
 
-### ```Compliance.getRuleSet```
+#### ```Compliance.getRuleSet```
 Get the compliance ruleset for the given ID
+
 ##### Parameters
 | Parameter | Type    | Description |
 | --------- | ------- | ----------- |
@@ -15,8 +16,9 @@ Get the compliance ruleset for the given ID
 
 <p class="vspacer"></p>
 
-### ```Compliance.getPolicies```
+#### ```Compliance.getPolicies```
 Get the list of policies in a given managed networks.
+
 ##### Parameters
 | Parameter | Type         | Description |
 | --------- | ------------ | ----------- |
@@ -26,8 +28,9 @@ Get the list of policies in a given managed networks.
 
 <p class="vspacer"></p>
 
-### ```Compliance.getPolicy```
+#### ```Compliance.getPolicy```
 Get the policy definition by ID.
+
 ##### Parameters
 | Parameter | Type    | Description |
 | --------- | ------- | ----------- |
@@ -37,8 +40,9 @@ Get the policy definition by ID.
 
 <p class="vspacer"></p>
 
-### ```Compliance.getViolationsForDevice```
+#### ```Compliance.getViolationsForDevice```
 Get the list of current violations for a given device.
+
 ##### Parameters
 | Parameter | Type         | Description |
 | --------- | ------------ | ----------- |
@@ -49,23 +53,24 @@ Get the list of current violations for a given device.
 
 <p class="vspacer"></p>
 
-### ```Compliance.getViolationsForPolicy```
+#### ```Compliance.getViolationsForPolicy```
 Get the list of current violations for a given policy.
+
 ##### Parameters
 | Parameter | Type    | Description |
 | --------- | ------- | ----------- |
-| policyId  | Integer | The ID of the desired violations' policy |
+| policyId  | Integer | The ID of the desired violations policy |
 
 ##### Return: an array of ```Violation``` objects
 
 <p class="vspacer"></p>
 
-## Compliance Objects
+### Compliance Objects
 
-### RuleSet
+#### RuleSet
 | Field         | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| ruleSetId     | Integer       | The rule set's ID |
+| ruleSetId     | Integer       | The rule set ID |
 | ruleSetName   | UTF-8 String  | The name of the rule set |
 | adapterId     | UTF-8 String  | The Adapter ID of the device |
 | configPath    | UTF-8 String  | The device configuration this rule applies to |
@@ -73,7 +78,7 @@ Get the list of current violations for a given policy.
 | networks      | Array         | An array of managed networks this rule set is available for |
 | readOnly      | Boolean       | A boolean flag indicating whether or not this rule set is editable |
 
-### PolicyInfo
+#### PolicyInfo
 | Field            | Type         | Description      |
 | ---------------- | ------------ | --------------   |
 | policyId         | Integer      | The policy's ID |
@@ -83,7 +88,7 @@ Get the list of current violations for a given policy.
 | coveredDevice    | Integer      | The number of devices covered by this policy
 | violatingDevices | Integer      | The number of devices in violation of this policy |
 
-### Policy
+#### Policy
 | Field            | Type         | Description      |
 | ---------------- | ------------ | --------------   |
 | policyId         | Integer      | The policy's ID |
@@ -94,7 +99,7 @@ Get the list of current violations for a given policy.
 | resolutionScheme | UTF-8 String | A single scheme name or comma-separated list of scheme names |
 | resolutionData   | UTF-8 String | The query associated with the scheme(s) specified |
 
-### Violation
+#### Violation
 | Field     | Type         | Description      |
 | --------- | ------------ | --------------   |
 | policyId  | Integer      | The ID of the Policy in violation |

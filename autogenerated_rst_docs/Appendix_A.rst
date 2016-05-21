@@ -74,6 +74,3 @@ Device Adapter IDs
 | Paloalto::PA500 \|
 | Vyatta::OFR \|
 | YAMAHA::RT107e \|
-
---------------
-

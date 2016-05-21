@@ -1,4 +1,4 @@
-## Overview
+## Inventory
 
 The inventory API provides the core functionality of manipulating devices in the Net LineDancer inventory, including: adding devices, deleting devices, modifying devices, searching devices, etc.
 
@@ -8,7 +8,6 @@ The ```search``` API returns a ```PageData``` object, as well as accepting a ```
 
 <p></p>
 
------------------------------------------------------------------------------------
 ### Inventory.createDevice
 Add a device to the inventory, in the specified network.  If there are no user-defined networks then "Default" should be used as the ``network`` value.  If the device was created successfully, the return value is ```null```, otherwise an error
 message is returned.
@@ -24,7 +23,6 @@ message is returned.
 
 <p class="vspacer"></p>
 
------------------------------------------------------------------------------------
 ### Inventory.deleteDevice
 
 Delete a device from the inventory.
@@ -39,7 +37,6 @@ Delete a device from the inventory.
 
 <p class="vspacer"></p>
 
------------------------------------------------------------------------------------
 ### Inventory.getDevice
 
 The ``Inventory.getDevice`` method returns a ``Device`` object as described above, or ``null`` if the requested device does not exist.
@@ -54,7 +51,6 @@ The ``Inventory.getDevice`` method returns a ``Device`` object as described abov
 
 <p class="vspacer"></p>
 
------------------------------------------------------------------------------------
 ### Inventory.updateDevice
 
 The ```Inventory.updateDevice``` method is used to update an existing device in the inventory.  It requires only ```network``` and ```ipAddress``` as parameters,
@@ -88,7 +84,6 @@ all other parameters are optional.
 
 <p class="vspacer"></p>
 
------------------------------------------------------------------------------------
 ### Inventory.updateDevices
 
 The ``Inventory.updateDevices`` method updates Adapter IDs and/or custom field values for multiple devices in a single operation.
@@ -123,7 +118,6 @@ The ``customFields`` parameter is an array of UTF-8 string values.  The first el
 
 <p class="vspacer"></p>
 
------------------------------------------------------------------------------------
 ### Inventory.search
 
 The ``Inventory.search`` method is the fundemental way of retrieving devices from the inventory.  Search supports many criteria, and the criteria can be combined to perform powerful searches.
@@ -265,10 +259,9 @@ When ``offset`` + ``pageSize`` is greater than or equal to ``total`` there are n
 
 <p class="vspacer"></p>
 
------------------------------------------------------------------------------------
-## Inventory Objects
+### Inventory Objects
 
-### Device
+#### Device
 | Field           | Type          | Description      |
 | --------------- | ------------- | --------------   |
 | ipAddress       | String    | The IPv4 or IPv6 address of the device |
@@ -292,7 +285,7 @@ When ``offset`` + ``pageSize`` is greater than or equal to ``total`` there are n
 | custom5         | String    | The custom5 value, or *null* |
 | serialNumber    | String    | The chassis serial number of the device, or *null* if not available |
 
-### PageData
+#### PageData
 | Attribute     | Type          | Description      |
 | ------------- | ------------- | --------------   |
 | offset        | Integer       | The starting ```offset``` in the results to begin retrieving ```pageSize``` number of ```Device``` objects.  This value is required when ```PageData``` is used as a parameter. |
@@ -300,4 +293,3 @@ When ``offset`` + ``pageSize`` is greater than or equal to ``total`` there are n
 | total         | Integer  | This value is set and retrieved from the server when an ```offset``` of zero (0) is passed.  This indicates the total number of ``Device`` objects available.   This value is ignored when ```PageData``` is used as a parameter. |
 | devices       | Array | An array of ``Device`` objects. This value is ignored when ``PageData`` is used as a parameter. |
 
-<p class="vspacer"></p>

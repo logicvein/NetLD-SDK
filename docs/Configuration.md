@@ -1,4 +1,4 @@
-## Overview
+## Configuration
 
 The configuration API provides the core functionality of retrieving configuration history and managing draft configurations.
 
@@ -236,8 +236,7 @@ Retrieve a revision of a configuration for the specified device.
 
 <p class="vspacer"></p>
 
-<!--
-### ```Configuration.retrieveRevisionWordDiff```
+### Configuration.retrieveRevisionWordDiff
 
 Retrieve an XML string containing differences marked up in such a way as to provide simple
 implementation of highlighting word-level differences.

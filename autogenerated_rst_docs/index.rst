@@ -1,6 +1,6 @@
 
 .. toctree::
-   :maxdepth: 3
+   :titlesonly:
 
    API Overview <Welcome.rst>
    Configuration <Configuration.rst>

@@ -1,19 +1,25 @@
-Overview
---------
+Compliance
+----------
 
 The compliance API provides access to compliance policies, rules, and
 violation information.
 
 Compliance Service Methods
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``Compliance.getRuleSet``
-~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Get the compliance ruleset for the given ID ##### Parameters \|
-Parameter \| Type \| Description \| \| --------- \| ------- \|
------------ \| \| ruleSetId \| Integer \| The ID of the desired RuleSet
-object \|
+Get the compliance ruleset for the given ID
+
+Parameters
+''''''''''
+
++-------------+-----------+----------------------------------------+
+| Parameter   | Type      | Description                            |
++=============+===========+========================================+
+| ruleSetId   | Integer   | The ID of the desired RuleSet object   |
++-------------+-----------+----------------------------------------+
 
 Return: the ``RuleSet`` object or ``null``
 ''''''''''''''''''''''''''''''''''''''''''
@@ -23,11 +29,18 @@ Return: the ``RuleSet`` object or ``null``
    <p class="vspacer"></p>
 
 ``Compliance.getPolicies``
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Get the list of policies in a given managed networks. ##### Parameters
-\| Parameter \| Type \| Description \| \| --------- \| ------------ \|
------------ \| \| network \| UTF-8 String \| The managed network \|
+Get the list of policies in a given managed networks.
+
+Parameters
+''''''''''
+
++-------------+----------------+-----------------------+
+| Parameter   | Type           | Description           |
++=============+================+=======================+
+| network     | UTF-8 String   | The managed network   |
++-------------+----------------+-----------------------+
 
 Return: an array of ``PolicyInfo`` objects
 ''''''''''''''''''''''''''''''''''''''''''
@@ -37,11 +50,18 @@ Return: an array of ``PolicyInfo`` objects
    <p class="vspacer"></p>
 
 ``Compliance.getPolicy``
-~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-Get the policy definition by ID. ##### Parameters \| Parameter \| Type
-\| Description \| \| --------- \| ------- \| ----------- \| \| policyId
-\| Integer \| The ID of the desired policy \|
+Get the policy definition by ID.
+
+Parameters
+''''''''''
+
++-------------+-----------+--------------------------------+
+| Parameter   | Type      | Description                    |
++=============+===========+================================+
+| policyId    | Integer   | The ID of the desired policy   |
++-------------+-----------+--------------------------------+
 
 Return: a ``Policy`` object or ``null``
 '''''''''''''''''''''''''''''''''''''''
@@ -51,13 +71,20 @@ Return: a ``Policy`` object or ``null``
    <p class="vspacer"></p>
 
 ``Compliance.getViolationsForDevice``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Get the list of current violations for a given device. ##### Parameters
-\| Parameter \| Type \| Description \| \| --------- \| ------------ \|
------------ \| \| network \| UTF-8 String \| The managed network of the
-device \| \| ipAddress \| UTF-8 String \| The IP address of the device
-\|
+Get the list of current violations for a given device.
+
+Parameters
+''''''''''
+
++-------------+----------------+-------------------------------------+
+| Parameter   | Type           | Description                         |
++=============+================+=====================================+
+| network     | UTF-8 String   | The managed network of the device   |
++-------------+----------------+-------------------------------------+
+| ipAddress   | UTF-8 String   | The IP address of the device        |
++-------------+----------------+-------------------------------------+
 
 Return: an array of ``Violation`` objects
 '''''''''''''''''''''''''''''''''''''''''
@@ -67,12 +94,18 @@ Return: an array of ``Violation`` objects
    <p class="vspacer"></p>
 
 ``Compliance.getViolationsForPolicy``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Get the list of current violations for a given policy. ##### Parameters
-\| Parameter \| Type \| Description \| \| --------- \| ------- \|
------------ \| \| policyId \| Integer \| The ID of the desired
-violations' policy \|
+Get the list of current violations for a given policy.
+
+Parameters
+''''''''''
+
++-------------+-----------+-------------------------------------------+
+| Parameter   | Type      | Description                               |
++=============+===========+===========================================+
+| policyId    | Integer   | The ID of the desired violations policy   |
++-------------+-----------+-------------------------------------------+
 
 Return: an array of ``Violation`` objects
 '''''''''''''''''''''''''''''''''''''''''
@@ -82,15 +115,15 @@ Return: an array of ``Violation`` objects
    <p class="vspacer"></p>
 
 Compliance Objects
-------------------
+~~~~~~~~~~~~~~~~~~
 
 RuleSet
-~~~~~~~
+^^^^^^^
 
 +---------------+----------------+----------------------------------------------------------------------+
 | Field         | Type           | Description                                                          |
 +===============+================+======================================================================+
-| ruleSetId     | Integer        | The rule set's ID                                                    |
+| ruleSetId     | Integer        | The rule set ID                                                      |
 +---------------+----------------+----------------------------------------------------------------------+
 | ruleSetName   | UTF-8 String   | The name of the rule set                                             |
 +---------------+----------------+----------------------------------------------------------------------+
@@ -106,7 +139,7 @@ RuleSet
 +---------------+----------------+----------------------------------------------------------------------+
 
 PolicyInfo
-~~~~~~~~~~
+^^^^^^^^^^
 
 +--------------------+----------------+-------------------------------------------------------------------+
 | Field              | Type           | Description                                                       |
@@ -125,7 +158,7 @@ PolicyInfo
 +--------------------+----------------+-------------------------------------------------------------------+
 
 Policy
-~~~~~~
+^^^^^^
 
 +--------------------+----------------+----------------------------------------------------------------+
 | Field              | Type           | Description                                                    |
@@ -146,7 +179,7 @@ Policy
 +--------------------+----------------+----------------------------------------------------------------+
 
 Violation
-~~~~~~~~~
+^^^^^^^^^
 
 +-------------+----------------+------------------------------------------------------+
 | Field       | Type           | Description                                          |

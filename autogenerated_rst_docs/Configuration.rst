@@ -1,5 +1,5 @@
-Overview
---------
+Configuration
+-------------
 
 The configuration API provides the core functionality of retrieving
 configuration history and managing draft configurations.
@@ -305,7 +305,8 @@ Sample Response JSON:
 
    <p class="vspacer"></p>
 
-<!-- ### ``Configuration.retrieveRevisionWordDiff``
+Configuration.retrieveRevisionWordDiff
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Retrieve an XML string containing differences marked up in such a way as
 to provide simple implementation of highlighting word-level differences.

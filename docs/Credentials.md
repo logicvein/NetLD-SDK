@@ -1,4 +1,4 @@
-## Overview
+## Credentials
 
 The credentials API provides the core functionality for device authentication credentials in Net LineDancer.
 
@@ -406,6 +406,3 @@ should be made before a final call to ``commitEdits``.
 }
 ```
 
-<p class="vspacer"></p>
-
-------------------------------------------------------
