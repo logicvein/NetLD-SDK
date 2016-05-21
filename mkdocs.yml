@@ -1,8 +1,8 @@
 site_name: netLD SDK
 pages:
 - API Overview: Welcome.md
-- Configuration: Configuration.md
 - Inventory: Inventory.md
+- Configuration: Configuration.md
 - Credentials: Credentials.md
 - Scheduler: Scheduler.md
 - Compliance: Compliance.md
