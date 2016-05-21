@@ -3,8 +3,8 @@
    :titlesonly:
 
    API Overview <Welcome.rst>
-   Configuration <Configuration.rst>
    Inventory <Inventory.rst>
+   Configuration <Configuration.rst>
    Credentials <Credentials.rst>
    Scheduler <Scheduler.rst>
    Compliance <Compliance.rst>
