@@ -26,7 +26,11 @@ Return: the ``RuleSet`` object or ``null``
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 ``Compliance.getPolicies``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -47,7 +51,11 @@ Return: an array of ``PolicyInfo`` objects
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 ``Compliance.getPolicy``
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -68,7 +76,11 @@ Return: a ``Policy`` object or ``null``
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 ``Compliance.getViolationsForDevice``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -91,7 +103,11 @@ Return: an array of ``Violation`` objects
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 ``Compliance.getViolationsForPolicy``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -112,7 +128,11 @@ Return: an array of ``Violation`` objects
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 Compliance Objects
 ~~~~~~~~~~~~~~~~~~
@@ -120,63 +140,103 @@ Compliance Objects
 RuleSet
 ^^^^^^^
 
-+---------------+----------------+----------------------------------------------------------------------+
-| Field         | Type           | Description                                                          |
-+===============+================+======================================================================+
-| ruleSetId     | Integer        | The rule set ID                                                      |
-+---------------+----------------+----------------------------------------------------------------------+
-| ruleSetName   | UTF-8 String   | The name of the rule set                                             |
-+---------------+----------------+----------------------------------------------------------------------+
-| adapterId     | UTF-8 String   | The Adapter ID of the device                                         |
-+---------------+----------------+----------------------------------------------------------------------+
-| configPath    | UTF-8 String   | The device configuration this rule applies to                        |
-+---------------+----------------+----------------------------------------------------------------------+
-| ruleSetXml    | UTF-8 String   | The rule set definition                                              |
-+---------------+----------------+----------------------------------------------------------------------+
-| networks      | Array          | An array of managed networks this rule set is available for          |
-+---------------+----------------+----------------------------------------------------------------------+
-| readOnly      | Boolean        | A boolean flag indicating whether or not this rule set is editable   |
-+---------------+----------------+----------------------------------------------------------------------+
++----------------+----------------+-----------------+
+| Field          | Type           | Description     |
++================+================+=================+
+| ruleSetId      | Integer        | The rule set ID |
++----------------+----------------+-----------------+
+| ruleSetName    | UTF-8 String   | The name of the |
+|                |                | rule set        |
++----------------+----------------+-----------------+
+| adapterId      | UTF-8 String   | The Adapter ID  |
+|                |                | of the device   |
++----------------+----------------+-----------------+
+| configPath     | UTF-8 String   | The device      |
+|                |                | configuration   |
+|                |                | this rule       |
+|                |                | applies to      |
++----------------+----------------+-----------------+
+| ruleSetXml     | UTF-8 String   | The rule set    |
+|                |                | definition      |
++----------------+----------------+-----------------+
+| networks       | Array          | An array of     |
+|                |                | managed         |
+|                |                | networks this   |
+|                |                | rule set is     |
+|                |                | available for   |
++----------------+----------------+-----------------+
+| readOnly       | Boolean        | A boolean flag  |
+|                |                | indicating      |
+|                |                | whether or not  |
+|                |                | this rule set   |
+|                |                | is editable     |
++----------------+----------------+-----------------+
 
 PolicyInfo
 ^^^^^^^^^^
 
-+--------------------+----------------+-------------------------------------------------------------------+
-| Field              | Type           | Description                                                       |
-+====================+================+===================================================================+
-| policyId           | Integer        | The policy's ID                                                   |
-+--------------------+----------------+-------------------------------------------------------------------+
-| policyName         | UTF-8 String   | The name of the policy                                            |
-+--------------------+----------------+-------------------------------------------------------------------+
-| network            | UTF-8 String   | The managed network the policy is in                              |
-+--------------------+----------------+-------------------------------------------------------------------+
-| enabled            | Boolean        | A boolean flag indicating whether or not this policy is enabled   |
-+--------------------+----------------+-------------------------------------------------------------------+
-| coveredDevice      | Integer        | The number of devices covered by this policy                      |
-+--------------------+----------------+-------------------------------------------------------------------+
-| violatingDevices   | Integer        | The number of devices in violation of this policy                 |
-+--------------------+----------------+-------------------------------------------------------------------+
++-------------------+---------------+-----------------+
+| Field             | Type          | Description     |
++===================+===============+=================+
+| policyId          | Integer       | The policy's ID |
++-------------------+---------------+-----------------+
+| policyName        | UTF-8 String  | The name of the |
+|                   |               | policy          |
++-------------------+---------------+-----------------+
+| network           | UTF-8 String  | The managed     |
+|                   |               | network the     |
+|                   |               | policy is in    |
++-------------------+---------------+-----------------+
+| enabled           | Boolean       | A boolean flag  |
+|                   |               | indicating      |
+|                   |               | whether or not  |
+|                   |               | this policy is  |
+|                   |               | enabled         |
++-------------------+---------------+-----------------+
+| coveredDevice     | Integer       | The number of   |
+|                   |               | devices covered |
+|                   |               | by this policy  |
++-------------------+---------------+-----------------+
+| violatingDevices  | Integer       | The number of   |
+|                   |               | devices in      |
+|                   |               | violation of    |
+|                   |               | this policy     |
++-------------------+---------------+-----------------+
 
 Policy
 ^^^^^^
 
-+--------------------+----------------+----------------------------------------------------------------+
-| Field              | Type           | Description                                                    |
-+====================+================+================================================================+
-| policyId           | Integer        | The policy's ID                                                |
-+--------------------+----------------+----------------------------------------------------------------+
-| policyName         | UTF-8 String   | The name of the policy                                         |
-+--------------------+----------------+----------------------------------------------------------------+
-| network            | UTF-8 String   | The managed network the policy is in                           |
-+--------------------+----------------+----------------------------------------------------------------+
-| adapterId          | UTF-8 String   | The Adapter ID of the device                                   |
-+--------------------+----------------+----------------------------------------------------------------+
-| configPath         | UTF-8 String   | The device configuration this policy applies to                |
-+--------------------+----------------+----------------------------------------------------------------+
-| resolutionScheme   | UTF-8 String   | A single scheme name or comma-separated list of scheme names   |
-+--------------------+----------------+----------------------------------------------------------------+
-| resolutionData     | UTF-8 String   | The query associated with the scheme(s) specified              |
-+--------------------+----------------+----------------------------------------------------------------+
++-------------------+---------------+-----------------+
+| Field             | Type          | Description     |
++===================+===============+=================+
+| policyId          | Integer       | The policy's ID |
++-------------------+---------------+-----------------+
+| policyName        | UTF-8 String  | The name of the |
+|                   |               | policy          |
++-------------------+---------------+-----------------+
+| network           | UTF-8 String  | The managed     |
+|                   |               | network the     |
+|                   |               | policy is in    |
++-------------------+---------------+-----------------+
+| adapterId         | UTF-8 String  | The Adapter ID  |
+|                   |               | of the device   |
++-------------------+---------------+-----------------+
+| configPath        | UTF-8 String  | The device      |
+|                   |               | configuration   |
+|                   |               | this policy     |
+|                   |               | applies to      |
++-------------------+---------------+-----------------+
+| resolutionScheme  | UTF-8 String  | A single scheme |
+|                   |               | name or         |
+|                   |               | comma-separated |
+|                   |               | list of scheme  |
+|                   |               | names           |
++-------------------+---------------+-----------------+
+| resolutionData    | UTF-8 String  | The query       |
+|                   |               | associated with |
+|                   |               | the scheme(s)   |
+|                   |               | specified       |
++-------------------+---------------+-----------------+
 
 Violation
 ^^^^^^^^^
@@ -196,4 +256,3 @@ Violation
 +-------------+----------------+------------------------------------------------------+
 | severity    | Integer        | The violation severity. 1 for WARNING, 2 for ERROR   |
 +-------------+----------------+------------------------------------------------------+
-

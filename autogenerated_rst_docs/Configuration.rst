@@ -29,37 +29,101 @@ A ``Change`` object is expressed in JSON format seen here:
 
 .. raw:: html
 
-   <p></p>
-
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Attribute        | Type      | Description                                                                                                                                                                         |
-+==================+===========+=====================================================================================================================================================================================+
-| author           | String    | The netLD username who made the change that was recorded, if known. 'n/a' if not available.                                                                                         |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| path             | String    | The filesystem path of the configuration on the device                                                                                                                              |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| mimeType         | String    | The MIME-type of the configuration file. Possible values are 'text/plain', 'application/octet-stream' (binary), 'application/x-tar' (binary).                                       |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| type             | String    | The kind of change recorded. Possible values are 'M' (modification to existing configuration), 'A' (addition of a never before seen configuration), 'D' (a deleted configuration)   |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| size             | Integer   | The size of the configuration in bytes                                                                                                                                              |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| previousChange   | Integer   | The timestamp of the previous configuration revision in milliseconds (in Unix Epoch time). Can be null.                                                                             |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| revisionTime     | Integer   | The timestamp when the configuration was backed up, in milliseconds (in Unix Epoch time).                                                                                           |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| head             | Boolean   | "true" if this revision is the latest, "false" otherwise.                                                                                                                           |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| hasMemo          | Boolean   | "true" is there is a memo for this configuration, "false" otherwise.                                                                                                                |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| mappingType      | String    | undocumented.                                                                                                                                                                       |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| mappingId        | String    | undocumented.                                                                                                                                                                       |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   <p>
 
 .. raw:: html
 
-   <p></p>
+   </p>
+
++----------------+----------------+-----------------+
+| Attribute      | Type           | Description     |
++================+================+=================+
+| author         | String         | The netLD       |
+|                |                | username who    |
+|                |                | made the change |
+|                |                | that was        |
+|                |                | recorded, if    |
+|                |                | known. 'n/a' if |
+|                |                | not available.  |
++----------------+----------------+-----------------+
+| path           | String         | The filesystem  |
+|                |                | path of the     |
+|                |                | configuration   |
+|                |                | on the device   |
++----------------+----------------+-----------------+
+| mimeType       | String         | The MIME-type   |
+|                |                | of the          |
+|                |                | configuration   |
+|                |                | file. Possible  |
+|                |                | values are      |
+|                |                | 'text/plain',   |
+|                |                | 'application/oc |
+|                |                | tet-stream'     |
+|                |                | (binary),       |
+|                |                | 'application/x- |
+|                |                | tar'            |
+|                |                | (binary).       |
++----------------+----------------+-----------------+
+| type           | String         | The kind of     |
+|                |                | change          |
+|                |                | recorded.       |
+|                |                | Possible values |
+|                |                | are 'M'         |
+|                |                | (modification   |
+|                |                | to existing     |
+|                |                | configuration), |
+|                |                | 'A' (addition   |
+|                |                | of a never      |
+|                |                | before seen     |
+|                |                | configuration), |
+|                |                | 'D' (a deleted  |
+|                |                | configuration)  |
++----------------+----------------+-----------------+
+| size           | Integer        | The size of the |
+|                |                | configuration   |
+|                |                | in bytes        |
++----------------+----------------+-----------------+
+| previousChange | Integer        | The timestamp   |
+|                |                | of the previous |
+|                |                | configuration   |
+|                |                | revision in     |
+|                |                | milliseconds    |
+|                |                | (in Unix Epoch  |
+|                |                | time). Can be   |
+|                |                | null.           |
++----------------+----------------+-----------------+
+| revisionTime   | Integer        | The timestamp   |
+|                |                | when the        |
+|                |                | configuration   |
+|                |                | was backed up,  |
+|                |                | in milliseconds |
+|                |                | (in Unix Epoch  |
+|                |                | time).          |
++----------------+----------------+-----------------+
+| head           | Boolean        | "true" if this  |
+|                |                | revision is the |
+|                |                | latest, "false" |
+|                |                | otherwise.      |
++----------------+----------------+-----------------+
+| hasMemo        | Boolean        | "true" is there |
+|                |                | is a memo for   |
+|                |                | this            |
+|                |                | configuration,  |
+|                |                | "false"         |
+|                |                | otherwise.      |
++----------------+----------------+-----------------+
+| mappingType    | String         | undocumented.   |
++----------------+----------------+-----------------+
+| mappingId      | String         | undocumented.   |
++----------------+----------------+-----------------+
+
+.. raw:: html
+
+   <p>
+
+.. raw:: html
+
+   </p>
 
 A ``ChangeLog`` object is expressed in JSON format seen here:
 
@@ -72,19 +136,41 @@ A ``ChangeLog`` object is expressed in JSON format seen here:
 
 .. raw:: html
 
-   <p></p>
-
-+-------------+-----------+-------------------------------------------------------------------------------------------------------------+
-| Attribute   | Type      | Description                                                                                                 |
-+=============+===========+=============================================================================================================+
-| timestamp   | Integer   | The 'Unix Epoch' timestamp (in milliseconds) when the configuration was recorded                            |
-+-------------+-----------+-------------------------------------------------------------------------------------------------------------+
-| changes     | Array     | An array of ``Change`` objects, reflecting configurations that were captured at the same time (timestamp)   |
-+-------------+-----------+-------------------------------------------------------------------------------------------------------------+
+   <p>
 
 .. raw:: html
 
-   <p></p>
+   </p>
+
++----------------+----------------+-----------------+
+| Attribute      | Type           | Description     |
++================+================+=================+
+| timestamp      | Integer        | The 'Unix       |
+|                |                | Epoch'          |
+|                |                | timestamp (in   |
+|                |                | milliseconds)   |
+|                |                | when the        |
+|                |                | configuration   |
+|                |                | was recorded    |
++----------------+----------------+-----------------+
+| changes        | Array          | An array of     |
+|                |                | ``Change``      |
+|                |                | objects,        |
+|                |                | reflecting      |
+|                |                | configurations  |
+|                |                | that were       |
+|                |                | captured at the |
+|                |                | same time       |
+|                |                | (timestamp)     |
++----------------+----------------+-----------------+
+
+.. raw:: html
+
+   <p>
+
+.. raw:: html
+
+   </p>
 
 A ``PageData`` object is expressed in JSON format seen here:
 
@@ -97,21 +183,52 @@ A ``PageData`` object is expressed in JSON format seen here:
         "changeLogs": [<ChangeLog> objects]
     }
 
-+--------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Attribute    | Type      | Description                                                                                                                                                     |
-+==============+===========+=================================================================================================================================================================+
-| offset       | Integer   | The starting ``offset`` in the results to begin retrieving ``pageSize`` number of ``ChangeLog`` objects.                                                        |
-+--------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| pageSize     | Integer   | The maximum number of ``ChangeLog`` objects to retrieve in a single method call.                                                                                |
-+--------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| total        | Integer   | This value is set and retrieved from the server when an ``offset`` of zero (0) is passed. This indicates the total number of ``ChangeLog`` objects available.   |
-+--------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| changeLogs   | Array     | An array of ``ChangeLog`` objects                                                                                                                               |
-+--------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------+----------------+-----------------+
+| Attribute      | Type           | Description     |
++================+================+=================+
+| offset         | Integer        | The starting    |
+|                |                | ``offset`` in   |
+|                |                | the results to  |
+|                |                | begin           |
+|                |                | retrieving      |
+|                |                | ``pageSize``    |
+|                |                | number of       |
+|                |                | ``ChangeLog``   |
+|                |                | objects.        |
++----------------+----------------+-----------------+
+| pageSize       | Integer        | The maximum     |
+|                |                | number of       |
+|                |                | ``ChangeLog``   |
+|                |                | objects to      |
+|                |                | retrieve in a   |
+|                |                | single method   |
+|                |                | call.           |
++----------------+----------------+-----------------+
+| total          | Integer        | This value is   |
+|                |                | set and         |
+|                |                | retrieved from  |
+|                |                | the server when |
+|                |                | an ``offset``   |
+|                |                | of zero (0) is  |
+|                |                | passed. This    |
+|                |                | indicates the   |
+|                |                | total number of |
+|                |                | ``ChangeLog``   |
+|                |                | objects         |
+|                |                | available.      |
++----------------+----------------+-----------------+
+| changeLogs     | Array          | An array of     |
+|                |                | ``ChangeLog``   |
+|                |                | objects         |
++----------------+----------------+-----------------+
 
 .. raw:: html
 
-   <p></p>
+   <p>
+
+.. raw:: html
+
+   </p>
 
 A ``Revision`` object is expressed in JSON format seen here:
 
@@ -126,21 +243,54 @@ A ``Revision`` object is expressed in JSON format seen here:
         "content": <BASE64 ENCODED STIRING>
     }
 
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
-| Attribute        | Type      | Description                                                                                                                                     |
-+==================+===========+=================================================================================================================================================+
-| path             | String    | The filesystem path of the configuration on the device                                                                                          |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
-| author           | String    | The netLD username who made the change that was recorded, if known. 'n/a' if not available.                                                     |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
-| mimeType         | String    | The MIME-type of the configuration file. Possible values are 'text/plain', 'application/octet-stream' (binary), 'application/x-tar' (binary).   |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
-| size             | Integer   | The size of the configuration in bytes                                                                                                          |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
-| previousChange   | Integer   | The timestamp of the previous configuration revision in milliseconds (in Unix Epoch time). Can be null.                                         |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
-| content          | String    | The configuration file content, encoded in Base64 format                                                                                        |
-+------------------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------+----------------+-----------------+
+| Attribute      | Type           | Description     |
++================+================+=================+
+| path           | String         | The filesystem  |
+|                |                | path of the     |
+|                |                | configuration   |
+|                |                | on the device   |
++----------------+----------------+-----------------+
+| author         | String         | The netLD       |
+|                |                | username who    |
+|                |                | made the change |
+|                |                | that was        |
+|                |                | recorded, if    |
+|                |                | known. 'n/a' if |
+|                |                | not available.  |
++----------------+----------------+-----------------+
+| mimeType       | String         | The MIME-type   |
+|                |                | of the          |
+|                |                | configuration   |
+|                |                | file. Possible  |
+|                |                | values are      |
+|                |                | 'text/plain',   |
+|                |                | 'application/oc |
+|                |                | tet-stream'     |
+|                |                | (binary),       |
+|                |                | 'application/x- |
+|                |                | tar'            |
+|                |                | (binary).       |
++----------------+----------------+-----------------+
+| size           | Integer        | The size of the |
+|                |                | configuration   |
+|                |                | in bytes        |
++----------------+----------------+-----------------+
+| previousChange | Integer        | The timestamp   |
+|                |                | of the previous |
+|                |                | configuration   |
+|                |                | revision in     |
+|                |                | milliseconds    |
+|                |                | (in Unix Epoch  |
+|                |                | time). Can be   |
+|                |                | null.           |
++----------------+----------------+-----------------+
+| content        | String         | The             |
+|                |                | configuration   |
+|                |                | file content,   |
+|                |                | encoded in      |
+|                |                | Base64 format   |
++----------------+----------------+-----------------+
 
 Configuration.retrieveSnapshotChangeLog
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -150,15 +300,24 @@ Retrieves the configuration history for the specified device.
 Parameters
 ^^^^^^^^^^
 
-+-------------+---------------+------------------------------------------------------------------------------+
-| Parameter   | Type          | Description                                                                  |
-+=============+===============+==============================================================================+
-| network     | String        | Name of an existing network, e.g. "Default"                                  |
-+-------------+---------------+------------------------------------------------------------------------------+
-| ipAddress   | String        | IPv4 or IPv6 address                                                         |
-+-------------+---------------+------------------------------------------------------------------------------+
-| pageData    | JSON Object   | A ``PageData`` object specifying the starting ``offset`` and ``pageSize``.   |
-+-------------+---------------+------------------------------------------------------------------------------+
++----------------+----------------+-----------------+
+| Parameter      | Type           | Description     |
++================+================+=================+
+| network        | String         | Name of an      |
+|                |                | existing        |
+|                |                | network, e.g.   |
+|                |                | "Default"       |
++----------------+----------------+-----------------+
+| ipAddress      | String         | IPv4 or IPv6    |
+|                |                | address         |
++----------------+----------------+-----------------+
+| pageData       | JSON Object    | A ``PageData``  |
+|                |                | object          |
+|                |                | specifying the  |
+|                |                | starting        |
+|                |                | ``offset`` and  |
+|                |                | ``pageSize``.   |
++----------------+----------------+-----------------+
 
 Return: a ``PageData`` object
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -249,17 +408,50 @@ Retrieve a revision of a configuration for the specified device.
 Parameters
 ^^^^^^^^^^
 
-+--------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Parameter    | Type      | Description                                                                                                                                                                                                                                                                 |
-+==============+===========+=============================================================================================================================================================================================================================================================================+
-| network      | String    | Name of an existing network, e.g. "Default"                                                                                                                                                                                                                                 |
-+--------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ipAddress    | String    | IPv4 or IPv6 address                                                                                                                                                                                                                                                        |
-+--------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| configPath   | String    | The path of the configuration file to retrieve. This should be the same value as the ``path`` attribute in a ``Change`` object.                                                                                                                                             |
-+--------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| timestamp    | Integer   | The timestamp (in Unix Epoch milliseconds) of the configuration to retrieve. This should be the same value as the ``revisionTime`` attribute in a ``Change`` object returned by ``retrieveSnapshotChangeLog``. If timestamp is omitted, the latest revision is retrieved.   |
-+--------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------+----------------+-----------------+
+| Parameter      | Type           | Description     |
++================+================+=================+
+| network        | String         | Name of an      |
+|                |                | existing        |
+|                |                | network, e.g.   |
+|                |                | "Default"       |
++----------------+----------------+-----------------+
+| ipAddress      | String         | IPv4 or IPv6    |
+|                |                | address         |
++----------------+----------------+-----------------+
+| configPath     | String         | The path of the |
+|                |                | configuration   |
+|                |                | file to         |
+|                |                | retrieve. This  |
+|                |                | should be the   |
+|                |                | same value as   |
+|                |                | the ``path``    |
+|                |                | attribute in a  |
+|                |                | ``Change``      |
+|                |                | object.         |
++----------------+----------------+-----------------+
+| timestamp      | Integer        | The timestamp   |
+|                |                | (in Unix Epoch  |
+|                |                | milliseconds)   |
+|                |                | of the          |
+|                |                | configuration   |
+|                |                | to retrieve.    |
+|                |                | This should be  |
+|                |                | the same value  |
+|                |                | as the          |
+|                |                | ``revisionTime` |
+|                |                | `               |
+|                |                | attribute in a  |
+|                |                | ``Change``      |
+|                |                | object returned |
+|                |                | by              |
+|                |                | ``retrieveSnaps |
+|                |                | hotChangeLog``. |
+|                |                | If timestamp is |
+|                |                | omitted, the    |
+|                |                | latest revision |
+|                |                | is retrieved.   |
++----------------+----------------+-----------------+
 
 Return: a ``Revision`` object
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -303,7 +495,11 @@ Sample Response JSON:
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 Configuration.retrieveRevisionWordDiff
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -314,23 +510,81 @@ to provide simple implementation of highlighting word-level differences.
 Parameters
 ^^^^^^^^^^
 
-+---------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Parameter     | Type      | Description                                                                                                                                                            |
-+===============+===========+========================================================================================================================================================================+
-| network       | String    | Name of an existing network, e.g. "Default"                                                                                                                            |
-+---------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ipAddress     | String    | IPv4 or IPv6 address of the "left" device                                                                                                                              |
-+---------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| configPath    | String    | The path of the configuration file to retrieve. This should be the same value as the ``path`` attribute in a ``Change`` object.                                        |
-+---------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| timestamp1    | Integer   | The timestamp (in Unix Epoch milliseconds) of the configuration to retrieve. This should be the same value as the ``revisionTime`` attribute in a ``Change`` object.   |
-+---------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ipAddress2    | String    | IPv4 or IPv6 address of the "right" device to compare revisions for. Should be the same as ``ipAddress`` for same device comparisons                                   |
-+---------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| configPath2   | String    | The path of the configuration file to retrieve. This should be the same value as the ``path`` attribute in a ``Change`` object.                                        |
-+---------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| timestamp2    | Integer   | The timestamp (in Unix Epoch milliseconds) of the configuration to retrieve. This should be the same value as the ``revisionTime`` attribute in a ``Change`` object.   |
-+---------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------+----------------+-----------------+
+| Parameter      | Type           | Description     |
++================+================+=================+
+| network        | String         | Name of an      |
+|                |                | existing        |
+|                |                | network, e.g.   |
+|                |                | "Default"       |
++----------------+----------------+-----------------+
+| ipAddress      | String         | IPv4 or IPv6    |
+|                |                | address of the  |
+|                |                | "left" device   |
++----------------+----------------+-----------------+
+| configPath     | String         | The path of the |
+|                |                | configuration   |
+|                |                | file to         |
+|                |                | retrieve. This  |
+|                |                | should be the   |
+|                |                | same value as   |
+|                |                | the ``path``    |
+|                |                | attribute in a  |
+|                |                | ``Change``      |
+|                |                | object.         |
++----------------+----------------+-----------------+
+| timestamp1     | Integer        | The timestamp   |
+|                |                | (in Unix Epoch  |
+|                |                | milliseconds)   |
+|                |                | of the          |
+|                |                | configuration   |
+|                |                | to retrieve.    |
+|                |                | This should be  |
+|                |                | the same value  |
+|                |                | as the          |
+|                |                | ``revisionTime` |
+|                |                | `               |
+|                |                | attribute in a  |
+|                |                | ``Change``      |
+|                |                | object.         |
++----------------+----------------+-----------------+
+| ipAddress2     | String         | IPv4 or IPv6    |
+|                |                | address of the  |
+|                |                | "right" device  |
+|                |                | to compare      |
+|                |                | revisions for.  |
+|                |                | Should be the   |
+|                |                | same as         |
+|                |                | ``ipAddress``   |
+|                |                | for same device |
+|                |                | comparisons     |
++----------------+----------------+-----------------+
+| configPath2    | String         | The path of the |
+|                |                | configuration   |
+|                |                | file to         |
+|                |                | retrieve. This  |
+|                |                | should be the   |
+|                |                | same value as   |
+|                |                | the ``path``    |
+|                |                | attribute in a  |
+|                |                | ``Change``      |
+|                |                | object.         |
++----------------+----------------+-----------------+
+| timestamp2     | Integer        | The timestamp   |
+|                |                | (in Unix Epoch  |
+|                |                | milliseconds)   |
+|                |                | of the          |
+|                |                | configuration   |
+|                |                | to retrieve.    |
+|                |                | This should be  |
+|                |                | the same value  |
+|                |                | as the          |
+|                |                | ``revisionTime` |
+|                |                | `               |
+|                |                | attribute in a  |
+|                |                | ``Change``      |
+|                |                | object.         |
++----------------+----------------+-----------------+
 
 Return: an XML string with change markup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -367,4 +621,3 @@ encoded. An example difference XML snippet is as follows:
 
     <diff>
     </diff>
-

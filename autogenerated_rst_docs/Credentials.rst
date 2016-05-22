@@ -11,7 +11,11 @@ format.
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 A *dynamic* ``CredentialConfig`` object is expressed in JSON format seen
 here:
@@ -47,27 +51,86 @@ empty ``addresses`` list and ``flat`` value of ``true``:
 
 .. raw:: html
 
-   <p></p>
-
-+------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Attribute        | Type           | Description                                                                                                                                                                     |
-+==================+================+=================================================================================================================================================================================+
-| priority         | Integer        | A lower priority number indicates higher placement in the list of credential configurations. These credentials will be tried before others with a higher number.                |
-+------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| addressSet       | Object         | A container for "addresses". Consider this a "fixed" element.                                                                                                                   |
-+------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| addresses        | String Array   | An array of IP Addresses, IP Wildcards, and IP/CIDR expressions the a "dynamic" ``CredentialConfig`` applies to. *This should be empty for static credential configurations.*   |
-+------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| name             | UTF-8 String   | The name of the ``CredentialConfig`` as seen in the user interface.                                                                                                             |
-+------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| managedNetwork   | UTF-8 String   | The name of the network that this configuration applies to. If there are no user-created networks this value should be ``Default``.                                             |
-+------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| flat             | Boolean        | ``true if`` the ``CredentialConfig`` represents a "static" configuration, ``false`` if it is dynamic.                                                                           |
-+------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   <p>
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   </p>
+
++-----------------+----------------+-----------------+
+| Attribute       | Type           | Description     |
++=================+================+=================+
+| priority        | Integer        | A lower         |
+|                 |                | priority number |
+|                 |                | indicates       |
+|                 |                | higher          |
+|                 |                | placement in    |
+|                 |                | the list of     |
+|                 |                | credential      |
+|                 |                | configurations. |
+|                 |                | These           |
+|                 |                | credentials     |
+|                 |                | will be tried   |
+|                 |                | before others   |
+|                 |                | with a higher   |
+|                 |                | number.         |
++-----------------+----------------+-----------------+
+| addressSet      | Object         | A container for |
+|                 |                | "addresses".    |
+|                 |                | Consider this a |
+|                 |                | "fixed"         |
+|                 |                | element.        |
++-----------------+----------------+-----------------+
+| addresses       | String Array   | An array of IP  |
+|                 |                | Addresses, IP   |
+|                 |                | Wildcards, and  |
+|                 |                | IP/CIDR         |
+|                 |                | expressions the |
+|                 |                | a "dynamic"     |
+|                 |                | ``CredentialCon |
+|                 |                | fig``           |
+|                 |                | applies to.     |
+|                 |                | *This should be |
+|                 |                | empty for       |
+|                 |                | static          |
+|                 |                | credential      |
+|                 |                | configurations. |
+|                 |                | *               |
++-----------------+----------------+-----------------+
+| name            | UTF-8 String   | The name of the |
+|                 |                | ``CredentialCon |
+|                 |                | fig``           |
+|                 |                | as seen in the  |
+|                 |                | user interface. |
++-----------------+----------------+-----------------+
+| managedNetwork  | UTF-8 String   | The name of the |
+|                 |                | network that    |
+|                 |                | this            |
+|                 |                | configuration   |
+|                 |                | applies to. If  |
+|                 |                | there are no    |
+|                 |                | user-created    |
+|                 |                | networks this   |
+|                 |                | value should be |
+|                 |                | ``Default``.    |
++-----------------+----------------+-----------------+
+| flat            | Boolean        | ``true if`` the |
+|                 |                | ``CredentialCon |
+|                 |                | fig``           |
+|                 |                | represents a    |
+|                 |                | "static"        |
+|                 |                | configuration,  |
+|                 |                | ``false`` if it |
+|                 |                | is dynamic.     |
++-----------------+----------------+-----------------+
+
+.. raw:: html
+
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 An example ``CredentialSet`` object is expressed in JSON format seen
 here:
@@ -89,35 +152,81 @@ here:
 
 .. raw:: html
 
-   <p></p>
-
-+---------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Attribute           | Type           | Description                                                                                                                                                                                   |
-+=====================+================+===============================================================================================================================================================================================+
-| name                | UTF-8 String   | Name of the credential set. In the case of dynamic credentials this is any user defined name; for static credentials the name MUST be an IP address (IPv4 or IPv6).                           |
-+---------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| username            | UTF-8 String   | The VTY username                                                                                                                                                                              |
-+---------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| password            | UTF-8 String   | The VTY password                                                                                                                                                                              |
-+---------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| enableUsername      | UTF-8 String   | The enable username                                                                                                                                                                           |
-+---------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| enablePassword      | UTF-8 String   | The enable password                                                                                                                                                                           |
-+---------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| roCommunityString   | UTF-8 String   | The SNMP read-only community string                                                                                                                                                           |
-+---------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| snmpUsername        | UTF-8 String   | The SNMPv3 username                                                                                                                                                                           |
-+---------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| snmpAuthPassword    | UTF-8 String   | The SNMPv3 password                                                                                                                                                                           |
-+---------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| snmpAuthPriv        | UTF-8 String   | The SNMPv3 private password                                                                                                                                                                   |
-+---------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| priority            | Integer        | A lower priority number indicates higher placement in the list of credential sets. These credentials will be tried before others with a higher number. *Inapplicable to static credentials*   |
-+---------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   <p>
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   </p>
+
++--------------------+----------------+-----------------+
+| Attribute          | Type           | Description     |
++====================+================+=================+
+| name               | UTF-8 String   | Name of the     |
+|                    |                | credential set. |
+|                    |                | In the case of  |
+|                    |                | dynamic         |
+|                    |                | credentials     |
+|                    |                | this is any     |
+|                    |                | user defined    |
+|                    |                | name; for       |
+|                    |                | static          |
+|                    |                | credentials the |
+|                    |                | name MUST be an |
+|                    |                | IP address      |
+|                    |                | (IPv4 or IPv6). |
++--------------------+----------------+-----------------+
+| username           | UTF-8 String   | The VTY         |
+|                    |                | username        |
++--------------------+----------------+-----------------+
+| password           | UTF-8 String   | The VTY         |
+|                    |                | password        |
++--------------------+----------------+-----------------+
+| enableUsername     | UTF-8 String   | The enable      |
+|                    |                | username        |
++--------------------+----------------+-----------------+
+| enablePassword     | UTF-8 String   | The enable      |
+|                    |                | password        |
++--------------------+----------------+-----------------+
+| roCommunityString  | UTF-8 String   | The SNMP        |
+|                    |                | read-only       |
+|                    |                | community       |
+|                    |                | string          |
++--------------------+----------------+-----------------+
+| snmpUsername       | UTF-8 String   | The SNMPv3      |
+|                    |                | username        |
++--------------------+----------------+-----------------+
+| snmpAuthPassword   | UTF-8 String   | The SNMPv3      |
+|                    |                | password        |
++--------------------+----------------+-----------------+
+| snmpAuthPriv       | UTF-8 String   | The SNMPv3      |
+|                    |                | private         |
+|                    |                | password        |
++--------------------+----------------+-----------------+
+| priority           | Integer        | A lower         |
+|                    |                | priority number |
+|                    |                | indicates       |
+|                    |                | higher          |
+|                    |                | placement in    |
+|                    |                | the list of     |
+|                    |                | credential      |
+|                    |                | sets. These     |
+|                    |                | credentials     |
+|                    |                | will be tried   |
+|                    |                | before others   |
+|                    |                | with a higher   |
+|                    |                | number.         |
+|                    |                | *Inapplicable   |
+|                    |                | to static       |
+|                    |                | credentials*    |
++--------------------+----------------+-----------------+
+
+.. raw:: html
+
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 An example ``PageData`` object is expressed in JSON format seen here:
 
@@ -132,23 +241,62 @@ An example ``PageData`` object is expressed in JSON format seen here:
 
 .. raw:: html
 
-   <p></p>
-
-+------------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Attribute        | Type      | Description                                                                                                                                                         |
-+==================+===========+=====================================================================================================================================================================+
-| offset           | Integer   | The starting ``offset`` in the results to begin retrieving ``pageSize`` number of ``CredentialSet`` objects.                                                        |
-+------------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| pageSize         | Integer   | The maximum number of ``CredentialSet`` objects to retrieve in a single method call.                                                                                |
-+------------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| total            | Integer   | This value is set and retrieved from the server when an ``offset`` of zero (0) is passed. This indicates the total number of ``CredentialSet`` objects available.   |
-+------------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| credentialSets   | Array     | An array of ``CredentialSet`` objects                                                                                                                               |
-+------------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   <p>
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   </p>
+
++-----------------+----------------+-----------------+
+| Attribute       | Type           | Description     |
++=================+================+=================+
+| offset          | Integer        | The starting    |
+|                 |                | ``offset`` in   |
+|                 |                | the results to  |
+|                 |                | begin           |
+|                 |                | retrieving      |
+|                 |                | ``pageSize``    |
+|                 |                | number of       |
+|                 |                | ``CredentialSet |
+|                 |                | ``              |
+|                 |                | objects.        |
++-----------------+----------------+-----------------+
+| pageSize        | Integer        | The maximum     |
+|                 |                | number of       |
+|                 |                | ``CredentialSet |
+|                 |                | ``              |
+|                 |                | objects to      |
+|                 |                | retrieve in a   |
+|                 |                | single method   |
+|                 |                | call.           |
++-----------------+----------------+-----------------+
+| total           | Integer        | This value is   |
+|                 |                | set and         |
+|                 |                | retrieved from  |
+|                 |                | the server when |
+|                 |                | an ``offset``   |
+|                 |                | of zero (0) is  |
+|                 |                | passed. This    |
+|                 |                | indicates the   |
+|                 |                | total number of |
+|                 |                | ``CredentialSet |
+|                 |                | ``              |
+|                 |                | objects         |
+|                 |                | available.      |
++-----------------+----------------+-----------------+
+| credentialSets  | Array          | An array of     |
+|                 |                | ``CredentialSet |
+|                 |                | ``              |
+|                 |                | objects         |
++-----------------+----------------+-----------------+
+
+.. raw:: html
+
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 Credentials.getCredentialConfig
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -159,13 +307,20 @@ object.
 Parameters
 ^^^^^^^^^^
 
-+--------------+----------------+--------------------------------------------------------+
-| Parameter    | Type           | Description                                            |
-+==============+================+========================================================+
-| network      | UTF-8 String   | Name of an existing network, e.g. "Default"            |
-+--------------+----------------+--------------------------------------------------------+
-| configName   | UTF-8 String   | Name of a dynamic or static credential configuration   |
-+--------------+----------------+--------------------------------------------------------+
++----------------+----------------+-----------------+
+| Parameter      | Type           | Description     |
++================+================+=================+
+| network        | UTF-8 String   | Name of an      |
+|                |                | existing        |
+|                |                | network, e.g.   |
+|                |                | "Default"       |
++----------------+----------------+-----------------+
+| configName     | UTF-8 String   | Name of a       |
+|                |                | dynamic or      |
+|                |                | static          |
+|                |                | credential      |
+|                |                | configuration   |
++----------------+----------------+-----------------+
 
 Return: a ``CredentialConfig`` object
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -208,7 +363,11 @@ Sample Response JSON:
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 Credentials.saveCredentialConfig
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -222,15 +381,39 @@ should be made before a final call to ``commitEdits``.
 Parameters
 ^^^^^^^^^^
 
-+--------------------+----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Parameter          | Type           | Description                                                                                                                                                                                                                               |
-+====================+================+===========================================================================================================================================================================================================================================+
-| network            | UTF-8 String   | Name of an existing network, e.g. "Default"                                                                                                                                                                                               |
-+--------------------+----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| oldConfigName      | UTF-8 String   | When *renaming* a credential configuration, this value should be the "old" (original) name of the configuration, and object in the ``credentialConfig`` parameter should contain the new name. This can be ``null`` in all other cases.   |
-+--------------------+----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| credentialConfig   | Object         | A ``CredentialConfig`` object                                                                                                                                                                                                             |
-+--------------------+----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------+----------------+-----------------+
+| Parameter         | Type           | Description     |
++===================+================+=================+
+| network           | UTF-8 String   | Name of an      |
+|                   |                | existing        |
+|                   |                | network, e.g.   |
+|                   |                | "Default"       |
++-------------------+----------------+-----------------+
+| oldConfigName     | UTF-8 String   | When *renaming* |
+|                   |                | a credential    |
+|                   |                | configuration,  |
+|                   |                | this value      |
+|                   |                | should be the   |
+|                   |                | "old"           |
+|                   |                | (original) name |
+|                   |                | of the          |
+|                   |                | configuration,  |
+|                   |                | and object in   |
+|                   |                | the             |
+|                   |                | ``credentialCon |
+|                   |                | fig``           |
+|                   |                | parameter       |
+|                   |                | should contain  |
+|                   |                | the new name.   |
+|                   |                | This can be     |
+|                   |                | ``null`` in all |
+|                   |                | other cases.    |
++-------------------+----------------+-----------------+
+| credentialConfig  | Object         | A               |
+|                   |                | ``CredentialCon |
+|                   |                | fig``           |
+|                   |                | object          |
++-------------------+----------------+-----------------+
 
 Return: the updated ``CredentialConfig`` object
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -261,7 +444,11 @@ Sample Request JSON:
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 Credentials.deleteCredentialConfig
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -274,13 +461,20 @@ made before a final call to ``commitEdits``.
 Parameters
 ^^^^^^^^^^
 
-+--------------+----------------+--------------------------------------------------------+
-| Parameter    | Type           | Description                                            |
-+==============+================+========================================================+
-| network      | UTF-8 String   | Name of an existing network, e.g. "Default"            |
-+--------------+----------------+--------------------------------------------------------+
-| configName   | UTF-8 String   | Name of a dynamic or static credential configuration   |
-+--------------+----------------+--------------------------------------------------------+
++----------------+----------------+-----------------+
+| Parameter      | Type           | Description     |
++================+================+=================+
+| network        | UTF-8 String   | Name of an      |
+|                |                | existing        |
+|                |                | network, e.g.   |
+|                |                | "Default"       |
++----------------+----------------+-----------------+
+| configName     | UTF-8 String   | Name of a       |
+|                |                | dynamic or      |
+|                |                | static          |
+|                |                | credential      |
+|                |                | configuration   |
++----------------+----------------+-----------------+
 
 Return: nothing
 ^^^^^^^^^^^^^^^
@@ -302,7 +496,11 @@ Sample Request JSON:
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 Credentials.getCredentialSets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -313,21 +511,52 @@ configuration.
 Parameters
 ^^^^^^^^^^
 
-+--------------+----------------+----------------------------------------------------------------------------------------------------+
-| Parameter    | Type           | Description                                                                                        |
-+==============+================+====================================================================================================+
-| pageData     | Object         | A credentials page data object (see above)                                                         |
-+--------------+----------------+----------------------------------------------------------------------------------------------------+
-| network      | UTF-8 String   | Name of an existing network, e.g. "Default"                                                        |
-+--------------+----------------+----------------------------------------------------------------------------------------------------+
-| configName   | UTF-8 String   | Name of a dynamic or static credential configuration                                               |
-+--------------+----------------+----------------------------------------------------------------------------------------------------+
-| ipOrCidr     | String         | Can be to search among static ``CredentialSets`` based on IP or IP/CIDR, can be "null"             |
-+--------------+----------------+----------------------------------------------------------------------------------------------------+
-| sortColumn   | String         | Should be "null" for dynamic configurations, or "ipAddress" for static credential configurations   |
-+--------------+----------------+----------------------------------------------------------------------------------------------------+
-| descending   | Boolean        | The sort order of the ``CredentialSet`` objects, only applicable to static configurations          |
-+--------------+----------------+----------------------------------------------------------------------------------------------------+
++----------------+-----------------+-----------------+
+| Parameter      | Type            | Description     |
++================+=================+=================+
+| pageData       | Object          | A credentials   |
+|                |                 | page data       |
+|                |                 | object (see     |
+|                |                 | above)          |
++----------------+-----------------+-----------------+
+| network        | UTF-8 String    | Name of an      |
+|                |                 | existing        |
+|                |                 | network, e.g.   |
+|                |                 | "Default"       |
++----------------+-----------------+-----------------+
+| configName     | UTF-8 String    | Name of a       |
+|                |                 | dynamic or      |
+|                |                 | static          |
+|                |                 | credential      |
+|                |                 | configuration   |
++----------------+-----------------+-----------------+
+| ipOrCidr       | String          | Can be to       |
+|                |                 | search among    |
+|                |                 | static          |
+|                |                 | ``CredentialSet |
+|                |                 | s``             |
+|                |                 | based on IP or  |
+|                |                 | IP/CIDR, can be |
+|                |                 | "null"          |
++----------------+-----------------+-----------------+
+| sortColumn     | String          | Should be       |
+|                |                 | "null" for      |
+|                |                 | dynamic         |
+|                |                 | configurations, |
+|                |                 | or "ipAddress"  |
+|                |                 | for static      |
+|                |                 | credential      |
+|                |                 | configurations  |
++----------------+-----------------+-----------------+
+| descending     | Boolean         | The sort order  |
+|                |                 | of the          |
+|                |                 | ``CredentialSet |
+|                |                 | ``              |
+|                |                 | objects, only   |
+|                |                 | applicable to   |
+|                |                 | static          |
+|                |                 | configurations  |
++----------------+-----------------+-----------------+
 
 Return: A ``PageData`` object containing a collection of ``CredentialSet`` objects
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -412,7 +641,11 @@ address of the device that the credential set is associated with.
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 Credentials.saveCredentialSets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -425,15 +658,25 @@ made before a final call to ``commitEdits``.
 Parameters
 ^^^^^^^^^^
 
-+------------------+----------------+--------------------------------------------------------+
-| Parameter        | Type           | Description                                            |
-+==================+================+========================================================+
-| network          | UTF-8 String   | Name of an existing network, e.g. "Default"            |
-+------------------+----------------+--------------------------------------------------------+
-| configName       | UTF-8 String   | Name of a dynamic or static credential configuration   |
-+------------------+----------------+--------------------------------------------------------+
-| credentialSets   | Array          | An array of ``CredentialSet`` objects                  |
-+------------------+----------------+--------------------------------------------------------+
++-------------------+----------------+-----------------+
+| Parameter         | Type           | Description     |
++===================+================+=================+
+| network           | UTF-8 String   | Name of an      |
+|                   |                | existing        |
+|                   |                | network, e.g.   |
+|                   |                | "Default"       |
++-------------------+----------------+-----------------+
+| configName        | UTF-8 String   | Name of a       |
+|                   |                | dynamic or      |
+|                   |                | static          |
+|                   |                | credential      |
+|                   |                | configuration   |
++-------------------+----------------+-----------------+
+| credentialSets    | Array          | An array of     |
+|                   |                | ``CredentialSet |
+|                   |                | ``              |
+|                   |                | objects         |
++-------------------+----------------+-----------------+
 
 Return: nothing
 ^^^^^^^^^^^^^^^
@@ -469,7 +712,11 @@ Sample Request JSON:
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <p class="vspacer">
+
+.. raw:: html
+
+   </p>
 
 Credentials.deleteCredentialSets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -482,15 +729,25 @@ made before a final call to ``commitEdits``.
 Parameters
 ^^^^^^^^^^
 
-+------------------+----------------+--------------------------------------------------------+
-| Parameter        | Type           | Description                                            |
-+==================+================+========================================================+
-| network          | UTF-8 String   | Name of an existing network, e.g. "Default"            |
-+------------------+----------------+--------------------------------------------------------+
-| configName       | UTF-8 String   | Name of a dynamic or static credential configuration   |
-+------------------+----------------+--------------------------------------------------------+
-| credentialSets   | Array          | An array of ``CredentialSet`` objects                  |
-+------------------+----------------+--------------------------------------------------------+
++-------------------+----------------+-----------------+
+| Parameter         | Type           | Description     |
++===================+================+=================+
+| network           | UTF-8 String   | Name of an      |
+|                   |                | existing        |
+|                   |                | network, e.g.   |
+|                   |                | "Default"       |
++-------------------+----------------+-----------------+
+| configName        | UTF-8 String   | Name of a       |
+|                   |                | dynamic or      |
+|                   |                | static          |
+|                   |                | credential      |
+|                   |                | configuration   |
++-------------------+----------------+-----------------+
+| credentialSets    | Array          | An array of     |
+|                   |                | ``CredentialSet |
+|                   |                | ``              |
+|                   |                | objects         |
++-------------------+----------------+-----------------+
 
 Return: nothing
 ^^^^^^^^^^^^^^^
@@ -535,4 +792,3 @@ Sample Request JSON:
                  }
        "id": 1
     }
-
