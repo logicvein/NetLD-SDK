@@ -105,7 +105,7 @@ An example ```PageData``` object is expressed in JSON format seen here:
 
 <p class="vspacer"></p>
 
-### ```Credentials.getCredentialConfig```
+### Credentials.getCredentialConfig
 Retrieves a single credential configuration (``CredentialConfig``) object.
 
 #### Parameters
@@ -152,7 +152,7 @@ Retrieves a single credential configuration (``CredentialConfig``) object.
 
 <p class="vspacer"></p>
 
-### ```Credentials.saveCredentialConfig```
+### Credentials.saveCredentialConfig
 
 Save a single credential configuration.  This method can be used to save a new configuration, or renaming an existing one.  Note: after call this method you must call the ``commitEdits``
 or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are should be made before a final call to ``commitEdits``.
@@ -191,7 +191,7 @@ or ``discardEdits`` method.  If you are making many changes, it is recommended t
 
 <p class="vspacer"></p>
 
-### ```Credentials.deleteCredentialConfig```
+### Credentials.deleteCredentialConfig
 
 Delete a single credential configuration.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are
 should be made before a final call to ``commitEdits``.
@@ -220,7 +220,7 @@ should be made before a final call to ``commitEdits``.
 
 <p class="vspacer"></p>
 
-### ```Credentials.getCredentialSets```
+### Credentials.getCredentialSets
 
 Get the credential sets associated with a specified credential configuration.
 
@@ -308,7 +308,7 @@ associated with.
 
 <p class="vspacer"></p>
 
-### ```Credentials.saveCredentialSets```
+### Credentials.saveCredentialSets
 
 Save a collection of credential sets.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are
 should be made before a final call to ``commitEdits``.
@@ -352,7 +352,7 @@ should be made before a final call to ``commitEdits``.
 
 <p class="vspacer"></p>
 
-### ```Credentials.deleteCredentialSets```
+### Credentials.deleteCredentialSets
 
 Delete a collection of credential sets.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are
 should be made before a final call to ``commitEdits``.
