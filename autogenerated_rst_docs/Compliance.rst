@@ -3,6 +3,8 @@ Compliance
 
 The compliance API provides access to compliance policies, rules, and violation information.
 
+**NOTE: This API has significant and incompatible changes in the next major release. You will need to update any scripts that use these APIs.**
+
 Compliance Service Methods
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
