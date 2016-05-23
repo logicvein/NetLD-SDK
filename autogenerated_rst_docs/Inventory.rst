@@ -12,7 +12,7 @@ See the `Inventory Objects <#inventory-objects>`__ section for a description of 
 Inventory.createDevice
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Add a device to the inventory, in the specified network. If there are no user-defined networks then "Default" should be used as the ``network`` value. If the device was created successfully, the return value is ``null``, otherwise an error message is returned.
+Add a device to the inventory, in the specified network. If the device was created successfully, the return value is ``null``, otherwise an error message is returned.
 
 Parameters
 ^^^^^^^^^^
