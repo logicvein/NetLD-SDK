@@ -63,19 +63,10 @@ The ```Inventory.updateDevice``` method is used to update an existing device in 
 
 #### Return: ```null```
 
-#### Sample Request JSON:
+#### Python Example:
 
-```javascript
-{
-   "jsonrpc": "2.0",
-   "method": "Inventory.updateDevice",
-   "params": {
-              "network": "Default",
-              "ipAddress": "10.0.3.6",
-              "newHostname": "router.company.com"
-             },
-   "id": 1
-}
+```python
+error = netld.call('Inventory.updateDevice', 'Default', '10.0.0.1', null, null, null, 'newhostname')
 ```
 
 <p class="vspacer"></p>
