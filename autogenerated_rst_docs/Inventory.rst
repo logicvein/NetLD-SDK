@@ -142,17 +142,12 @@ Return: ``null``
 Sample Request JSON:
 ^^^^^^^^^^^^^^^^^^^^
 
-.. code:: javascript
+.. code:: python
 
-    {
-       "jsonrpc": "2.0",
-       "method": "Inventory.updateDevices",
-       "params": {
-                  "ipCsv": "192.168.0.254@NetworkA,192.168.0.252@NetworkA",
-                  "customFields": ["Tokyo HQ", "Rack 1F-8"]
-                 },
-       "id": 1
-    }
+    netld.call('Inventory.updateDevices', \
+               '192.168.0.254@NetworkA,192.168.0.252@NetworkA', \
+               null, \
+               ['Tokyo HQ', 'Rack 1F-8'])
 
 .. raw:: html
 
