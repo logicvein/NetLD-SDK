@@ -1,6 +1,6 @@
 ## Scheduler
 
-**NOTE: This API has significant and incompatible changes in the next major release.**
+**NOTE: This API has significant and incompatible changes in the next major release.  You will need to update any scripts that use these APIs.**
 
 The scheduler API provides access to job management, scheduling and execution.  Job types include tools, configuration backup, Smart Changes, and reports.
 
