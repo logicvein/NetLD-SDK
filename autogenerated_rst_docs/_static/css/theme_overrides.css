@@ -1,0 +1,9 @@
+/* Allow table cell contents to wrap */
+.wy-table-responsive table td, .wy-table-responsive table th {
+    white-space: normal;
+}
+
+/* Override default css to get a larger widt */
+.wy-nav-content {
+   max-width: 1050px
+}

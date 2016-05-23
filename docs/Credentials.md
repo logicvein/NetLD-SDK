@@ -2,8 +2,7 @@
 
 The credentials API provides the core functionality for device authentication credentials in Net LineDancer.
 
-Methods in this API return various "credentials objects" (e.g. CredentialConfig) which encapsulate attributes of specific credentials in Net LineDancer.  These configuration objects are
-expressed in JSON format.
+Methods in this API return various "credentials objects" (e.g. CredentialConfig) which encapsulate attributes of specific credentials in Net LineDancer.  These configuration objects are expressed in JSON format.
 
 <p class="vspacer"></p>
 
@@ -44,8 +43,8 @@ Here is an example of a *static* ``CredentialConfig`` object.  Note the empty ``
 | priority       | Integer       | A lower priority number indicates higher placement in the list of credential configurations.  These credentials will be tried before others with a higher number. |
 | addressSet     | Object        | A container for "addresses".  Consider this a "fixed" element. |
 | addresses      | String Array  | An array of IP Addresses, IP Wildcards, and IP/CIDR expressions the a "dynamic" ``CredentialConfig`` applies to.  *This should be empty for static credential configurations.*
-| name           | UTF-8 String  | The name of the ``CredentialConfig`` as seen in the user interface. |
-| managedNetwork | UTF-8 String  | The name of the network that this configuration applies to. If there are no user-created networks this value should be ``Default``. |
+| name           | String  | The name of the ``CredentialConfig`` as seen in the user interface. |
+| managedNetwork | String  | The name of the network that this configuration applies to. If there are no user-created networks this value should be ``Default``. |
 | flat           | Boolean       | ``true if`` the ``CredentialConfig`` represents a "static" configuration, ``false`` if it is dynamic. |
 
 <p class="vspacer"></p>
@@ -71,15 +70,15 @@ An example ``CredentialSet`` object is expressed in JSON format seen here:
 
 | Attribute         | Type          | Description      |
 | ----------------- | ------------- | --------------   |
-| name              | UTF-8 String  | Name of the credential set.  In the case of dynamic credentials this is any user defined name; for static credentials the name MUST be an IP address (IPv4 or IPv6).  |
-| username          | UTF-8 String  | The VTY username |
-| password          | UTF-8 String  | The VTY password |
-| enableUsername    | UTF-8 String  | The enable username |
-| enablePassword    | UTF-8 String  | The enable password |
-| roCommunityString | UTF-8 String  | The SNMP read-only community string |
-| snmpUsername      | UTF-8 String  | The SNMPv3 username |
-| snmpAuthPassword  | UTF-8 String  | The SNMPv3 password |
-| snmpAuthPriv      | UTF-8 String  | The SNMPv3 private password |
+| name              | String  | Name of the credential set.  In the case of dynamic credentials this is any user defined name; for static credentials the name MUST be an IP address (IPv4 or IPv6).  |
+| username          | String  | The VTY username |
+| password          | String  | The VTY password |
+| enableUsername    | String  | The enable username |
+| enablePassword    | String  | The enable password |
+| roCommunityString | String  | The SNMP read-only community string |
+| snmpUsername      | String  | The SNMPv3 username |
+| snmpAuthPassword  | String  | The SNMPv3 password |
+| snmpAuthPriv      | String  | The SNMPv3 private password |
 | priority          | Integer       | A lower priority number indicates higher placement in the list of credential sets. These credentials will be tried before others with a higher number. *Inapplicable to static credentials* |
 
 <p class="vspacer"></p>
@@ -111,8 +110,8 @@ Retrieves a single credential configuration (``CredentialConfig``) object.
 #### Parameters
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| network      | UTF-8 String   | Name of an existing network, e.g. "Default" |
-| configName   | UTF-8 String   | Name of a dynamic or static credential configuration |
+| network      | String   | Name of an existing network, e.g. "Default" |
+| configName   | String   | Name of a dynamic or static credential configuration |
 
 #### Return: a ```CredentialConfig``` object
 
@@ -154,14 +153,13 @@ Retrieves a single credential configuration (``CredentialConfig``) object.
 
 ### Credentials.saveCredentialConfig
 
-Save a single credential configuration.  This method can be used to save a new configuration, or renaming an existing one.  Note: after call this method you must call the ``commitEdits``
-or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are should be made before a final call to ``commitEdits``.
+Save a single credential configuration.  This method can be used to save a new configuration, or renaming an existing one.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are should be made before a final call to ``commitEdits``.
 
 #### Parameters
 | Parameter        | Type          | Description      |
 | ---------------- | ------------- | --------------   |
-| network          | UTF-8 String  | Name of an existing network, e.g. "Default" |
-| oldConfigName    | UTF-8 String  | When *renaming* a credential configuration, this value should be the "old" (original) name of the configuration, and object in the ``credentialConfig`` parameter should contain the new name. This can be ``null`` in all other cases. |
+| network          | String  | Name of an existing network, e.g. "Default" |
+| oldConfigName    | String  | When *renaming* a credential configuration, this value should be the "old" (original) name of the configuration, and object in the ``credentialConfig`` parameter should contain the new name. This can be ``null`` in all other cases. |
 | credentialConfig | Object        | A ``CredentialConfig`` object
 
 #### Return: the updated ``CredentialConfig`` object
@@ -199,8 +197,8 @@ should be made before a final call to ``commitEdits``.
 #### Parameters
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| network      | UTF-8 String   | Name of an existing network, e.g. "Default" |
-| configName   | UTF-8 String   | Name of a dynamic or static credential configuration |
+| network      | String   | Name of an existing network, e.g. "Default" |
+| configName   | String   | Name of a dynamic or static credential configuration |
 
 #### Return: nothing
 
@@ -228,8 +226,8 @@ Get the credential sets associated with a specified credential configuration.
 | Parameter     | Type           | Description      |
 | ------------- | -------------- | --------------   |
 | pageData      | Object         | A credentials page data object (see above) |
-| network       | UTF-8 String   | Name of an existing network, e.g. "Default" |
-| configName    | UTF-8 String   | Name of a dynamic or static credential configuration |
+| network       | String   | Name of an existing network, e.g. "Default" |
+| configName    | String   | Name of a dynamic or static credential configuration |
 | ipOrCidr      | String         | Can be to search among static ``CredentialSets`` based on IP or IP/CIDR, can be "null" |
 | sortColumn    | String         | Should be "null" for dynamic configurations, or "ipAddress" for static credential configurations |
 | descending    | Boolean        | The sort order of the ``CredentialSet`` objects, only applicable to static configurations |
@@ -303,8 +301,7 @@ retrieve subsequent pages of results.  When ```offset``` + ```pageSize``` is gre
 }
 ```
 
-*Static* credential sets will look identical to *dynamic* credential sets with the exception that the ``name`` property will contain the IP address of the device that the credential set is
-associated with.
+*Static* credential sets will look identical to *dynamic* credential sets with the exception that the ``name`` property will contain the IP address of the device that the credential set is associated with.
 
 <p class="vspacer"></p>
 
@@ -316,8 +313,8 @@ should be made before a final call to ``commitEdits``.
 #### Parameters
 | Parameter        | Type          | Description      |
 | ---------------- | ------------- | --------------   |
-| network          | UTF-8 String  | Name of an existing network, e.g. "Default" |
-| configName       | UTF-8 String  | Name of a dynamic or static credential configuration |
+| network          | String  | Name of an existing network, e.g. "Default" |
+| configName       | String  | Name of a dynamic or static credential configuration |
 | credentialSets   | Array         | An array of ``CredentialSet`` objects |
 
 #### Return: nothing
@@ -354,14 +351,13 @@ should be made before a final call to ``commitEdits``.
 
 ### Credentials.deleteCredentialSets
 
-Delete a collection of credential sets.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are
-should be made before a final call to ``commitEdits``.
+Delete a collection of credential sets.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are should be made before a final call to ``commitEdits``.
 
 #### Parameters
 | Parameter        | Type          | Description      |
 | ---------------- | ------------- | --------------   |
-| network          | UTF-8 String  | Name of an existing network, e.g. "Default" |
-| configName       | UTF-8 String  | Name of a dynamic or static credential configuration |
+| network          | String  | Name of an existing network, e.g. "Default" |
+| configName       | String  | Name of a dynamic or static credential configuration |
 | credentialSets   | Array         | An array of ``CredentialSet`` objects |
 
 #### Return: nothing
@@ -405,4 +401,3 @@ should be made before a final call to ``commitEdits``.
    "id": 1
 }
 ```
-

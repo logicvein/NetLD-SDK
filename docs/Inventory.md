@@ -9,8 +9,7 @@ The ```search``` API returns a ```PageData``` object, as well as accepting a ```
 <p></p>
 
 ### Inventory.createDevice
-Add a device to the inventory, in the specified network.  If there are no user-defined networks then "Default" should be used as the ``network`` value.  If the device was created successfully, the return value is ```null```, otherwise an error
-message is returned.
+Add a device to the inventory, in the specified network.  If there are no user-defined networks then "Default" should be used as the ``network`` value.  If the device was created successfully, the return value is ```null```, otherwise an error message is returned.
 
 #### Parameters
 | Parameter     | Type          | Description      |
@@ -53,8 +52,7 @@ The ``Inventory.getDevice`` method returns a ``Device`` object as described abov
 
 ### Inventory.updateDevice
 
-The ```Inventory.updateDevice``` method is used to update an existing device in the inventory.  It requires only ```network``` and ```ipAddress``` as parameters,
-all other parameters are optional.
+The ```Inventory.updateDevice``` method is used to update an existing device in the inventory.  It requires only ```network``` and ```ipAddress``` as parameters, all other parameters are optional.
 
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
@@ -292,4 +290,3 @@ When ``offset`` + ``pageSize`` is greater than or equal to ``total`` there are n
 | pageSize      | Integer       | The maximum number of ```Device``` objects to retrieve in a single method call. This value is required when ```PageData``` is used as a parameter. |
 | total         | Integer  | This value is set and retrieved from the server when an ```offset``` of zero (0) is passed.  This indicates the total number of ``Device`` objects available.   This value is ignored when ```PageData``` is used as a parameter. |
 | devices       | Array | An array of ``Device`` objects. This value is ignored when ``PageData`` is used as a parameter. |
-

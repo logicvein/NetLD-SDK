@@ -1,7 +1,6 @@
 ## Scheduler
 
-The scheduler API provides access to job management, scheduling and execution.  Job types include tools, configuration backup,
-Smart Changes, and reports.
+The scheduler API provides access to job management, scheduling and execution.  Job types include tools, configuration backup, Smart Changes, and reports.
 
 #### Scheduler.runNow
 Execute a job defined by the specified ``JobData``.
@@ -12,7 +11,7 @@ Execute a job defined by the specified ``JobData``.
 | jobData   | JSON Object | A ``JobData`` object |
 
 ##### Return: an ``ExecutionData`` object.
-.. 
+..
 
 ------
 
