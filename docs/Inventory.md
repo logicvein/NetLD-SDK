@@ -91,16 +91,11 @@ The ``customFields`` parameter is an array of UTF-8 string values.  The first el
 
 #### Sample Request JSON:
 
-```javascript
-{
-   "jsonrpc": "2.0",
-   "method": "Inventory.updateDevices",
-   "params": {
-              "ipCsv": "192.168.0.254@NetworkA,192.168.0.252@NetworkA",
-              "customFields": ["Tokyo HQ", "Rack 1F-8"]
-             },
-   "id": 1
-}
+```python
+netld.call('Inventory.updateDevices', \
+           '192.168.0.254@NetworkA,192.168.0.252@NetworkA', \
+           null, \
+           ['Tokyo HQ', 'Rack 1F-8'])
 ```
 
 <p class="vspacer"></p>
