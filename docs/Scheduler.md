@@ -1,5 +1,7 @@
 ## Scheduler
 
+**NOTE: This API has significant and incompatible changes in the next major release.**
+
 The scheduler API provides access to job management, scheduling and execution.  Job types include tools, configuration backup, Smart Changes, and reports.
 
 #### Scheduler.runNow
@@ -11,80 +13,89 @@ Execute a job defined by the specified ``JobData``.
 | jobData   | JSON Object | A ``JobData`` object |
 
 ##### Return: an ``ExecutionData`` object.
-..
 
-------
 
-#### Scheduler.saveJob
+#### Scheduler.addJob
 Save (or replace) the job defined by the specified ``JobData``.
 
 ##### Parameters
 | Parameter | Type         | Description |
 | --------- | ------------ | ----------- |
-| jobData   | JSON Object | A ``JobData`` object |
+| jobData   | JSON Object  | A ``JobData`` object |
+| replace   | boolean      | true if an existing job with the same name replaced, false otherwise |
 
 ##### Return: the ``JobData`` object with ``jobId`` property populated.
 
 
 #### Scheduler.deleteJob
-Get the policy definition by ID.
+Delete the specified job.
 
 ##### Parameters
 | Parameter | Type    | Description |
 | --------- | ------- | ----------- |
-| jobId     | Integer | The ID of the Job |
+| managedNetwork | String | The name of the network in which the job is defined |
+| jobName        | String | The name of the job to delete |
 
 ##### Return: ``true`` if the Job was deleted successfully, ``false`` otherwise
 
 
 #### Scheduler.getJob
-Get the list of current violations for a given device.
+Get the ``JobData`` for the specified device.
 
 ##### Parameters
 | Parameter | Type         | Description |
 | --------- | ------------ | ----------- |
-| jobId     | Integer      | The ID of the Job |
+| managedNetwork | String | The name of the network in which the job is defined |
+| jobName        | String | The name of the job |
 
 ##### Return: a ``JobData`` object.
 
+<p class="vspacer"></p>
 
-#### Scheduler.searchJobs
-Get the list of current violations for a given policy.
+#### Scheduler.scheduleJob
+Create a "trigger" (schedule) for a job.
 
 ##### Parameters
-| Parameter | Type    | Description |
-| --------- | ------- | ----------- |
-| pageData  | JSON Object  | A ``JobPageData`` object specifying the starting *offset* and *pageSize*. |
-| networks  | Array        | An array of managed network names to search for jobs in. |
-| sortColumn  | String | A string indicating the ``JobData`` object attribute the results should be sorted by, *null* for default. |
-| descending  | Boolean | A boolean flag indicating whether results should be sorted in descending or ascending order. |
+| Parameter | Type         | Description |
+| --------- | ------------ | ----------- |
+| triggerData | JSON Object | The schedule (trigger) definition |
 
-##### Return: a ``JobPageData`` object containing search results
+##### Return: an updated ``TriggerData`` object.
 
 <p class="vspacer"></p>
+
+#### Scheduler.unscheduleJob
+Delete a "trigger" (schedule) for a job.
+
+##### Parameters
+| Parameter | Type         | Description |
+| --------- | ------------ | ----------- |
+| managedNetwork | String | The name of the network in which the schedule is defined |
+| triggerData    | String | The schedule (trigger) name |
+| jobName        | String | The name of the job |
+
+##### Return: a boolean, *true* if the trigger was found and deleted
+
 
 ### Scheduler Objects
 
 #### JobData
 | Field           | Type          | Description      |
 | --------------- | ------------- | --------------   |
-| jobId           | Integer       | The job ID (read-only) |
 | jobName         | String  | The name of the job |
 | description     | String  | The description of the job |
-| managedNetworks | Array         | An array of managed network names this job set is available in |
+| managedNetwork  | String | The name of the network in which the job is defined |
 | jobType         | String  | One of the pre-defined NetLD job types (see below) |
 | jobParameters   | Map           | A map (hash) of job parameter name/value pairs that are specific to each *jobType* (see below) |
-| isAccessLimited | Boolean       | ``true`` if the caller has limited visibility to the networks defined for this job (read-only) |
-| isGlobal        | Boolean       | ``true`` if the specified job is a "global" (aka system) job (read-only) |
 
-#### JobPageData
-| Field            | Type         | Description      |
-| ---------------- | ------------ | --------------   |
-| offset           | Integer      | The starting offset in the results to begin retrieving pageSize number of ``JobData`` objects. |
-| pageSize         | Integer      | The maximum number of ``JobData`` objects to retrieve in a single method call. |
-| total            | Integer      | This value is set and retrieved from the server when an offset of zero (0) is passed. This indicates the total number of ``JobData`` objects available. (read-only) |
-| jobData          | Array        | An array of ``JobData`` objects |
-
+#### TriggerData
+| Field           | Type          | Description      |
+| --------------- | ------------- | --------------   |
+| triggerName         | String  | The name of the schedule (trigger) |
+| jobName         | String  | The name of the job |
+| jobNetwork      | String  | The name of the network in which the schedule (trigger) is defined |
+| timeZone        | String  | The timezone name |
+| cronExpression  | String  | The cron expression |
 
 #### ExecutionData
 | Field            | Type         | Description      |
