@@ -3,11 +3,7 @@ Inventory
 
 The inventory API provides the core functionality of manipulating devices in the Net LineDancer inventory, including: adding devices, deleting devices, modifying devices, searching devices, etc.
 
-.. raw:: html
-
-   <p class="vspacer"></p>
-
-The ``search`` API returns a ``PageData`` object, as well as accepting a ``PageData`` as a parameter is expressed in JSON format seen here:
+See the `Inventory Objects <#inventory-objects>`__ section for a description of the various objects consumed and returned by these APIs.
 
 .. raw:: html
 
