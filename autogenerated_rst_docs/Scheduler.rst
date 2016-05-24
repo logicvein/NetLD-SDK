@@ -276,13 +276,13 @@ Job Types
 +--------------------------+-------------------------------------------+
 | Type Name                | Type Description                          |
 +==========================+===========================================+
-| "Discover Devices"       | Network device discovery.                 |
-+--------------------------+-------------------------------------------+
 | "Backup Configuration"   | Network device configuration backup.      |
 +--------------------------+-------------------------------------------+
-| "Script Tool Job"        | Pre-definied read/write tool execution.   |
-+--------------------------+-------------------------------------------+
 | "Bulk Update"            | SmartChange execution.                    |
++--------------------------+-------------------------------------------+
+| "Discover Devices"       | Network device discovery.                 |
++--------------------------+-------------------------------------------+
+| "Script Tool Job"        | Pre-definied read/write tool execution.   |
 +--------------------------+-------------------------------------------+
 
 Job Parameters (per Job Type)
@@ -290,12 +290,12 @@ Job Parameters (per Job Type)
 
 Job parameters are stored in a map (hash) of string name/value pairs. **All job parameter names and values are UTF-8 strings**. Even "Boolean" and "Integer" values should be stored as strings such as *"true"* or *"5432"*.
 
-*Most* (but not all) jobs share a common set of "device resolution" parameters (`Device Resolution Parameters <#device-resolution-parameters>`__) used to specify the set of devices that the job applies to.
+*Most* (but not all) jobs share a common set of "device resolution" parametersused to specify the set of devices that the job applies to (see `Device Resolution Parameters <#device-resolution-parameters>`__)
 
 Device Resolution Parameters
 ''''''''''''''''''''''''''''
 
-The documentation below for type specific job parameters will declare whether these values are required.
+The documentation below for each specific type will declare whether these values are applicable.
 
 +----------------------+----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Name                 | Type     | Value Description                                                                                                                                                                                                                                                                    |
@@ -307,29 +307,28 @@ The documentation below for type specific job parameters will declare whether th
 | managedNetwork       | String   | The name of the network in which the devices are resolved. This value should be the same as the ``managedNetwork`` defined in the ``JobData`` object.                                                                                                                                |
 +----------------------+----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-"Discover Devices"
-''''''''''''''''''
-
--  *Device resolution parameters not required.*
-
-+--------------------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Name               | Type     | Value Description                                                                                                                                                                |
-+====================+==========+==================================================================================================================================================================================+
-| communityStrings   | String   | Additional SNMP community string or comma-separated list of strings                                                                                                              |
-+--------------------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| boundaryNetworks   | String   | Comma-separated list of discovery boundary networks (CIDR)                                                                                                                       |
-+--------------------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| crawl              | String   | A "boolean" value indicating whether the discovery should use neighbor/peer information to discover additional devices                                                           |
-+--------------------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| includeInventory   | String   | A "boolean" value indicating whether the discovery should automatically include current inventory devices. This option is only meaningful when "crawl" is also set to *"true"*   |
-+--------------------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| addresses          | String   | A comma-separated list of IP address "shapes" to include in the discovery. See below.                                                                                            |
-+--------------------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
 "Backup Configuration"
 ''''''''''''''''''''''
 
--  The *only* parameters required for this job are the (`Device Resolution Parameters <#device-resolution-parameters>`__).
+-  The *only* job parameters required for this job are the (`Device Resolution Parameters <#device-resolution-parameters>`__).
+
+Ruby example:
+
+.. code:: ruby
+
+    job = {
+        'managedNetwork' => 'Headquarters',
+        'jobName' => "HQ backup",
+        'jobType' => 'Backup Configuration',
+        'description' => '',
+        'jobParameters' => {
+            'ipResolutionScheme' => 'ipAddress',
+            'ipResolutionData' => '192.168.0.0/16',
+            'managedNetwork' => 'Headquarters'
+        },
+    }
+
+    execution = netld['Scheduler.runNow', job]
 
 "Bulk Update"
 '''''''''''''
@@ -385,3 +384,46 @@ The second difference from a "perjob" XML definition is that there is one ``<con
     </configs>
 
 *Note: the replacements names of "IP Address" and "VLAN ID" are merely example replacement names, not pre-defined or required names.*
+
+"Discover Devices"
+''''''''''''''''''
+
+-  *Device resolution parameters not required.*
+
++--------------------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Name               | Type     | Value Description                                                                                                                                                                |
++====================+==========+==================================================================================================================================================================================+
+| communityStrings   | String   | Additional SNMP community string or comma-separated list of strings                                                                                                              |
++--------------------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| boundaryNetworks   | String   | Comma-separated list of discovery boundary networks (CIDR)                                                                                                                       |
++--------------------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| crawl              | String   | A "boolean" value indicating whether the discovery should use neighbor/peer information to discover additional devices                                                           |
++--------------------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| includeInventory   | String   | A "boolean" value indicating whether the discovery should automatically include current inventory devices. This option is only meaningful when "crawl" is also set to *"true"*   |
++--------------------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| addresses          | String   | A comma-separated list of IP address "shapes" to include in the discovery. See below.                                                                                            |
++--------------------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Python example:
+
+.. code:: python
+
+    job_data = {
+        'managedNetwork': 'Headquarters',
+        'jobName': 'Discover lab devices',
+        'jobType': 'Discover Devices',
+        'description': '',
+        'jobParameters': {
+            'addresses': '10.0.0.0/24,10.0.1.0/24',
+            'managedNetwork': 'Headquarters',
+            'crawl': 'false',
+            'boundaryNetworks': '10.0.0.0/8,192.168.0.0/16,172.16.0.0/12',
+            'includeInventory': 'false',
+            'communityStrings': 'public'
+        }
+    }
+
+    try:
+        execution = netld_svc.call('Scheduler.runNow', job_data)
+    except JsonError as ex:
+        print 'JsonError: ' + str(ex.value)
