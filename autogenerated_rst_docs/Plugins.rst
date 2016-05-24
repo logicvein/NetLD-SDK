@@ -5,8 +5,9 @@ The plugins API provides access to tool job execution results.
 
 **NOTE: This API has significant and incompatible changes in the next major release. The name of this service endpoint is likely to change. You will need to update any scripts that use these APIs.**
 
-Plugin Service Methods
-~~~~~~~~~~~~~~~~~~~~~~
+.. raw:: html
+
+   <hr>
 
 Plugins.getExecutionDetails
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -24,6 +25,10 @@ Parameters
 
 Return: an array of ``ToolRunDetails`` objects or ``null``
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+.. raw:: html
+
+   <hr>
 
 Plugins Objects
 ~~~~~~~~~~~~~~~
@@ -52,6 +57,10 @@ ToolRunDetails
 +------------------+------------------+----------------------------------------------------------------------------------------------------------------------+
 
 Some tools return all of their data in the ``gridData`` attribute, others contains additional textual output from the device, available from the URL endpoint below.
+
+.. raw:: html
+
+   <hr>
 
 Execution Detail URL Endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

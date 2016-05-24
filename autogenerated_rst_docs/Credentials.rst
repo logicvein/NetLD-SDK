@@ -7,7 +7,7 @@ Methods in this API return various "credentials objects" (e.g. CredentialConfig)
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
 A *dynamic* ``CredentialConfig`` object is expressed in JSON format seen here:
 
@@ -39,10 +39,6 @@ Here is an example of a *static* ``CredentialConfig`` object. Note the empty ``a
        "flat": true
     }
 
-.. raw:: html
-
-   <p></p>
-
 +------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Attribute        | Type           | Description                                                                                                                                                                     |
 +==================+================+=================================================================================================================================================================================+
@@ -58,10 +54,6 @@ Here is an example of a *static* ``CredentialConfig`` object. Note the empty ``a
 +------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | flat             | Boolean        | ``true if`` the ``CredentialConfig`` represents a "static" configuration, ``false`` if it is dynamic.                                                                           |
 +------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. raw:: html
-
-   <p class="vspacer"></p>
 
 An example ``CredentialSet`` object is expressed in JSON format seen here:
 
@@ -79,10 +71,6 @@ An example ``CredentialSet`` object is expressed in JSON format seen here:
        "snmpPrivPassword": "v3priv",
        "priority": 0
     }
-
-.. raw:: html
-
-   <p></p>
 
 +---------------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Attribute           | Type      | Description                                                                                                                                                                                   |
@@ -108,10 +96,6 @@ An example ``CredentialSet`` object is expressed in JSON format seen here:
 | priority            | Integer   | A lower priority number indicates higher placement in the list of credential sets. These credentials will be tried before others with a higher number. *Inapplicable to static credentials*   |
 +---------------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. raw:: html
-
-   <p class="vspacer"></p>
-
 An example ``PageData`` object is expressed in JSON format seen here:
 
 .. code:: javascript
@@ -122,10 +106,6 @@ An example ``PageData`` object is expressed in JSON format seen here:
         "total": 27,
         "credentialSets": [<CredentialSet> objects]
     }
-
-.. raw:: html
-
-   <p></p>
 
 +------------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Attribute        | Type      | Description                                                                                                                                                         |
@@ -141,15 +121,15 @@ An example ``PageData`` object is expressed in JSON format seen here:
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
 Credentials.getCredentialConfig
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Retrieves a single credential configuration (``CredentialConfig``) object.
+Retrieves a single credential configuration ``CredentialConfig`` object.
 
 Parameters
-^^^^^^^^^^
+''''''''''
 
 +--------------+----------+--------------------------------------------------------+
 | Parameter    | Type     | Description                                            |
@@ -160,10 +140,10 @@ Parameters
 +--------------+----------+--------------------------------------------------------+
 
 Return: a ``CredentialConfig`` object
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+'''''''''''''''''''''''''''''''''''''
 
 Sample Request JSON:
-^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''
 
 .. code:: javascript
 
@@ -178,7 +158,7 @@ Sample Request JSON:
     }
 
 Sample Response JSON:
-^^^^^^^^^^^^^^^^^^^^^
+'''''''''''''''''''''
 
 .. code:: javascript
 
@@ -200,15 +180,15 @@ Sample Response JSON:
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
 Credentials.saveCredentialConfig
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Save a single credential configuration. This method can be used to save a new configuration, or renaming an existing one. Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method. If you are making many changes, it is recommended that all changes are should be made before a final call to ``commitEdits``.
 
 Parameters
-^^^^^^^^^^
+''''''''''
 
 +--------------------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Parameter          | Type     | Description                                                                                                                                                                                                                               |
@@ -221,10 +201,10 @@ Parameters
 +--------------------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Return: the updated ``CredentialConfig`` object
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+'''''''''''''''''''''''''''''''''''''''''''''''
 
 Sample Request JSON:
-^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''
 
 .. code:: javascript
 
@@ -249,16 +229,16 @@ Sample Request JSON:
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
 Credentials.deleteCredentialConfig
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 | Delete a single credential configuration. Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method. If you are making many changes, it is recommended that all changes are
 | should be made before a final call to ``commitEdits``.
 
 Parameters
-^^^^^^^^^^
+''''''''''
 
 +--------------+----------+--------------------------------------------------------+
 | Parameter    | Type     | Description                                            |
@@ -269,10 +249,10 @@ Parameters
 +--------------+----------+--------------------------------------------------------+
 
 Return: nothing
-^^^^^^^^^^^^^^^
+'''''''''''''''
 
 Sample Request JSON:
-^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''
 
 .. code:: javascript
 
@@ -288,15 +268,15 @@ Sample Request JSON:
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
 Credentials.getCredentialSets
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Get the credential sets associated with a specified credential configuration.
 
 Parameters
-^^^^^^^^^^
+''''''''''
 
 +--------------+-----------+----------------------------------------------------------------------------------------------------+
 | Parameter    | Type      | Description                                                                                        |
@@ -315,14 +295,14 @@ Parameters
 +--------------+-----------+----------------------------------------------------------------------------------------------------+
 
 Return: A ``PageData`` object containing a collection of ``CredentialSet`` objects
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 | The ``PageData`` object that is returned will contain a property called ``credentialSets``, which is an array of ``CredentialSet`` objects. If the initial ``offset`` that is passed is zero (0),
 | the returned ``PageData`` object will also contain a populated ``total`` attribute, telling you how many total results are available. By incrementing the ``offset`` by ``pageSize`` you can
 | retrieve subsequent pages of results. When ``offset`` + ``pageSize`` is greater than or equal to ``total`` there are no more results available.
 
 Sample Request JSON:
-^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''
 
 .. code:: javascript
 
@@ -346,7 +326,7 @@ Sample Request JSON:
     }
 
 Sample Response JSON:
-^^^^^^^^^^^^^^^^^^^^^
+'''''''''''''''''''''
 
 .. code:: javascript
 
@@ -390,16 +370,16 @@ Sample Response JSON:
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
 Credentials.saveCredentialSets
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 | Save a collection of credential sets. Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method. If you are making many changes, it is recommended that all changes are
 | should be made before a final call to ``commitEdits``.
 
 Parameters
-^^^^^^^^^^
+''''''''''
 
 +------------------+----------+--------------------------------------------------------+
 | Parameter        | Type     | Description                                            |
@@ -412,10 +392,10 @@ Parameters
 +------------------+----------+--------------------------------------------------------+
 
 Return: nothing
-^^^^^^^^^^^^^^^
+'''''''''''''''
 
 Sample Request JSON:
-^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''
 
 .. code:: javascript
 
@@ -445,15 +425,15 @@ Sample Request JSON:
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
 Credentials.deleteCredentialSets
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Delete a collection of credential sets. Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method. If you are making many changes, it is recommended that all changes are should be made before a final call to ``commitEdits``.
 
 Parameters
-^^^^^^^^^^
+''''''''''
 
 +------------------+----------+--------------------------------------------------------+
 | Parameter        | Type     | Description                                            |
@@ -466,10 +446,10 @@ Parameters
 +------------------+----------+--------------------------------------------------------+
 
 Return: nothing
-^^^^^^^^^^^^^^^
+'''''''''''''''
 
 Sample Request JSON:
-^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''
 
 .. code:: javascript
 
