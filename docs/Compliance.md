@@ -4,9 +4,9 @@ The compliance API provides access to compliance policies, rules, and violation 
 
 **NOTE: This API has significant and incompatible changes in the next major release.  You will need to update any scripts that use these APIs.**
 
-### Compliance Service Methods
+<hr>
 
-#### ```Compliance.getRuleSet```
+#### Compliance.getRuleSet
 Get the compliance ruleset for the given ID
 
 ##### Parameters
@@ -14,11 +14,11 @@ Get the compliance ruleset for the given ID
 | --------- | ------- | ----------- |
 | ruleSetId | Integer | The ID of the desired RuleSet object |
 
-##### Return: the ```RuleSet``` object or ```null```
+##### Return: the ``RuleSet`` object or ``null``
 
-<p class="vspacer"></p>
+<hr>
 
-#### ```Compliance.getPolicies```
+#### Compliance.getPolicies
 Get the list of policies in a given managed networks.
 
 ##### Parameters
@@ -26,11 +26,11 @@ Get the list of policies in a given managed networks.
 | --------- | ------------ | ----------- |
 | network   | String | The managed network |
 
-##### Return: an array of ```PolicyInfo``` objects
+##### Return: an array of ``PolicyInfo`` objects
 
-<p class="vspacer"></p>
+<hr>
 
-#### ```Compliance.getPolicy```
+#### Compliance.getPolicy
 Get the policy definition by ID.
 
 ##### Parameters
@@ -38,11 +38,11 @@ Get the policy definition by ID.
 | --------- | ------- | ----------- |
 | policyId  | Integer | The ID of the desired policy |
 
-##### Return: a ```Policy``` object or ```null```
+##### Return: a ``Policy`` object or ``null``
 
-<p class="vspacer"></p>
+<hr>
 
-#### ```Compliance.getViolationsForDevice```
+#### Compliance.getViolationsForDevice
 Get the list of current violations for a given device.
 
 ##### Parameters
@@ -51,11 +51,11 @@ Get the list of current violations for a given device.
 | network   | String | The managed network of the device |
 | ipAddress | String | The IP address of the device |
 
-##### Return: an array of ```Violation``` objects
+##### Return: an array of ``Violation`` objects
 
-<p class="vspacer"></p>
+<hr>
 
-#### ```Compliance.getViolationsForPolicy```
+#### Compliance.getViolationsForPolicy
 Get the list of current violations for a given policy.
 
 ##### Parameters
@@ -63,9 +63,9 @@ Get the list of current violations for a given policy.
 | --------- | ------- | ----------- |
 | policyId  | Integer | The ID of the desired violations policy |
 
-##### Return: an array of ```Violation``` objects
+##### Return: an array of ``Violation`` objects
 
-<p class="vspacer"></p>
+<hr>
 
 ### Compliance Objects
 

@@ -4,7 +4,7 @@ The credentials API provides the core functionality for device authentication cr
 
 Methods in this API return various "credentials objects" (e.g. CredentialConfig) which encapsulate attributes of specific credentials in Net LineDancer.  These configuration objects are expressed in JSON format.
 
-<p class="vspacer"></p>
+<hr>
 
 A *dynamic* ```CredentialConfig``` object is expressed in JSON format seen here:
 
@@ -36,8 +36,6 @@ Here is an example of a *static* ``CredentialConfig`` object.  Note the empty ``
 }
 ```
 
-<p></p>
-
 | Attribute      | Type          | Description      |
 | -------------- | ------------- | --------------   |
 | priority       | Integer       | A lower priority number indicates higher placement in the list of credential configurations.  These credentials will be tried before others with a higher number. |
@@ -46,8 +44,6 @@ Here is an example of a *static* ``CredentialConfig`` object.  Note the empty ``
 | name           | String  | The name of the ``CredentialConfig`` as seen in the user interface. |
 | managedNetwork | String  | The name of the network that this configuration applies to. If there are no user-created networks this value should be ``Default``. |
 | flat           | Boolean       | ``true if`` the ``CredentialConfig`` represents a "static" configuration, ``false`` if it is dynamic. |
-
-<p class="vspacer"></p>
 
 An example ``CredentialSet`` object is expressed in JSON format seen here:
 
@@ -66,8 +62,6 @@ An example ``CredentialSet`` object is expressed in JSON format seen here:
 }
 ```
 
-<p></p>
-
 | Attribute         | Type          | Description      |
 | ----------------- | ------------- | --------------   |
 | name              | String  | Name of the credential set.  In the case of dynamic credentials this is any user defined name; for static credentials the name MUST be an IP address (IPv4 or IPv6).  |
@@ -81,8 +75,6 @@ An example ``CredentialSet`` object is expressed in JSON format seen here:
 | snmpAuthPriv      | String  | The SNMPv3 private password |
 | priority          | Integer       | A lower priority number indicates higher placement in the list of credential sets. These credentials will be tried before others with a higher number. *Inapplicable to static credentials* |
 
-<p class="vspacer"></p>
-
 An example ```PageData``` object is expressed in JSON format seen here:
 
 ```javascript
@@ -93,7 +85,7 @@ An example ```PageData``` object is expressed in JSON format seen here:
     "credentialSets": [<CredentialSet> objects]
 }
 ```
-<p></p>
+
 
 | Attribute      | Type          | Description      |
 | -------------- | ------------- | --------------   |
@@ -102,20 +94,20 @@ An example ```PageData``` object is expressed in JSON format seen here:
 | total          | Integer       | This value is set and retrieved from the server when an ```offset``` of zero (0) is passed.  This indicates the total number of ```CredentialSet``` objects available. |
 | credentialSets | Array         | An array of ```CredentialSet``` objects |
 
-<p class="vspacer"></p>
+<hr>
 
-### Credentials.getCredentialConfig
-Retrieves a single credential configuration (``CredentialConfig``) object.
+#### Credentials.getCredentialConfig
+Retrieves a single credential configuration ``CredentialConfig`` object.
 
-#### Parameters
+##### Parameters
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
 | network      | String   | Name of an existing network, e.g. "Default" |
 | configName   | String   | Name of a dynamic or static credential configuration |
 
-#### Return: a ```CredentialConfig``` object
+##### Return: a ``CredentialConfig`` object
 
-#### Sample Request JSON:
+##### Sample Request JSON:
 
 ```javascript
 {
@@ -129,7 +121,7 @@ Retrieves a single credential configuration (``CredentialConfig``) object.
 }
 ```
 
-#### Sample Response JSON:
+##### Sample Response JSON:
 
 ```javascript
 {  
@@ -149,22 +141,22 @@ Retrieves a single credential configuration (``CredentialConfig``) object.
 }
 ```
 
-<p class="vspacer"></p>
+<hr>
 
-### Credentials.saveCredentialConfig
+#### Credentials.saveCredentialConfig
 
 Save a single credential configuration.  This method can be used to save a new configuration, or renaming an existing one.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are should be made before a final call to ``commitEdits``.
 
-#### Parameters
+##### Parameters
 | Parameter        | Type          | Description      |
 | ---------------- | ------------- | --------------   |
 | network          | String  | Name of an existing network, e.g. "Default" |
 | oldConfigName    | String  | When *renaming* a credential configuration, this value should be the "old" (original) name of the configuration, and object in the ``credentialConfig`` parameter should contain the new name. This can be ``null`` in all other cases. |
 | credentialConfig | Object        | A ``CredentialConfig`` object
 
-#### Return: the updated ``CredentialConfig`` object
+##### Return: the updated ``CredentialConfig`` object
 
-#### Sample Request JSON:
+##### Sample Request JSON:
 
 ```javascript
 {
@@ -187,22 +179,22 @@ Save a single credential configuration.  This method can be used to save a new c
 }
 ```
 
-<p class="vspacer"></p>
+<hr>
 
-### Credentials.deleteCredentialConfig
+#### Credentials.deleteCredentialConfig
 
 Delete a single credential configuration.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are
 should be made before a final call to ``commitEdits``.
 
-#### Parameters
+##### Parameters
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
 | network      | String   | Name of an existing network, e.g. "Default" |
 | configName   | String   | Name of a dynamic or static credential configuration |
 
-#### Return: nothing
+##### Return: nothing
 
-#### Sample Request JSON:
+##### Sample Request JSON:
 
 ```javascript
 {
@@ -216,13 +208,13 @@ should be made before a final call to ``commitEdits``.
 }
 ```
 
-<p class="vspacer"></p>
+<hr>
 
-### Credentials.getCredentialSets
+#### Credentials.getCredentialSets
 
 Get the credential sets associated with a specified credential configuration.
 
-#### Parameters
+##### Parameters
 | Parameter     | Type           | Description      |
 | ------------- | -------------- | --------------   |
 | pageData      | Object         | A credentials page data object (see above) |
@@ -232,13 +224,13 @@ Get the credential sets associated with a specified credential configuration.
 | sortColumn    | String         | Should be "null" for dynamic configurations, or "ipAddress" for static credential configurations |
 | descending    | Boolean        | The sort order of the ``CredentialSet`` objects, only applicable to static configurations |
 
-#### Return: A ``PageData`` object containing a collection of ``CredentialSet`` objects
+##### Return: A ``PageData`` object containing a collection of ``CredentialSet`` objects
 
 The ```PageData``` object that is returned will contain a property called ```credentialSets```, which is an array of ```CredentialSet``` objects.  If the initial ```offset``` that is passed is zero (0),
 the returned ```PageData``` object will also contain a populated ```total``` attribute, telling you how many total results are available.  By incrementing the ```offset``` by ```pageSize``` you can
 retrieve subsequent pages of results.  When ```offset``` + ```pageSize``` is greater than or equal to ```total``` there are no more results available.
 
-#### Sample Request JSON:
+##### Sample Request JSON:
 
 ```javascript
 {
@@ -261,7 +253,7 @@ retrieve subsequent pages of results.  When ```offset``` + ```pageSize``` is gre
 }
 ```
 
-#### Sample Response JSON:
+##### Sample Response JSON:
 
 ```javascript
 {
@@ -303,23 +295,23 @@ retrieve subsequent pages of results.  When ```offset``` + ```pageSize``` is gre
 
 *Static* credential sets will look identical to *dynamic* credential sets with the exception that the ``name`` property will contain the IP address of the device that the credential set is associated with.
 
-<p class="vspacer"></p>
+<hr>
 
-### Credentials.saveCredentialSets
+#### Credentials.saveCredentialSets
 
 Save a collection of credential sets.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are
 should be made before a final call to ``commitEdits``.
 
-#### Parameters
+##### Parameters
 | Parameter        | Type          | Description      |
 | ---------------- | ------------- | --------------   |
 | network          | String  | Name of an existing network, e.g. "Default" |
 | configName       | String  | Name of a dynamic or static credential configuration |
 | credentialSets   | Array         | An array of ``CredentialSet`` objects |
 
-#### Return: nothing
+##### Return: nothing
 
-#### Sample Request JSON:
+##### Sample Request JSON:
 
 ```javascript
 {
@@ -347,22 +339,22 @@ should be made before a final call to ``commitEdits``.
 }
 ```
 
-<p class="vspacer"></p>
+<hr>
 
-### Credentials.deleteCredentialSets
+#### Credentials.deleteCredentialSets
 
 Delete a collection of credential sets.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are should be made before a final call to ``commitEdits``.
 
-#### Parameters
+##### Parameters
 | Parameter        | Type          | Description      |
 | ---------------- | ------------- | --------------   |
 | network          | String  | Name of an existing network, e.g. "Default" |
 | configName       | String  | Name of a dynamic or static credential configuration |
 | credentialSets   | Array         | An array of ``CredentialSet`` objects |
 
-#### Return: nothing
+##### Return: nothing
 
-#### Sample Request JSON:
+##### Sample Request JSON:
 
 ```javascript
 {

@@ -4,7 +4,7 @@ The plugins API provides access to tool job execution results.
 
 **NOTE: This API has significant and incompatible changes in the next major release.  The name of this service endpoint is likely to change.  You will need to update any scripts that use these APIs.**
 
-### Plugin Service Methods
+<hr>
 
 #### Plugins.getExecutionDetails
 Get the list of ``ToolRunDetails``, one per device, for the given scheduler execution ID.  *Note that currently only the SmartChange ("bulk update") job contains accessible tool execution records.*
@@ -16,6 +16,7 @@ Get the list of ``ToolRunDetails``, one per device, for the given scheduler exec
 
 ##### Return: an array of ``ToolRunDetails`` objects or ``null``
 
+<hr>
 
 ### Plugins Objects
 
@@ -32,6 +33,8 @@ Get the list of ``ToolRunDetails``, one per device, for the given scheduler exec
 | endTime        | 64-bit Integer  | The end time of the job as a Unix epoch value. | 
 
 Some tools return all of their data in the ``gridData`` attribute, others contains additional textual output from the device, available from the URL endpoint below.
+
+<hr>
 
 ### Execution Detail URL Endpoint
 
