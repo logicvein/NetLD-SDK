@@ -22,6 +22,10 @@ Parameters
 Return: an ``ExecutionData`` object.
 ''''''''''''''''''''''''''''''''''''
 
+.. raw:: html
+
+   <hr>
+
 Scheduler.addJob
 ^^^^^^^^^^^^^^^^
 
