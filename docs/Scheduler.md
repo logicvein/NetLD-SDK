@@ -14,6 +14,7 @@ Execute a job defined by the specified ``JobData``.
 
 ##### Return: an ``ExecutionData`` object.
 
+<hr>
 
 #### Scheduler.addJob
 Save (or replace) the job defined by the specified ``JobData``.
