@@ -8,7 +8,7 @@ The scheduler API provides access to job management, scheduling and execution. J
 Scheduler.runNow
 ^^^^^^^^^^^^^^^^
 
-Execute a job defined by the specified ``JobData``.
+Execute a job defined by the specified ```JobData`` <#jobdata>`__.
 
 Parameters
 ''''''''''
@@ -18,6 +18,29 @@ Parameters
 +=============+===============+========================+
 | jobData     | JSON Object   | A ``JobData`` object   |
 +-------------+---------------+------------------------+
+
+Return: an ``ExecutionData`` object.
+''''''''''''''''''''''''''''''''''''
+
+.. raw:: html
+
+   <hr>
+
+runExistingJobNow
+^^^^^^^^^^^^^^^^^
+
+Execute a job defined by the specified ``JobData``.
+
+Parameters
+''''''''''
+
++------------------+----------+-------------------------------------------------------+
+| Parameter        | Type     | Description                                           |
++==================+==========+=======================================================+
+| managedNetwork   | String   | The name of the network in which the job is defined   |
++------------------+----------+-------------------------------------------------------+
+| jobName          | String   | The name of the job to run                            |
++------------------+----------+-------------------------------------------------------+
 
 Return: an ``ExecutionData`` object.
 ''''''''''''''''''''''''''''''''''''
@@ -45,6 +68,10 @@ Parameters
 Return: the ``JobData`` object with ``jobId`` property populated.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
+.. raw:: html
+
+   <hr>
+
 Scheduler.deleteJob
 ^^^^^^^^^^^^^^^^^^^
 
@@ -63,6 +90,10 @@ Parameters
 
 Return: ``true`` if the Job was deleted successfully, ``false`` otherwise
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+.. raw:: html
+
+   <hr>
 
 Scheduler.getJob
 ^^^^^^^^^^^^^^^^
@@ -85,7 +116,7 @@ Return: a ``JobData`` object.
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
 Scheduler.scheduleJob
 ^^^^^^^^^^^^^^^^^^^^^
@@ -106,7 +137,7 @@ Return: an updated ``TriggerData`` object.
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
 Scheduler.unscheduleJob
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -128,6 +159,10 @@ Parameters
 
 Return: a boolean, *true* if the trigger was found and deleted
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+.. raw:: html
+
+   <hr>
 
 Scheduler Objects
 ~~~~~~~~~~~~~~~~~
@@ -169,29 +204,29 @@ TriggerData
 ExecutionData
 ^^^^^^^^^^^^^
 
-+-------------------+------------------+--------------------------------------------------------------------------------------+
-| Field             | Type             | Description                                                                          |
-+===================+==================+======================================================================================+
-| id                | Integer          | The execution ID                                                                     |
-+-------------------+------------------+--------------------------------------------------------------------------------------+
-| jobName           | String           | The name of the job                                                                  |
-+-------------------+------------------+--------------------------------------------------------------------------------------+
-| managedNetworks   | Array            | An array of managed network names the job was associated with                        |
-+-------------------+------------------+--------------------------------------------------------------------------------------+
-| executor          | String           | The user name of the user who executed the job                                       |
-+-------------------+------------------+--------------------------------------------------------------------------------------+
-| startTime         | 64-bit Integer   | The start time of the job as a Unix epoch value                                      |
-+-------------------+------------------+--------------------------------------------------------------------------------------+
-| endTime           | 64-bit Integer   | The end time of the job as a Unix epoch value                                        |
-+-------------------+------------------+--------------------------------------------------------------------------------------+
-| completionState   | Integer          | 0=normal, 1=cancelled, 2=misfired (schedule missed)                                  |
-+-------------------+------------------+--------------------------------------------------------------------------------------+
-| status            | String           | One of: "OK", "WARN", "ERROR", "ABORT"                                               |
-+-------------------+------------------+--------------------------------------------------------------------------------------+
-| isPartialView     | Boolean          | ``true`` if the caller has limited visibility to the networks defined for this job   |
-+-------------------+------------------+--------------------------------------------------------------------------------------+
-| isGlobal          | Boolean          | ``true`` if the specified job is a "global" (aka system) job                         |
-+-------------------+------------------+--------------------------------------------------------------------------------------+
++-------------------+------------------+-------------------------------------------------------+
+| Field             | Type             | Description                                           |
++===================+==================+=======================================================+
+| id                | Integer          | The execution ID                                      |
++-------------------+------------------+-------------------------------------------------------+
+| jobName           | String           | The name of the job                                   |
++-------------------+------------------+-------------------------------------------------------+
+| managedNetwork    | String           | The name of the network in which the job is defined   |
++-------------------+------------------+-------------------------------------------------------+
+| executor          | String           | The username of the user who executed the job         |
++-------------------+------------------+-------------------------------------------------------+
+| startTime         | 64-bit Integer   | The start time of the job as a Unix epoch value       |
++-------------------+------------------+-------------------------------------------------------+
+| endTime           | 64-bit Integer   | The end time of the job as a Unix epoch value         |
++-------------------+------------------+-------------------------------------------------------+
+| completionState   | Integer          | 0=normal, 1=cancelled, 2=misfired (schedule missed)   |
++-------------------+------------------+-------------------------------------------------------+
+| status            | String           | One of: "OK", "WARN", "ERROR", "ABORT"                |
++-------------------+------------------+-------------------------------------------------------+
+
+.. raw:: html
+
+   <hr>
 
 Job Types
 ^^^^^^^^^
