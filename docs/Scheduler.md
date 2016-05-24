@@ -17,7 +17,7 @@ Execute a job defined by the specified [``JobData``](#jobdata).
 <hr>
 
 #### runExistingJobNow
-Execute a job defined by the specified [``JobData``](#jobdata).
+Execute a job defined by the specified ``JobData``.
 
 ##### Parameters
 | Parameter | Type    | Description |
