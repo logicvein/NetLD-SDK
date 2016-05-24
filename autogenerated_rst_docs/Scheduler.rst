@@ -1,5 +1,5 @@
 Scheduler
-~~~~~~~~~
+---------
 
 **NOTE: This API has significant and incompatible changes in the next major release. You will need to update any scripts that use these APIs.**
 
