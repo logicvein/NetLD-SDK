@@ -5,12 +5,25 @@
 The scheduler API provides access to job management, scheduling and execution.  Job types include tools, configuration backup, Smart Changes, and reports.
 
 #### Scheduler.runNow
-Execute a job defined by the specified ``JobData``.
+Execute a job defined by the specified [``JobData``](#jobdata).
 
 ##### Parameters
 | Parameter | Type    | Description |
 | --------- | ------- | ----------- |
 | jobData   | JSON Object | A ``JobData`` object |
+
+##### Return: an ``ExecutionData`` object.
+
+<hr>
+
+#### runExistingJobNow
+Execute a job defined by the specified ``JobData``.
+
+##### Parameters
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| managedNetwork | String | The name of the network in which the job is defined |
+| jobName        | String | The name of the job to run |
 
 ##### Return: an ``ExecutionData`` object.
 
@@ -27,6 +40,7 @@ Save (or replace) the job defined by the specified ``JobData``.
 
 ##### Return: the ``JobData`` object with ``jobId`` property populated.
 
+<hr>
 
 #### Scheduler.deleteJob
 Delete the specified job.
@@ -39,6 +53,7 @@ Delete the specified job.
 
 ##### Return: ``true`` if the Job was deleted successfully, ``false`` otherwise
 
+<hr>
 
 #### Scheduler.getJob
 Get the ``JobData`` for the specified device.
@@ -51,7 +66,7 @@ Get the ``JobData`` for the specified device.
 
 ##### Return: a ``JobData`` object.
 
-<p class="vspacer"></p>
+<hr>
 
 #### Scheduler.scheduleJob
 Create a "trigger" (schedule) for a job.
@@ -63,7 +78,7 @@ Create a "trigger" (schedule) for a job.
 
 ##### Return: an updated ``TriggerData`` object.
 
-<p class="vspacer"></p>
+<hr>
 
 #### Scheduler.unscheduleJob
 Delete a "trigger" (schedule) for a job.
@@ -77,6 +92,7 @@ Delete a "trigger" (schedule) for a job.
 
 ##### Return: a boolean, *true* if the trigger was found and deleted
 
+<hr>
 
 ### Scheduler Objects
 
@@ -102,16 +118,15 @@ Delete a "trigger" (schedule) for a job.
 | Field            | Type         | Description      |
 | ---------------- | ------------ | --------------   |
 | id               | Integer      | The execution ID |
-| jobName          | String  | The name of the job |
-| managedNetworks  | Array         | An array of managed network names the job was associated with |
-| executor         | String  | The user name of the user who executed the job |
+| jobName          | String       | The name of the job |
+| managedNetwork   | String       | The name of the network in which the job is defined |
+| executor         | String       | The username of the user who executed the job |
 | startTime        | 64-bit Integer  | The start time of the job as a Unix epoch value |
 | endTime          | 64-bit Integer  | The end time of the job as a Unix epoch value |
 | completionState  | Integer      | 0=normal, 1=cancelled, 2=misfired (schedule missed) |
-| status           | String | One of: "OK", "WARN", "ERROR", "ABORT" |
-| isPartialView    | Boolean       | ``true`` if the caller has limited visibility to the networks defined for this job |
-| isGlobal         | Boolean       | ``true`` if the specified job is a "global" (aka system) job |
+| status           | String       | One of: "OK", "WARN", "ERROR", "ABORT" |
 
+<hr>
 
 #### Job Types
 | Type Name              | Type Description     |
