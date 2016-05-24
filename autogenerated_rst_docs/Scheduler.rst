@@ -1,5 +1,5 @@
 Scheduler
----------
+~~~~~~~~~
 
 **NOTE: This API has significant and incompatible changes in the next major release. You will need to update any scripts that use these APIs.**
 
@@ -192,7 +192,7 @@ Return: an updated ``ExecutionPageData`` object.
    <hr>
 
 Scheduler Objects
------------------
+~~~~~~~~~~~~~~~~~
 
 JobData
 ^^^^^^^
@@ -423,7 +423,7 @@ Python example:
         }
     }
 
-    try:
-        execution = netld_svc.call('Scheduler.runNow', job_data)
-    except JsonError as ex:
-        print 'JsonError: ' + str(ex.value)
+    execution = netld_svc.call('Scheduler.runNow', job_data)
+
+Job Detail Retrieval
+~~~~~~~~~~~~~~~~~~~~
