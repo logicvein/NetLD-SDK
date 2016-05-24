@@ -1,4 +1,4 @@
-## Scheduler
+### Scheduler
 
 **NOTE: This API has significant and incompatible changes in the next major release.  You will need to update any scripts that use these APIs.**
 
@@ -110,7 +110,7 @@ Get paged ``ExecutionData`` objects representing the execution history of jobs i
 
 <hr>
 
-## Scheduler Objects
+### Scheduler Objects
 
 #### JobData
 | Field           | Type          | Description      |
@@ -274,8 +274,8 @@ job_data = {
     }
 }
 
-try:
-    execution = netld_svc.call('Scheduler.runNow', job_data)
-except JsonError as ex:
-    print 'JsonError: ' + str(ex.value)
+execution = netld_svc.call('Scheduler.runNow', job_data)
 ```
+
+### Job Detail Retrieval
+
