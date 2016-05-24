@@ -5,6 +5,7 @@ pages:
 - Configuration: Configuration.md
 - Credentials: Credentials.md
 - Scheduler: Scheduler.md
+- Plugins: Plugins.md
 - Compliance: Compliance.md
 - Appendix A: Appendix_A.md
 theme: readthedocs

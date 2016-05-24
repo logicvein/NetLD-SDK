@@ -110,6 +110,18 @@ Get paged ``ExecutionData`` objects representing the execution history of jobs i
 
 <hr>
 
+#### Scheduler.getExecutionDataById
+Get an ``ExecutionData`` object by its *id* for a specific job execution.
+
+##### Parameters
+| Parameter | Type         | Description |
+| --------- | ------------ | ----------- |
+| executionId   | Integer | The ID of a specific job execution, obtained from the ``ExecutionData`` object returned when it was run or from the [Scheduler.getExecutionDetails](#scheduler.getexecutiondetails) API. |
+
+##### Return: an ``ExecutionData`` object.
+
+<hr>
+
 ### Scheduler Objects
 
 #### JobData
@@ -138,7 +150,7 @@ Get paged ``ExecutionData`` objects representing the execution history of jobs i
 | managedNetwork   | String       | The name of the network in which the job is defined |
 | executor         | String       | The username of the user who executed the job |
 | startTime        | 64-bit Integer  | The start time of the job as a Unix epoch value |
-| endTime          | 64-bit Integer  | The end time of the job as a Unix epoch value |
+| endTime          | 64-bit Integer  | The end time of the job as a Unix epoch value.  This value is *null* until the job has completed execution, and can be used to "poll" the execution status until this value becomes non-null. |
 | completionState  | Integer      | 0=normal, 1=cancelled, 2=misfired (schedule missed) |
 | status           | String       | One of: "OK", "WARN", "ERROR", "ABORT" |
 
@@ -245,6 +257,7 @@ The second difference from a "perjob" XML definition is that there is one ``<con
 *Note: the replacements names of "IP Address" and "VLAN ID" are merely example replacement names, not pre-defined or required names.*
 
 
+
 ##### "Discover Devices"
 * *Device resolution parameters not required.*
 
@@ -276,6 +289,4 @@ job_data = {
 
 execution = netld_svc.call('Scheduler.runNow', job_data)
 ```
-
-### Job Detail Retrieval
 
