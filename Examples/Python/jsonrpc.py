@@ -12,6 +12,7 @@ import urllib2
 import cookielib
 import functools
 from hashlib import sha1
+from datetime import tzinfo
 
 class JsonRpcProxy(object):
    '''A class implementing a JSON-RPC Proxy.'''
@@ -113,3 +114,17 @@ def encode_(obj, **kw):
    return func(obj)
 
 encode = functools.partial(json.dumps, default=encode_)
+
+class UTC(tzinfo):
+   """UTC"""
+
+   def utcoffset(self, dt):
+      return timedelta(0)
+
+   def tzname(self, dt):
+      return "UTC"
+
+   def dst(self, dt):
+      return timedelta(0)
+
+utc = UTC()

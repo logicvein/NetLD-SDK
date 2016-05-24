@@ -5,11 +5,16 @@ import json
 import urllib2
 import base64
 import datetime
-from jsonrpc.proxy import JSONRPCProxy
+from jsonrpc import JsonRpcProxy, JsonError
+
+netld_host = 'localhost'
+netld_user = 'admin'
+netld_pass = 'password'
+netld_network = 'Default'
 
 ### Create a JSON-RPC proxy
 ###
-netld = JSONRPCProxy.from_url("https://localhost/rest?j_username=admin&j_password=password")
+netld = JsonRpcProxy("https://{0}/rest".format(netld_host), netld_user, netld_pass)
 
 ### use the configuration service to retrieve a page of change logs
 ipAddress = raw_input('Enter an individual IP address or IP/CIDR (eg. 10.0.0.0/24): ')
@@ -32,7 +37,7 @@ while True:
                 firstLine = False
             else:
                 sys.stdout.write('{:<21}'.format(''))
-    
+
             print '{:<15}'.format(change['path']) + "   " \
                 + datetime.datetime.fromtimestamp(change['revisionTime']/1000).strftime('%Y-%m-%d %H:%M:%S') + "  " \
                 + '{:>5}'.format(change['size']) + "  " \

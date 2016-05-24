@@ -20,8 +20,7 @@ PASSWORD='password'
 LAST_END_TIME='lastEndTime'
 
 def usageAndExit():
-   print 'Usage:'
-   print '  exportJobHistory.py -o <output file> -c <config file>'
+   print 'Usage: ' + sys.argv[0] + ' -o <output file> -c <settings file>'
    sys.exit(2)
 
 host = None

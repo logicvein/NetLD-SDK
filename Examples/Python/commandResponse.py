@@ -10,7 +10,7 @@ import zlib
 import getopt
 from jsonrpc import JsonRpcProxy, JsonError
 
-netld_host = '192.168.20.10'
+netld_host = 'localhost'
 netld_user = 'admin'
 netld_pass = 'password'
 netld_network = 'Default'
@@ -20,7 +20,7 @@ netld_network = 'Default'
 job_name = "Show version";
 
 #
-# ----------------------- NO MORE EDITS BELOW THIS LINE ------------------------
+# ----------------------- NO MORE EDITS NEEDED BELOW THIS LINE ------------------------
 #
 
 def main(argv):

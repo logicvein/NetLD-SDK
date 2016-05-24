@@ -3,7 +3,7 @@
 import sys
 import json
 import urllib2
-from jsonrpc.proxy import JSONRPCProxy
+from jsonrpc import JsonRpcProxy, JsonError
 
 ### Create a JSON-RPC proxy for the inventory service
 ###
