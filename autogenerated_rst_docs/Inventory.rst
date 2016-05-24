@@ -92,9 +92,9 @@ The ``Inventory.updateDevice`` method is used to update an existing device in th
 +----------------+----------+----------------------------------------------+
 | ipAddress      | String   | IPv4 or IPv6 address                         |
 +----------------+----------+----------------------------------------------+
-| newIpAddress   | String   | A new IP address for the device, or null     |
-+----------------+----------+----------------------------------------------+
 | newNetwork     | String   | A new Network name for the device, or null   |
++----------------+----------+----------------------------------------------+
+| newIpAddress   | String   | A new IP address for the device, or null     |
 +----------------+----------+----------------------------------------------+
 | newAdapterId   | String   | A new AdapterId for the device, or null      |
 +----------------+----------+----------------------------------------------+
@@ -139,14 +139,13 @@ The ``customFields`` parameter is an array of UTF-8 string values. The first ele
 Return: ``null``
 ^^^^^^^^^^^^^^^^
 
-Sample Request JSON:
-^^^^^^^^^^^^^^^^^^^^
+Python example:
 
 .. code:: python
 
-    netld.call('Inventory.updateDevices', \
-               '192.168.0.254@NetworkA,192.168.0.252@NetworkA', \
-               null, \
+    netld.call('Inventory.updateDevices',
+               '192.168.0.254@NetworkA,192.168.0.252@NetworkA',
+               null,
                ['Tokyo HQ', 'Rack 1F-8'])
 
 .. raw:: html
