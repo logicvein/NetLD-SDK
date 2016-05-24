@@ -8,7 +8,7 @@ The scheduler API provides access to job management, scheduling and execution. J
 Scheduler.runNow
 ^^^^^^^^^^^^^^^^
 
-Execute a job defined by the specified ```JobData`` <#jobdata>`__.
+Execute a job defined by the specified ``JobData``.
 
 Parameters
 ''''''''''
@@ -157,15 +157,40 @@ Parameters
 | jobName          | String   | The name of the job                                        |
 +------------------+----------+------------------------------------------------------------+
 
-Return: a boolean, *true* if the trigger was found and deleted
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Return: a boolean, *true* if the trigger was found and deleted.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+.. raw:: html
+
+   <hr>
+
+Scheduler.getExecutionDetails
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Get paged ``ExecutionData`` objects representing the execution history of jobs in the scheduler.
+
+Parameters
+''''''''''
+
++--------------+---------------------+----------------------------------------------------------------------------------------+
+| Parameter    | Type                | Description                                                                            |
++==============+=====================+========================================================================================+
+| pageData     | ExecutionPageData   | Page object for execution data                                                         |
++--------------+---------------------+----------------------------------------------------------------------------------------+
+| sortColumn   | String              | The name of an ``ExecutionData`` attribute to sort by, *null* for default sort order   |
++--------------+---------------------+----------------------------------------------------------------------------------------+
+| descending   | boolean             | *true* if the sort should be descending                                                |
++--------------+---------------------+----------------------------------------------------------------------------------------+
+
+Return: an updated ``ExecutionPageData`` object.
+''''''''''''''''''''''''''''''''''''''''''''''''
 
 .. raw:: html
 
    <hr>
 
 Scheduler Objects
-~~~~~~~~~~~~~~~~~
+-----------------
 
 JobData
 ^^^^^^^
