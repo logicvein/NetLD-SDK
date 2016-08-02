@@ -82,10 +82,10 @@ def main(argv):
 def millisToDate(millis):
    return datetime.datetime.utcfromtimestamp(millis / 1000)
 
-def makeJobList(execution):
+def makeJobList(execution, managedNetwork):
    jobList = '\n[ ' + \
-      str(execution['status']) + ' / ' + str(execution['jobName']) + ' / ' + \
-      str(execution['managedNetwork']) + ' / ' + str(execution['executor']) + ' / S:' + \
+      str(execution['status']) + ' / ' + str(execution['jobName'].encode('utf-8')) + ' / ' + \
+      str(managedNetwork.encode('utf-8')) + ' / ' + str(execution['executor']) + ' / S:' + \
       millisToDate(execution['startTime']).strftime('%Y-%m-%d %H:%M:%S') + ' / E:' + \
       millisToDate(execution['endTime']).strftime('%Y-%m-%d %H:%M:%S') + \
       ' ]\n'
@@ -118,7 +118,7 @@ def exportJobHistory(outputFile, inilastEndTime):
                else:
                   resp = response.read()
 
-               file.write(makeJobList(execution))
+               file.write(makeJobList(execution, detail['managedNetwork']))
                file.write(resp)
                file.close()
 

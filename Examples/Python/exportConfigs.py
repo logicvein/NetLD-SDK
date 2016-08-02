@@ -119,7 +119,7 @@ def exportConfigs(output, lastTimestamp):
       params = urllib.urlencode({
             'op': 'config',
             'ipAddress': ipAddress,
-            'managedNetwork': network,
+            'managedNetwork': network.encode('utf-8'),
             'configPath': path,
             'timestamp': timestamp.isoformat(),
             'j_username': user,
