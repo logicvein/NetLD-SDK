@@ -6,8 +6,12 @@ The compliance API provides access to compliance policies, rules, and violation 
 Compliance Service Methods
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``Compliance.getRuleSet``
-^^^^^^^^^^^^^^^^^^^^^^^^^
+.. raw:: html
+
+   <hr>
+
+Compliance.getRuleSet
+^^^^^^^^^^^^^^^^^^^^^
 
 Get the compliance ruleset for the given ID
 
@@ -25,10 +29,10 @@ Return: the ``RuleSet`` object or ``null``
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
-``Compliance.getPolicies``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Compliance.getPolicies
+^^^^^^^^^^^^^^^^^^^^^^
 
 Get the list of policies in a given managed networks.
 
@@ -46,10 +50,10 @@ Return: an array of ``PolicyInfo`` objects
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
-``Compliance.getPolicy``
-^^^^^^^^^^^^^^^^^^^^^^^^
+Compliance.getPolicy
+^^^^^^^^^^^^^^^^^^^^
 
 Get the policy definition by ID.
 
@@ -67,10 +71,10 @@ Return: a ``Policy`` object or ``null``
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
-``Compliance.getViolationsForDevice``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Compliance.getViolationsForDevice
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Get the list of current violations for a given device.
 
@@ -90,10 +94,10 @@ Return: an array of ``Violation`` objects
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
-``Compliance.getViolationsForPolicy``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Compliance.getViolationsForPolicy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Get the list of current violations for a given policy.
 
@@ -111,7 +115,7 @@ Return: an array of ``Violation`` objects
 
 .. raw:: html
 
-   <p class="vspacer"></p>
+   <hr>
 
 Compliance Objects
 ~~~~~~~~~~~~~~~~~~

@@ -7,6 +7,7 @@
    Configuration <Configuration.rst>
    Credentials <Credentials.rst>
    Scheduler <Scheduler.rst>
+   Plugins <Plugins.rst>
    Compliance <Compliance.rst>
    Appendix A <Appendix_A.rst>
 
