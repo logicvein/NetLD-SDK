@@ -101,19 +101,19 @@ A ```Revision``` object is expressed in JSON format seen here:
 | content       | String  | The configuration file content, encoded in Base64 format | 
 
 
-### Configuration.retrieveSnapshotChangeLog
+#### Configuration.retrieveSnapshotChangeLog
 Retrieves the configuration history for the specified device.
 
-#### Parameters
+##### Parameters
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
 | network      | String   | Name of an existing network, e.g. "Default" |
 | ipAddress    | String   | IPv4 or IPv6 address |
 | pageData     | JSON Object    | A ```PageData``` object specifying the starting ```offset``` and ```pageSize```. |
 
-#### Return: a ```PageData``` object
+##### Return: a ```PageData``` object
 
-#### Sample Request JSON:
+##### Sample Request JSON:
 
 ```javascript
 {
@@ -136,7 +136,7 @@ If the initial ```offset``` that is passed is zero (0), the returned ```PageData
 telling you how many total results are available.  By incrementing the ```offset``` by ```pageSize``` you can retrieve subsequent pages of
 results.  When ```offset``` + ```pageSize``` is greater than or equal to ```total``` there are no more results available.
 
-#### Sample Response JSON:
+##### Sample Response JSON:
 
 ```javascript
 {  
@@ -185,11 +185,13 @@ results.  When ```offset``` + ```pageSize``` is greater than or equal to ```tota
 }
 ```
 
-### Configuration.retrieveRevision
+<hr>
+
+#### Configuration.retrieveRevision
 
 Retrieve a revision of a configuration for the specified device.
 
-#### Parameters
+##### Parameters
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
 | network      | String   | Name of an existing network, e.g. "Default" |
@@ -197,9 +199,9 @@ Retrieve a revision of a configuration for the specified device.
 | configPath   | String   | The path of the configuration file to retrieve.  This should be the same value as the ```path``` attribute in a ```Change``` object. |
 | timestamp    | Integer        | The timestamp (in Unix Epoch milliseconds) of the configuration to retrieve.  This should be the same value as the ```revisionTime``` attribute in a ```Change``` object returned by ``retrieveSnapshotChangeLog``. If timestamp is omitted, the latest revision is retrieved. |
 
-#### Return: a ```Revision``` object
+##### Return: a ```Revision``` object
 
-#### Sample Request JSON:
+##### Sample Request JSON:
 
 ```javascript
 {
@@ -215,7 +217,7 @@ Retrieve a revision of a configuration for the specified device.
 }
 ```
 
-#### Sample Response JSON:
+##### Sample Response JSON:
 
 ```javascript
 {  
@@ -233,53 +235,3 @@ Retrieve a revision of a configuration for the specified device.
    }
 }
 ```
-
-<p class="vspacer"></p>
-
-### Configuration.retrieveRevisionWordDiff
-
-Retrieve an XML string containing differences marked up in such a way as to provide simple
-implementation of highlighting word-level differences.
-
-#### Parameters
-| Parameter     | Type          | Description      |
-| ------------- | ------------- | --------------   |
-| network      | String   | Name of an existing network, e.g. "Default" |
-| ipAddress    | String   | IPv4 or IPv6 address of the "left" device |
-| configPath   | String   | The path of the configuration file to retrieve.  This should be the same value as the ```path``` attribute in a ```Change``` object. |
-| timestamp1    | Integer        | The timestamp (in Unix Epoch milliseconds) of the configuration to retrieve.  This should be the same value as the ```revisionTime``` attribute in a ```Change``` object. |
-| ipAddress2    | String   | IPv4 or IPv6 address of the "right" device to compare revisions for.  Should be the same as ```ipAddress``` for same device comparisons |
-| configPath2   | String   | The path of the configuration file to retrieve.  This should be the same value as the ```path``` attribute in a ```Change``` object. |
-| timestamp2    | Integer        | The timestamp (in Unix Epoch milliseconds) of the configuration to retrieve.  This should be the same value as the ```revisionTime``` attribute in a ```Change``` object. |
-
-#### Return: an XML string with change markup
-
-#### Sample Request JSON:
-
-```javascript
-{
-   "jsonrpc": "2.0",
-   "method": "Configuration.retrieveRevision",
-   "params": {
-              "network": "Default",
-              "ipAddress": "192.168.0.254",
-              "configPath": "/running-config",
-              "timestamp1": 1361249887
-              "ipAddress2": "192.168.0.254",
-              "configPath2": "/startup-config",
-              "timestamp2": 1361249887
-             },
-   "id": 1
-}
-```
-
-The returned XML contains a top-level (root) element called "&lt;diff>", of which all other elements are children.  Text that is a direct child of "&lt;diff"> is common to both the "left" and "right" configurations.  Additional child elements of "&lt;diff>" include, "&lt;d>"
-for deleted content (left), "&lt;a>" for added content (right), "&lt;cl>" changed content (left),
-and "&lt;cr>" changed content (right).  All configuration text is Base64 encoded.  An example
-difference XML snippet is as follows:
-
-```xml
-<diff>
-</diff>
-```
-

@@ -9,14 +9,15 @@ import os
 import csv
 import time
 import math
-
-from jsonrpc.proxy import JSONRPCProxy
+from jsonrpc import JsonRpcProxy, JsonError
 
 def usage_and_exit():
     """Print the usage message and exit"""
     print 'Usage:'
     print '  passwordChange.py -f <csv input file> -h <netld server> -u <netld username> -p <netld password> -c <credential config name> [-n <job name>]'
     sys.exit(2)
+
+_netld_svc = None
 
 # Main
 def main(argv):
@@ -54,6 +55,7 @@ def main(argv):
 
     run(host, user, password, network, csv_file, job_name, credential_config_name)
 
+
 # Run the job
 def run(host, user, password, network, csv_file, job_name, credential_config_name):
     with open(csv_file, 'rb') as f:
@@ -66,8 +68,8 @@ def run(host, user, password, network, csv_file, job_name, credential_config_nam
     new_password = 'newPassword'
     new_enable_password = 'newEnablePassword'
 
-    creds = urllib.urlencode({'j_username': user, 'j_password': password})
-    netld = JSONRPCProxy.from_url("https://" + host + "/rest?%s" % creds)
+    global _netld_svc
+    _netld_svc = JsonRpcProxy("https://{0}/rest".format(host), user, password)
 
     job = {
         'managedNetwork': network,
@@ -85,7 +87,7 @@ def run(host, user, password, network, csv_file, job_name, credential_config_nam
         },
     }
 
-    execution = netld.call('Scheduler.runNow', job)
+    execution = _netld_svc.call('Scheduler.runNow', job)
 
     print '** executing job **'
 
@@ -100,19 +102,22 @@ def run(host, user, password, network, csv_file, job_name, credential_config_nam
 
         x += .1
         time.sleep(math.atan(x)) # gradually increase wait time, so we don't have to wait very long for short jobs, but we don't make too many calls for long jobs
-        execution = netld.call('Scheduler.getExecutionDataById', execution_id)
+        execution = _netld_svc.call('Scheduler.getExecutionDataById', execution_id)
 
     ips_to_update = {}
 
     # print individual script run details...
-    tool_run_details = netld.call('Plugins.getExecutionDetails', executionId)
+    tool_run_details = _netld_svc.call('Plugins.getExecutionDetails', executionId)
     for detail in tool_run_details:
-        print_details(host, user, password, executionId, detail)
+        print_details(host, executionId, detail)
         ips_to_update[detail.ipAddress] = True;
 
     update_credentials(network, credential_config_name, ips_to_update, new_password, new_enable_password)
 
+    _netld_svc.call('Security.logoutCurrentUser')
+
     print "** password change execution complete **"
+
 
 def update_credentials(network, credential_config_name, ips_to_update, new_password, new_enable_password):
     """Updates the static credential configuration to reflect the new passwords."""
@@ -127,7 +132,7 @@ def update_credentials(network, credential_config_name, ips_to_update, new_passw
     }
 
     while True:
-        page = netld.call('Credentials.getCredentialSets', page, credential_config_name, network, None, "ipAddress", True)
+        page = _netld_svc.call('Credentials.getCredentialSets', page, credential_config_name, network, None, "ipAddress", True)
 
         creds = []
         for set in page.credentialSets:
@@ -138,7 +143,7 @@ def update_credentials(network, credential_config_name, ips_to_update, new_passw
                 creds.append(set)
 
         if creds:
-            netld.call('Credentials.saveCredentialSets', network, credential_config_name, creds)
+            _netld_svc.call('Credentials.saveCredentialSets', network, credential_config_name, creds)
 
         page.offset = page.offset + page.pageSize
         if page.offset > page.total:
@@ -147,10 +152,12 @@ def update_credentials(network, credential_config_name, ips_to_update, new_passw
     for ip in ips_to_update.keys():
         print "! no credentials defined in static credential set for " + ip
 
-    netld.call('Credentials.commitEdits')
+    _netld_svc.call('Credentials.commitEdits')
 
-def print_details(host, user, password, execution_id, detail):
+def print_details(host, execution_id, detail):
     """Load and print the script output details to stdout for the given tool record"""
+
+    opener = urllib2.build_opener(_netld_svc._cookie_processor, _netld_svc._https_handler)
     params = urllib.urlencode({
         'executionId': execution_id,
         'recordId': detail.id,
@@ -158,7 +165,7 @@ def print_details(host, user, password, execution_id, detail):
         'j_password': password
     })
 
-    response = urllib2.urlopen('https://' + host + '/servlet/pluginDetail?%s' % params)
+    response = opener.open('https://' + host + '/servlet/pluginDetail?%s' % params)
     print response.read()
 
 # Main
