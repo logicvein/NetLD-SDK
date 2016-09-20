@@ -44,7 +44,7 @@ Return: the ``JobData`` object with ``jobId`` property populated.
 Scheduler.deleteJob
 ^^^^^^^^^^^^^^^^^^^
 
-Get the policy definition by ID.
+Delete a job by ID.
 
 Parameters
 ''''''''''
@@ -61,7 +61,7 @@ Return: ``true`` if the Job was deleted successfully, ``false`` otherwise
 Scheduler.getJob
 ^^^^^^^^^^^^^^^^
 
-Get the list of current violations for a given device.
+Get the JobData for the job with the specified ID.
 
 Parameters
 ''''''''''
@@ -78,7 +78,10 @@ Return: a ``JobData`` object.
 Scheduler.searchJobs
 ^^^^^^^^^^^^^^^^^^^^
 
-Get the list of current violations for a given policy.
+| Get a JobPageData object containing "shallow" JobData objects. These JobData objects
+| do not contain ``jobParameters`` and cannot directly be used to execute jobs via the
+| ``runNow()`` method. However, the job ID can be used to obtain a full ``JobData``
+| object suitable for execution directly by the ``runNow()`` method.
 
 Parameters
 ''''''''''
