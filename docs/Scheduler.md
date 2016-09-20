@@ -27,7 +27,7 @@ Save (or replace) the job defined by the specified ``JobData``.
 
 
 #### Scheduler.deleteJob
-Get the policy definition by ID.
+Delete a job by ID.
 
 ##### Parameters
 | Parameter | Type    | Description |
@@ -38,7 +38,7 @@ Get the policy definition by ID.
 
 
 #### Scheduler.getJob
-Get the list of current violations for a given device.
+Get the JobData for the job with the specified ID.
 
 ##### Parameters
 | Parameter | Type         | Description |
@@ -49,7 +49,10 @@ Get the list of current violations for a given device.
 
 
 #### Scheduler.searchJobs
-Get the list of current violations for a given policy.
+Get a JobPageData object containing "shallow" JobData objects.  These JobData objects
+do not contain ``jobParameters`` and cannot directly be used to execute jobs via the
+``runNow()`` method.  However, the job ID can be used to obtain a full ``JobData``
+object suitable for execution directly by the ``runNow()`` method.
 
 ##### Parameters
 | Parameter | Type    | Description |
