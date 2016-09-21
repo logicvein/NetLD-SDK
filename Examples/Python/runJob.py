@@ -119,4 +119,4 @@ def _wait_for_completion(execution):
    return execution
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+   exit(main(sys.argv[1:]))
