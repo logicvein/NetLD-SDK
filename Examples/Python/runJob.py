@@ -28,12 +28,15 @@ _netld_svc = None
 
 def main(argv):
    try:
-      opts, args = getopt.getopt(argv, "hupj:mw", ["host=","user=","password=","job=",'--managed-network=','--no-wait'])
-   except getopt.GetoptError:
+      opts, args = getopt.getopt(argv, "h:u:p:j:m:w"),  ["host=","user=","password=","job=",'--managed-network=','--no-wait'])
+   except getopt.GetoptError as err:
+      print "Error: " + str(err)
       usage_and_exit()
 
    global netld_host, netld_user, netld_pass, job_name, netld_network
    no_wait = None
+   job_name = None
+
    for opt, arg in opts:
       if opt in ('-h', '--host'):
          netld_host = arg
@@ -58,7 +61,7 @@ def main(argv):
 
    pageData = {'offset': 0, 'pageSize': 1000}
    try:
-      pageData = _netld_svc.call('Scheduler.searchJobs', pageData, netld_network, None, True)
+      pageData = _netld_svc.call('Scheduler.searchJobs', pageData, [netld_network], None, True)
    except JsonError as ex:
       print 'JsonError: ' + str(ex.value)
 
