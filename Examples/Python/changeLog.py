@@ -7,10 +7,10 @@ import base64
 import datetime
 from jsonrpc import JsonRpcProxy, JsonError
 
-netld_host = 'localhost'
+netld_host = '192.168.20.215'
 netld_user = 'admin'
 netld_pass = 'password'
-netld_network = 'Default'
+netld_network = 'Core'
 
 ### Create a JSON-RPC proxy
 ###
@@ -25,7 +25,7 @@ print "=========================================================================
 pageData= {'offset': 0, 'pageSize': 10}
 
 while True:
-    pageData = netld.call('Configuration.retrieveSnapshotChangeLog', 'Default', ipAddress, pageData)
+    pageData = netld.call('Configuration.retrieveSnapshotChangeLog', netld_network, ipAddress, pageData)
 
     for changeLog in pageData['changeLogs']:
         snapShot = changeLog['timestamp']
@@ -56,15 +56,15 @@ print "\nRetreiving first 10 lines of newest text configuration:"
 print "======================================================"
 
 pageData= {'offset': 0, 'pageSize': 1}
-pageData = netld.call('Configuration.retrieveSnapshotChangeLog', 'Default', ipAddress, pageData)
+pageData = netld.call('Configuration.retrieveSnapshotChangeLog', netld_network, ipAddress, pageData)
 
 if pageData['total'] > 0:
     for change in pageData['changeLogs'][0]['changes']:
         if change['mimeType'] != 'text/plain':
             continue;
 
-        revision = netld.call('Configuration.retrieveRevision', 'Default', ipAddress, change['path'], change['revisionTime'])
-        print revision;
+        revision = netld.call('Configuration.retrieveRevision', netld_network, ipAddress, change['path'], change['revisionTime'])
+        # print revision;
         lines = str(base64.b64decode(revision['content'])).split('\n')
         for i in range(10):
             print lines[i]
