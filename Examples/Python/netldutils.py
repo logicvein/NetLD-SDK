@@ -1,6 +1,6 @@
 from jsonrpc import JsonRpcProxy, JsonError
 
-class NetLdUtils
+class NetLdUtils:
    '''A utility class with miscellaneous functions'''
 
    def __init__(self, netldService):
@@ -21,3 +21,6 @@ class NetLdUtils
          execution = self._netld_svc.call('Scheduler.getExecutionDataById', execution_id)
 
       return execution
+
+   def get_networks(self):
+      return self._netld_svc.call('Networks.getManagedNetworkNames')
