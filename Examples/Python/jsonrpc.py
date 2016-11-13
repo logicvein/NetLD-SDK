@@ -37,6 +37,13 @@ class JsonRpcProxy(object):
       self._opener = urllib2.build_opener(self._cookie_processor, self._https_handler)
       self._opener.add_handler(JsonRpcProcessor())
 
+   @classmethod
+   def fromHost(cls, host, username, password):
+      proxy = cls("https://{0}/rest".format(host), username, password)
+      proxy._host = host
+
+      return proxy
+
    def _next_id(self):
       self._id += 1
       self._hasher.update(str(self._id))
