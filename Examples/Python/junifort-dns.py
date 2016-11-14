@@ -199,6 +199,7 @@ def exec_from_excel(devices, excelFile):
 
    utils = NetLdUtils(netld_svc)
 
+   executions = []
    for adapterId in ['Juniper::ScreenOS', 'Fortinet::FortiGate']:
       # Filter devices by adapterId
       job_devices = {key: device for (key, device) in devices.items() if device['adapterId'] == adapterId}
@@ -231,8 +232,22 @@ def exec_from_excel(devices, excelFile):
          networks = networks
       )
 
-      utils.execute_smart_change(job_data, job_devices, 'perdevice', replacements)
-   return 0
+      try:
+         executions.append(
+            utils.execute_smart_change(job_data, job_devices, 'perdevice', replacements)
+         )
+      except JsonError as ex:
+         print 'JsonError: ' + str(ex.value)
+
+   try:
+      for execution in executions:
+         utils.wait_job_completion(execution)
+
+      for execution in executions:
+         utils.get_tool_details(execution, append_excel_row)
+   except JsonError as ex:
+      print 'JsonError: ' + str(ex.value)
+
 
 if __name__ == "__main__":
    exit(main(sys.argv[1:]))

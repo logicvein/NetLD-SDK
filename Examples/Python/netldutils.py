@@ -117,8 +117,10 @@ class NetLdUtils:
           dictionary instance also defining 'ipAddress' and 'network' entries:
 
             (
-             {'ipAddress': '10.0.0.1', 'network': 'Tokyo', 'Name_1': 'Value', ...},
-             {'ipAddress': '10.0.2.6', 'network': 'Tokyo', 'Name_1': 'Value', ...}
+             {'ipAddress': '10.0.0.1', 'network': 'Tokyo', 'Name_1': 'Value_1', ...},
+             {'ipAddress': '10.0.0.1', 'network': 'Tokyo', 'Name_2': 'Value_2', ...},
+             {'ipAddress': '10.0.2.6', 'network': 'Tokyo', 'Name_1': 'Value_1', ...},
+             {'ipAddress': '10.0.2.6', 'network': 'Tokyo', 'Name_2': 'Value_2', ...},
             )
 
           This method returns an ExecutionData object.
@@ -132,11 +134,10 @@ class NetLdUtils:
 
       xml = '<configs>'
       if replacementMode == 'perjob':
+         xml += '<config>'
          for key, value in replacements:
-            xml += r"""
-               <config>
-                  <replacement name='{0}'>{1}</replacement>
-               </config>""".format(key, base64.b64encode(value))
+            xml += r"""<replacement name='{0}'>{1}</replacement>""".format(key, base64.b64encode(value))
+         xml += '</config>'
       else:
          for replacement in replacements:
             xml += r"""<config device='{0}@{1}'>""".format(replacement['ipAddress'], replacement['network'])
