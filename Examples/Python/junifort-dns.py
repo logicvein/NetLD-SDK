@@ -13,6 +13,7 @@ from jsonrpc import JsonRpcProxy, JsonError
 from netldutils import NetLdUtils
 from netldexcel import NetLdExcel
 
+
 juniper_read_template = """
 get nsm | i server
 get conf | i "host dns[1-3]"
@@ -29,6 +30,8 @@ set dns server-select domain * primary-server {DNS-X1} secondary-server {DNS-X2}
 save
 """
 
+juniper_validation_regex = re.compile(r"\S+->.*?[\r\n](?=(\S+?->|\s+))")
+
 fortinet_read_template = """
 show | grep 'set fmg'
 config global
@@ -44,11 +47,12 @@ config global
 config system dns
 set primary {DNS-X1}
 set secondary {DNS-X2}
+end
+end
+exit
 """
 
-netld_user = 'admin'
-netld_pass = 'password'
-netld_host = 'localhost'
+fortinet_validation_regex = re.compile(r"(\S+).*?#.*?[\r\n](?=[\r\n](\1.*?#|\S+))")
 
 def usage_and_exit(argv):
    print 'Usage: ' + sys.argv[0] + ' [OPTIONS]'
@@ -64,6 +68,9 @@ def usage_and_exit(argv):
    sys.exit(2)
 
 netld_svc = None
+netld_user = 'admin'
+netld_pass = 'password'
+netld_host = 'localhost'
 
 def main(argv):
    try:
@@ -122,7 +129,6 @@ def main(argv):
        netld_svc.call('Security.logoutCurrentUser')
 
 def export_to_excel(devices):
-   global exportWorksheet
    exportWb = Workbook()
    exportWorksheet = exportWb.active
    exportWorksheet.append(['IP Address', 'Network', 'MGR', 'DNS1', 'DNS2', 'DNS3'])
@@ -131,120 +137,122 @@ def export_to_excel(devices):
 
    executions = []
    for adapterId in ['Juniper::ScreenOS', 'Fortinet::FortiGate']:
-      csv = ''
-      for device in devices.values():
-         if device['adapterId'] == adapterId:
-            csv += device['ipAddress'] + '@' + device['network'] + ','
-      csv = csv[:-1]
+      # Filter devices by adapterId
+      job_devices = list(device for device in devices if device['adapterId'] == adapterId)
 
-      job_data = {
-         'jobType': 'Script Tool Job',
-         'jobName': 'Export ' + adapterId + ' DNS/Manager to Excel',
-         'managedNetworks': utils.get_networks(),
-         'description': '',
-         'jobParameters': {
-            'tool': 'org.ziptie.tools.scripts.commandRunner',
-            'input.commandList': juniper_read_template if adapterId == 'Juniper::ScreenOS' else fortinet_read_template,
-            'backupOnCompletion': 'false',
-            'ipResolutionScheme': 'ipCsv',
-            'ipResolutionData': csv,
-         }
-      }
-
-      if len(csv) == 0:
+      if len(job_devices) == 0:
          continue
 
       try:
-         executions.append( netld_svc.call('Scheduler.runNow', job_data) )
+         def create_closure(mgr_regex, dns_regex):
+            def append_excel_row(ipAddress, network, response):
+               result = mgr_regex.search(response)
+               if result is None:
+                  print "Unexpected response from {0} in network '{1}'".format(ipAddress, network)
+               mgr = result.group(1) if result else ''
+               dns = dns_regex.findall(response)
+
+               exportWorksheet.append([
+                  ipAddress,
+                  network,
+                  mgr if mgr else '',
+                  dns[0] if len(dns) > 0 else '',
+                  dns[1] if len(dns) > 1 else '',
+                  dns[2] if len(dns) > 2 else '']
+               )
+            # return the closure function
+            return append_excel_row
+
+         executions.append({
+            'execution': utils.execute_command_runner(
+               devices  = job_devices,
+               name     = 'Export ' + adapterId + ' DNS/Manager to Excel',
+               commands = juniper_read_template if adapterId == 'Juniper::ScreenOS' else fortinet_read_template),
+            'callback' : create_closure(
+               mgr_regex = juniper_nsm_regex if adapterId == 'Juniper::ScreenOS' else fortinet_fmg_regex,
+               dns_regex = juniper_dns_regex if adapterId == 'Juniper::ScreenOS' else fortinet_dns_regex)
+         })
       except JsonError as ex:
          print 'JsonError: ' + str(ex.value)
 
    try:
-      for execution in executions:
-         utils.wait_job_completion(execution)
+      for execs in executions:
+         utils.wait_job_completion(execs['execution'])
 
-      for execution in executions:
-         utils.get_tool_details(execution, append_excel_row)
+         utils.get_tool_details(execs['execution'], execs['callback'])
    except JsonError as ex:
       print 'JsonError: ' + str(ex.value)
 
    exportWb.save('export.xlsx')
 
 
-def append_excel_row(ipAddress, network, response):
-   if 'set dns' in response:
-      result = juniper_nsm_regex.search(response)
-      mgr = result.group(1) if result else ''
-      dns = juniper_dns_regex.findall(response)
-   elif 'dns-cache-limit' in response:
-      result = fortinet_fmg_regex.search(response)
-      mgr = result.group(1) if result else ''
-      dns = fortinet_dns_regex.findall(response)
-   else:
-      print 'Unexpected response from ' + ipAddress + ' in network ' + network
-      return
-
-   exportWorksheet.append([
-      ipAddress,
-      network,
-      mgr if mgr else '',
-      dns[0] if len(dns) > 0 else '',
-      dns[1] if len(dns) > 1 else '',
-      dns[2] if len(dns) > 2 else '']
-   )
-
 def exec_from_excel(devices, excelFile):
    workbook = load_workbook(excelFile)
-   ws = workbook.active
+   worksheet = workbook.active
 
    utils = NetLdUtils(netld_svc)
 
    executions = []
    for adapterId in ['Juniper::ScreenOS', 'Fortinet::FortiGate']:
-      # Filter devices by adapterId
-      job_devices = {key: device for (key, device) in devices.items() if device['adapterId'] == adapterId}
+      # Create a dictionary of Devices objects filtered by adapterId
+      job_devices = {(device['ipAddress'] + device['network']): device for device in devices if device['adapterId'] == adapterId}
 
-      # Unique list of networks from the set of job_devices
-      networks = {device['network']: True for (key, device) in job_devices.items()}.keys()
+      if len(job_devices) == 0:
+         continue
+
+      # Unique list of networks from the dictionary of job_devices
+      networks = { device['network']: True for device in job_devices.values() }.keys()
 
       replacements = []
-      for row in range(2, ws.max_row + 1):
-         ipAddress = ws.cell(row=row, column=1).value
-         network   = ws.cell(row=row, column=2).value
-         unused    = ws.cell(row=row, column=3).value
-         dns1      = ws.cell(row=row, column=4).value
-         dns2      = ws.cell(row=row, column=5).value
-         dns3      = ws.cell(row=row, column=6).value
-         print "DNS1 {0}, DNS2 {1}, DNS3 {2}".format(dns1, dns2, dns3)
-         key = ipAddress + network
-         device = devices[key]
-         replacements.append({
-            'ipAddress': ipAddress,
-            'network': network,
-            'DNS-X1': dns1 if dns1 else '',
-            'DNS-X2': dns2 if dns2 else '',
-            'DNS-X3': dns3 if dns3 else '',
-         })
+      for row_num in range(2, worksheet.max_row + 1):
+         ipAddress = worksheet.cell( row=row_num, column=1).value
+         network   = worksheet.cell( row=row_num, column=2).value
+         unused    = worksheet.cell( row=row_num, column=3).value
+         dns1      = worksheet.cell( row=row_num, column=4).value
+         dns2      = worksheet.cell( row=row_num, column=5).value
+         dns3      = worksheet.cell( row=row_num, column=6).value
+
+         if job_devices.get( ipAddress + network ):
+            replacements.append({
+               'ipAddress': ipAddress,
+               'network': network,
+               'DNS-X1': dns1 if dns1 else '',
+               'DNS-X2': dns2 if dns2 else dns1,
+               'DNS-X3': dns3 if dns3 else dns1,
+            })
 
       job_data = utils.create_smart_change(
-         name     = adapterId + ' apply the DNS/Mgr settings',
+         name     = adapterId + ' apply DNS settings',
          template = juniper_write_template if adapterId == 'Juniper::ScreenOS' else fortinet_write_template,
          networks = networks
       )
 
       try:
-         executions.append(
-            utils.execute_smart_change(job_data, job_devices, 'perdevice', replacements)
-         )
+         def create_closure(adapter, validation_regex, match_group, match_string):
+            def check_execution(ipAddress, network, response):
+               for match in validation_regex.finditer(response):
+                  if match.group(match_group) and not match_string in match.group(match_group):
+                     print "{0} device {1} in network '{2}' did not contain expected response.".format(adapter, ipAddress, network)
+            # return the closure function
+            return check_execution
+
+         executions.append({
+            'execution': utils.execute_smart_change(job_data, job_devices.values(), 'perdevice', replacements),
+            'callback' : create_closure(
+               adapter = adapterId,
+               validation_regex = juniper_validation_regex if adapterId == 'Juniper::ScreenOS' else fortinet_validation_regex,
+               match_group  = 1 if adapterId == 'Juniper::ScreenOS' else 2,
+               match_string = '->' if adapterId == 'Juniper::ScreenOS' else '#'),
+         })
       except JsonError as ex:
          print 'JsonError: ' + str(ex.value)
 
    try:
-      for execution in executions:
-         utils.wait_job_completion(execution)
+      for execs in executions:
+         utils.wait_job_completion(execs['execution'])
 
-      for execution in executions:
-         utils.get_tool_details(execution, append_excel_row)
+         utils.get_tool_details(execs['execution'], execs['callback'])
+
    except JsonError as ex:
       print 'JsonError: ' + str(ex.value)
 

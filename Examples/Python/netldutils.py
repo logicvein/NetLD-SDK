@@ -56,6 +56,29 @@ class NetLdUtils:
 
       return None
 
+   def execute_command_runner(self, devices, name, commands):
+      # Unique list of networks from the set of job_devices
+      networks = {device['network']: True for device in devices}.keys()
+
+      if len(devices) == 0:
+         return None
+
+      job_data = {
+         'jobType': 'Script Tool Job',
+         'jobName': name,
+         'managedNetworks': networks,
+         'description': '',
+         'jobParameters': {
+            'tool': 'org.ziptie.tools.scripts.commandRunner',
+            'input.commandList': commands,
+            'backupOnCompletion': 'false',
+            'ipResolutionScheme': 'ipCsv',
+            'ipResolutionData': self.csv_from_device_list(devices),
+         }
+      }
+
+      return self._netld_svc.call('Scheduler.runNow', job_data)
+
    def create_smart_change(self, name, template, networks):
       xml = r"""
          <templateXml>
@@ -78,21 +101,24 @@ class NetLdUtils:
 
       xml += r'</templateXml>'
 
-      # Delete job
-      # Scheduler.saveJob
-      job_data = {
-         'managedNetworks': networks,
-         'jobName': name,
-         'jobType': 'Bulk Update',
-         'description': '',
-         'jobParameters': {
-            'backupOnCompletion': 'false',
-            'ipResolutionScheme': 'managedNetwork',
-            'ipResolutionData': '',
-            'templateXml': xml,
-            'replacementMode': 'perdevice'
+      job_data = self.get_job_by_name(name, networks)
+      if job_data:
+         job_data['managedNetworks'] = networks
+         job_data['jobParameters']['templateXml'] = xml
+      else:
+         job_data = {
+            'managedNetworks': networks,
+            'jobName': name,
+            'jobType': 'Bulk Update',
+            'description': '',
+            'jobParameters': {
+               'backupOnCompletion': 'false',
+               'ipResolutionScheme': 'managedNetwork',
+               'ipResolutionData': '',
+               'templateXml': xml,
+               'replacementMode': 'perdevice'
+            }
          }
-      }
 
       job_data = self._netld_svc.call('Scheduler.saveJob', job_data)
 
@@ -118,9 +144,7 @@ class NetLdUtils:
 
             (
              {'ipAddress': '10.0.0.1', 'network': 'Tokyo', 'Name_1': 'Value_1', ...},
-             {'ipAddress': '10.0.0.1', 'network': 'Tokyo', 'Name_2': 'Value_2', ...},
              {'ipAddress': '10.0.2.6', 'network': 'Tokyo', 'Name_1': 'Value_1', ...},
-             {'ipAddress': '10.0.2.6', 'network': 'Tokyo', 'Name_2': 'Value_2', ...},
             )
 
           This method returns an ExecutionData object.
@@ -128,8 +152,7 @@ class NetLdUtils:
 
       jobData['jobParameters']['replacementMode'] = replacementMode
 
-      csv = ','.join( [device['ipAddress'] + '@' + device['network'] for device in devices.values()] )
-      jobData['jobParameters']['ipResolutionData'] = csv
+      jobData['jobParameters']['ipResolutionData'] = self.csv_from_device_list(devices)
       jobData['jobParameters']['ipResolutionScheme'] = 'ipCsv'
 
       xml = '<configs>'
@@ -150,5 +173,24 @@ class NetLdUtils:
 
       jobData['jobParameters']['replacements'] = xml
 
-      print jobData
       return self._netld_svc.call('Scheduler.runNow', jobData)
+
+   def csv_from_device_list(self, devices):
+      return ','.join( [device['ipAddress'] + '@' + device['network'] for device in devices] )
+
+   def get_job_by_name(self, name, networks):
+      netDict = {network: True for network in networks}
+
+      pageData= {'offset': 0, 'pageSize': 1000}
+      while True:
+         pageData = self._netld_svc.call('Scheduler.searchJobs', pageData, networks, None, False)
+         for jobData in pageData['jobData']:
+            jobNetDict = {network: True for network in jobData['managedNetworks']}
+            if jobData['jobName'] == name and jobNetDict.viewitems() <= netDict.viewitems():
+               return self._netld_svc.call('Scheduler.getJob', jobData['jobId'])
+
+         if pageData['offset'] + pageData['pageSize'] > pageData['total']:
+            break;
+         else:
+            pageData['offset'] += pageData['pageSize']
+      return None

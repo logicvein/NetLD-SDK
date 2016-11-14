@@ -82,7 +82,7 @@ class NetLdExcel:
             print 'Unresolved device ' + device['ipAddress']
             del devices[key]
 
-      return devices
+      return devices.values()
 
    def __detect_excel_columns(self, workbook):
       startRow = 1
