@@ -57,8 +57,7 @@ class NetLdUtils:
       return None
 
    def create_smart_change(self, name, template, networks):
-      xml = """
-         <?xml version="1.0" encoding="UTF-8"?>
+      xml = r"""
          <templateXml>
             <text>{0}</text>
          """.format(base64.b64encode(template))
@@ -69,7 +68,7 @@ class NetLdUtils:
 
       for key in replacements.keys():
          replacement = re.match(r"\{(.*?)\}", key)
-         xml += """
+         xml += r"""
             <replacement name="{0}" type="string" group="" originalIsDefault="false">
                <original></original>
                <values></values>
@@ -77,7 +76,7 @@ class NetLdUtils:
             </replacement>
             """.format(replacement.group(1), base64.b64encode(replacement.group(0)))
 
-      xml += "</templateXml>"
+      xml += r'</templateXml>'
 
       # Delete job
       # Scheduler.saveJob
@@ -88,7 +87,7 @@ class NetLdUtils:
          'description': '',
          'jobParameters': {
             'backupOnCompletion': 'false',
-            'ipResolutionScheme': 'ipCsv',
+            'ipResolutionScheme': 'managedNetwork',
             'ipResolutionData': '',
             'templateXml': xml,
             'replacementMode': 'perdevice'
@@ -99,7 +98,56 @@ class NetLdUtils:
 
       return job_data
 
-   def execute_smart_change(jobData, replacementMode, replacements):
+   def execute_smart_change(self, jobData, devices, replacementMode, replacements):
+      r'''A method to execute a Smart Change with the specified replacementMode
+          and replacement values.
+
+          The replacementMode parameter is either 'perjob' or 'perdevice'.
+
+          If the replacementMode is 'perjob' then the expected type of the
+          replacements parameter is dictionary:
+
+            {'Name_1': 'Value_1', 'Name_2': 'Value_2', ...}
+
+          where 'Name_1', 'Name_2', etc. are names of replacements that are
+          defined in the Smart Change template.
+
+          If the replacementMode is 'perdevice' then the expected type of the
+          replacements parameter is a "list of dictionaries", with each
+          dictionary instance also defining 'ipAddress' and 'network' entries:
+
+            (
+             {'ipAddress': '10.0.0.1', 'network': 'Tokyo', 'Name_1': 'Value', ...},
+             {'ipAddress': '10.0.2.6', 'network': 'Tokyo', 'Name_1': 'Value', ...}
+            )
+
+          This method returns an ExecutionData object.
+      '''
+
       jobData['jobParameters']['replacementMode'] = replacementMode
-      jobData['jobParameters']['replacements'] = replacements
-      return 0
+
+      csv = ','.join( [device['ipAddress'] + '@' + device['network'] for device in devices.values()] )
+      jobData['jobParameters']['ipResolutionData'] = csv
+      jobData['jobParameters']['ipResolutionScheme'] = 'ipCsv'
+
+      xml = '<configs>'
+      if replacementMode == 'perjob':
+         for key, value in replacements:
+            xml += r"""
+               <config>
+                  <replacement name='{0}'>{1}</replacement>
+               </config>""".format(key, base64.b64encode(value))
+      else:
+         for replacement in replacements:
+            xml += r"""<config device='{0}@{1}'>""".format(replacement['ipAddress'], replacement['network'])
+            for key, value in replacement.items():
+               if key == 'ipAddress' or key == 'network':
+                  continue
+               xml += r"""<replacement name='{0}'>{1}</replacement>""".format(key, base64.b64encode(value))
+            xml += r"""</config>"""
+      xml += '</configs>'
+
+      jobData['jobParameters']['replacements'] = xml
+
+      print jobData
+      return self._netld_svc.call('Scheduler.runNow', jobData)

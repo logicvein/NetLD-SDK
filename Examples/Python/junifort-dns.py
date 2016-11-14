@@ -11,6 +11,7 @@ import ConfigParser
 from openpyxl import Workbook, load_workbook
 from jsonrpc import JsonRpcProxy, JsonError
 from netldutils import NetLdUtils
+from netldexcel import NetLdExcel
 
 juniper_read_template = """
 get nsm | i server
@@ -105,92 +106,20 @@ def main(argv):
       global netld_svc
       netld_svc = JsonRpcProxy.fromHost(netld_host, netld_user, netld_pass)
 
-      workbook = load_workbook(excel_file)
-      cols = detect_excel_columns(workbook)
-
-      devices = resolve_from_excel(workbook, cols['networkColumn'], cols['startRow'])
+      devices = NetLdExcel(netld_svc).resolve_from_excel(
+         excelFile=excel_file,
+         adapters=['Juniper::ScreenOS', 'Fortinet::FortiGate']
+      )
 
       if export_action:
-         print NetLdUtils(netld_svc).create_smart_change('apply the DNS/Mgr settings', juniper_write_template, ['Default'])
          export_to_excel(devices)
       else:
-         exec_from_excel(devices)
+         exec_from_excel(devices, excel_file)
 
    except JsonError as ex:
       print 'JsonError: ' + str(ex.value)
    finally:
        netld_svc.call('Security.logoutCurrentUser')
-
-
-def detect_excel_columns(workbook):
-   startRow = 1
-   netColumn = None
-   ws = workbook.active
-   if (ws['A1'].value == 'IP Address'):
-      startRow = 2
-   else:
-      try:
-         ipaddress.ip_address(ws['A1'].value)
-      except ValueError:
-         raise ValueError('IP address column could not be identified.')
-
-   for row in ws.iter_rows(min_row=1, max_row=1):
-      for cell in row:
-         if (cell.value == 'Network'):
-            netColumn = cell.col_idx
-
-   return {'networkColumn': netColumn, 'startRow': startRow}
-
-
-# The provided Excel had 'IP Address' and 'Network' columns, so read those
-# from the sheet and generate an array of 'ipaddress@network' entries.
-def resolve_from_excel(workbook, networkColumn, startRow):
-   ws = workbook.active
-   devices = {}
-
-   network = None
-   for row in range(startRow, ws.max_row):
-      ipAddress = ws.cell(row=row, column=1).value
-      key = ipAddress
-      if networkColumn is not None:
-         network = ws.cell(row=row, column=networkColumn).value
-         key = ipAddress + network
-      devices[key] = {'ipAddress': ipAddress, 'network': network}
-
-   networks = NetLdUtils(netld_svc).get_networks()
-   pageData= {'offset': 0, 'pageSize': 1000}
-   while True:
-      pageData = netld_svc.call('Inventory.search', networks, 'ipAddress', '', pageData, 'ipAddress', False)
-      for invDevice in pageData['devices']:
-         ipAddress = invDevice['ipAddress']
-         network = invDevice['network']
-         adapter = invDevice['adapterId']
-         if adapter != 'Juniper::ScreenOS' and adapter != 'Fortinet::FortiGate':
-            continue
-
-         key = ipAddress + network
-         device = devices.get(key)
-         if device is None:
-            device = devices.get(ipAddress)
-            if device is None:
-               continue
-         if device['network'] is None:
-            device['network'] = network
-         elif device['network'] != network or device.get('resolved'):
-            continue
-         device['adapter'] = adapter
-         device['resolved'] = True
-
-      if pageData['offset'] + pageData['pageSize'] > pageData['total']:
-         break;
-      else:
-         pageData['offset'] += pageData['pageSize']
-
-   for key, device in devices.items():
-      if not 'resolved' in device:
-         del devices[key]
-
-   return devices
 
 def export_to_excel(devices):
    global exportWorksheet
@@ -198,41 +127,51 @@ def export_to_excel(devices):
    exportWorksheet = exportWb.active
    exportWorksheet.append(['IP Address', 'Network', 'MGR', 'DNS1', 'DNS2', 'DNS3'])
 
-   for adapter in ['Juniper::ScreenOS', 'Fortinet::FortiGate']:
+   utils = NetLdUtils(netld_svc)
+
+   executions = []
+   for adapterId in ['Juniper::ScreenOS', 'Fortinet::FortiGate']:
       csv = ''
       for device in devices.values():
-         if device['adapter'] == adapter:
+         if device['adapterId'] == adapterId:
             csv += device['ipAddress'] + '@' + device['network'] + ','
       csv = csv[:-1]
 
       job_data = {
-         'managedNetworks': NetLdUtils(netld_svc).get_networks(),
-         'jobName': 'Export ' + adapter + ' DNS/Manager to Excel',
          'jobType': 'Script Tool Job',
+         'jobName': 'Export ' + adapterId + ' DNS/Manager to Excel',
+         'managedNetworks': utils.get_networks(),
          'description': '',
          'jobParameters': {
             'tool': 'org.ziptie.tools.scripts.commandRunner',
+            'input.commandList': juniper_read_template if adapterId == 'Juniper::ScreenOS' else fortinet_read_template,
             'backupOnCompletion': 'false',
             'ipResolutionScheme': 'ipCsv',
             'ipResolutionData': csv,
-            'input.commandList': juniper_read_template if adapter == 'Juniper::ScreenOS' else fortinet_read_template
          }
       }
 
+      if len(csv) == 0:
+         continue
+
       try:
-         execution = netld_svc.call('Scheduler.runNow', job_data)
-
-         utils = NetLdUtils(netld_svc)
-         utils.wait_job_completion(execution)
-         utils.get_tool_details(execution, print_detail)
-
+         executions.append( netld_svc.call('Scheduler.runNow', job_data) )
       except JsonError as ex:
          print 'JsonError: ' + str(ex.value)
+
+   try:
+      for execution in executions:
+         utils.wait_job_completion(execution)
+
+      for execution in executions:
+         utils.get_tool_details(execution, append_excel_row)
+   except JsonError as ex:
+      print 'JsonError: ' + str(ex.value)
 
    exportWb.save('export.xlsx')
 
 
-def print_detail(ipAddress, network, response):
+def append_excel_row(ipAddress, network, response):
    if 'set dns' in response:
       result = juniper_nsm_regex.search(response)
       mgr = result.group(1) if result else ''
@@ -251,36 +190,48 @@ def print_detail(ipAddress, network, response):
       mgr if mgr else '',
       dns[0] if len(dns) > 0 else '',
       dns[1] if len(dns) > 1 else '',
-      dns[2] if len(dns) > 2 else ''
-      ])
+      dns[2] if len(dns) > 2 else '']
+   )
 
-def export_to_excel(devices):
-   for adapter in ['Juniper::ScreenOS', 'Fortinet::FortiGate']:
-      for row in range(startRow, ws.max_row):
+def exec_from_excel(devices, excelFile):
+   workbook = load_workbook(excelFile)
+   ws = workbook.active
+
+   utils = NetLdUtils(netld_svc)
+
+   for adapterId in ['Juniper::ScreenOS', 'Fortinet::FortiGate']:
+      # Filter devices by adapterId
+      job_devices = {key: device for (key, device) in devices.items() if device['adapterId'] == adapterId}
+
+      # Unique list of networks from the set of job_devices
+      networks = {device['network']: True for (key, device) in job_devices.items()}.keys()
+
+      replacements = []
+      for row in range(2, ws.max_row + 1):
          ipAddress = ws.cell(row=row, column=1).value
+         network   = ws.cell(row=row, column=2).value
+         unused    = ws.cell(row=row, column=3).value
+         dns1      = ws.cell(row=row, column=4).value
+         dns2      = ws.cell(row=row, column=5).value
+         dns3      = ws.cell(row=row, column=6).value
+         print "DNS1 {0}, DNS2 {1}, DNS3 {2}".format(dns1, dns2, dns3)
+         key = ipAddress + network
+         device = devices[key]
+         replacements.append({
+            'ipAddress': ipAddress,
+            'network': network,
+            'DNS-X1': dns1 if dns1 else '',
+            'DNS-X2': dns2 if dns2 else '',
+            'DNS-X3': dns3 if dns3 else '',
+         })
 
-      csv = ''
-      for device in devices.values():
-         if device['adapter'] == adapter:
-            csv += device['ipAddress'] + '@' + device['network'] + ','
-      csv = csv[:-1]
+      job_data = utils.create_smart_change(
+         name     = adapterId + ' apply the DNS/Mgr settings',
+         template = juniper_write_template if adapterId == 'Juniper::ScreenOS' else fortinet_write_template,
+         networks = networks
+      )
 
-      job_data = {
-         'managedNetworks': NetLdUtils(netld_svc).get_networks(),
-         'jobName': 'Apply ' + adapter + ' DNS/Manager settings from Excel',
-         'jobType': 'Script Tool Job',
-         'description': '',
-         'jobParameters': {
-            'tool': 'org.ziptie.tools.scripts.commandRunner',
-            'backupOnCompletion': 'false',
-            'ipResolutionScheme': 'ipCsv',
-            'ipResolutionData': csv,
-            'input.commandList': (
-                  juniper_write_template if adapter == 'Juniper::ScreenOS' else fortinet_write_template
-               ).format(**{'DNS-X1': '', 'DNS-X2': '', 'DNS-X3': ''})
-         }
-      }
-
+      utils.execute_smart_change(job_data, job_devices, 'perdevice', replacements)
    return 0
 
 if __name__ == "__main__":
