@@ -31,7 +31,7 @@ sub usage_and_exit
 
 sub main
 {
-    my @argv = shift;
+    my @argv = @_;
     
     if ($#argv == -1)
     {
@@ -164,4 +164,4 @@ sub export_configs
     return $last_timestamp;
 }
 
-main();
+main(@ARGV);
