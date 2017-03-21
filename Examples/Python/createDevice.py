@@ -7,7 +7,7 @@ from jsonrpc import JsonRpcProxy, JsonError
 
 ### Create a JSON-RPC proxy for the inventory service
 ###
-netld = JSONRPCProxy.from_url("https://localhost/rest?j_username=admin&j_password=password")
+netld = JsonRpcProxy.fromHost("localhost", "admin", "password")
 
 ### use the inventory service to create a device
 error = netld.call('Inventory.createDevice', 'Default', '10.10.10.10', 'Cisco::IOS')

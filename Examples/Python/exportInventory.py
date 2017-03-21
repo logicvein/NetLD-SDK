@@ -55,7 +55,7 @@ def main(argv):
    pageData = {'offset': 0, 'pageSize': 500}
 
    while True:
-      pageData = _netld_svc.call('Inventory.search', 'Default', 'ipAddress', "", pageData, 'ipAddress', False)
+      pageData = _netld_svc.call('Inventory.search', ['Default'], 'ipAddress', "", pageData, 'ipAddress', False)
 
       csvfile = open(outputFile, 'w')
       cw = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
