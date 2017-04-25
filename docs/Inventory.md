@@ -106,7 +106,7 @@ The ``Inventory.search`` method is the fundemental way of retrieving devices fro
 
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
-| network       | String  | Name of the network to search. It is not possible to search across multiple networks in the same operation. |
+| network       | String Array | An array of networks to search. It is now possible to search across multiple networks in the same operation. |
 | scheme        | String  | A single scheme name, or comma-separated list of scheme names (see table below) |
 | query         | String  | The query associated with the scheme(s) specified.  If there are multiple schemes specified, the query parameter should contain new-line (\n) characters between each query string |
 | pageData      | Object        | A ``PageData`` object defining the offset where retrieval should begin and page size |
@@ -120,7 +120,7 @@ The ``scheme`` parameter is a single value or a comma separated list of search s
 | ipAddress          | Searches the inventory based on a specific IP address (e.g. *192.168.0.254*) or a CIDR (*10.0.0.0/24*) |
 | interfaceIpAddress | Searches the inventory based on a specific IP address (e.g. *192.168.0.254*) or a CIDR (*10.0.0.0/24*) where the search includes not only the management IP address but also all of the device interface IP addresses |
 | hostname           | Searches the inventory based on a specified hostname.  The specified hostname may be an exact hostname or a name with leading and/or trailing wildcard character (asterisk) |
-| adapter            | Searches the inventory based on the specified Adapter ID.  See *Appendix A* for a list of Adapter IDs |
+| vendor             | Searches the inventory based on the specified Adapter ID.  See *Appendix A* for a list of Adapter IDs |
 | serial             | Searches the inventory based on a specified serial number.  The specified serial number may be an exact serial number or a string with leading and/or trailing wildcard character (asterisk) |
 | status             | Searches the inventory based on the specified inventory status.  The status string (specified in the *query* parameter) must be one of these values: "N" (<i>NONE</i>), "S" (<i>SUCCESS</i>), "C" (<i>COMPLIANCE VIOLATION</i>), "I" (<i>INVALID CREDENTIALS</i>), "F" (<i>OTHER FAILURE</i>) |
 | lastChange         | Searches the inventory for devices whose configuration has changed during the specified time period.  Valid values are: "24h", "7d", "30d", or a range in this format: *YYYY-MM-DD/YYYY-MM-DD* (eg. *2012-01-01/2012-06-01*) |
@@ -146,7 +146,7 @@ When ``offset`` + ``pageSize`` is greater than or equal to ``total`` there are n
    "jsonrpc": "2.0",
    "method": "Inventory.search",
    "params": {
-              "network": "Default",
+              "network": ["Default"],
               "scheme": "ipAddress",
               "query": "10.0.3.0/24",
               "pageData": {
@@ -227,7 +227,7 @@ When ``offset`` + ``pageSize`` is greater than or equal to ``total`` there are n
    "jsonrpc": "2.0",
    "method": "Inventory.search",
    "params": {
-              "network": "Default",
+              "network": ["Default"],
               "scheme": "ipAddress,custom",
               "query": "10.0.3.0/24\ncustom2=New York*,custom4=core",
               "pageData": {
