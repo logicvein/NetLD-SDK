@@ -157,21 +157,21 @@ Inventory.search
 
 The ``Inventory.search`` method is the fundemental way of retrieving devices from the inventory. Search supports many criteria, and the criteria can be combined to perform powerful searches.
 
-+--------------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Parameter    | Type      | Description                                                                                                                                                                          |
-+==============+===========+======================================================================================================================================================================================+
-| network      | String    | Name of the network to search. It is not possible to search across multiple networks in the same operation.                                                                          |
-+--------------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| scheme       | String    | A single scheme name, or comma-separated list of scheme names (see table below)                                                                                                      |
-+--------------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| query        | String    | The query associated with the scheme(s) specified. If there are multiple schemes specified, the query parameter should contain new-line (\\n) characters between each query string   |
-+--------------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| pageData     | Object    | A ``PageData`` object defining the offset where retrieval should begin and page size                                                                                                 |
-+--------------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sortColumn   | String    | A string indicating the ``Device`` object attribute the results should be sorted by                                                                                                  |
-+--------------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| descending   | Boolean   | A boolean flag indicating whether results should be sorted in descending or ascending order                                                                                          |
-+--------------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Parameter    | Type           | Description                                                                                                                                                                          |
++==============+================+======================================================================================================================================================================================+
+| network      | String Array   | An array of networks to search. It is now possible to search across multiple networks in the same operation.                                                                         |
++--------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| scheme       | String         | A single scheme name, or comma-separated list of scheme names (see table below)                                                                                                      |
++--------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| query        | String         | The query associated with the scheme(s) specified. If there are multiple schemes specified, the query parameter should contain new-line (\\n) characters between each query string   |
++--------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| pageData     | Object         | A ``PageData`` object defining the offset where retrieval should begin and page size                                                                                                 |
++--------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sortColumn   | String         | A string indicating the ``Device`` object attribute the results should be sorted by                                                                                                  |
++--------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| descending   | Boolean        | A boolean flag indicating whether results should be sorted in descending or ascending order                                                                                          |
++--------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 The ``scheme`` parameter is a single value or a comma separated list of search schemes from the following table:
 
@@ -184,7 +184,7 @@ The ``scheme`` parameter is a single value or a comma separated list of search s
 +----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | hostname             | Searches the inventory based on a specified hostname. The specified hostname may be an exact hostname or a name with leading and/or trailing wildcard character (asterisk)                                                                                                                                     |
 +----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| adapter              | Searches the inventory based on the specified Adapter ID. See *Appendix A* for a list of Adapter IDs                                                                                                                                                                                                           |
+| vendor               | Searches the inventory based on the specified Adapter ID. See *Appendix A* for a list of Adapter IDs                                                                                                                                                                                                           |
 +----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | serial               | Searches the inventory based on a specified serial number. The specified serial number may be an exact serial number or a string with leading and/or trailing wildcard character (asterisk)                                                                                                                    |
 +----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -219,7 +219,7 @@ Sample Request JSON:
        "jsonrpc": "2.0",
        "method": "Inventory.search",
        "params": {
-                  "network": "Default",
+                  "network": ["Default"],
                   "scheme": "ipAddress",
                   "query": "10.0.3.0/24",
                   "pageData": {
@@ -302,7 +302,7 @@ Sample Request JSON combining two search schemes:
        "jsonrpc": "2.0",
        "method": "Inventory.search",
        "params": {
-                  "network": "Default",
+                  "network": ["Default"],
                   "scheme": "ipAddress,custom",
                   "query": "10.0.3.0/24\ncustom2=New York*,custom4=core",
                   "pageData": {
