@@ -15,7 +15,7 @@ def main(*args):
 
    # Inventory.search parameters:
    #   network, search scheme, query data, paging data, sort column, descending
-   pageData = netld.call('Inventory.search', 'Default', 'ipAddress', query, pageData, 'ipAddress', False)
+   pageData = netld.call('Inventory.search', ['Default'], 'ipAddress', query, pageData, 'ipAddress', False)
 
    print "Search found " + str(pageData['total']) + " devices.";
    print "----------------------------------------------";
