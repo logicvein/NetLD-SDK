@@ -56,7 +56,7 @@ def main(argv):
    if outputFile == '':
       outputFile = "HardwareReport" + strftime("%y%m%d-%H%M%S", localtime()) + ".csv"
 
-   _netld_svc = JsonRpcProxy("https://{0}/rest".format(netld_host), netld_user, netld_pass)
+   _netld_svc = JsonRpcProxy("https://{0}/jsonrpc".format(netld_host), netld_user, netld_pass)
 
    job = {
       'managedNetwork': netld_network,

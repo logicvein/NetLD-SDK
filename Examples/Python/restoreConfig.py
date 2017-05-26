@@ -59,7 +59,7 @@ def main(argv):
    ### Create a JSON-RPC proxy for the inventory service
    ###
    global _netld_svc
-   _netld_svc = JsonRpcProxy("https://{0}/rest".format(netld_host), netld_user, netld_pass)
+   _netld_svc = JsonRpcProxy("https://{0}/jsonrpc".format(netld_host), netld_user, netld_pass)
 
    pageData = _netld_svc.call('Configuration.retrieveSnapshotChangeLog', 'Default', device, {'offset': 0, 'pageSize': 1000})
    for changeLog in pageData['changeLogs']:

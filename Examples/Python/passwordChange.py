@@ -69,7 +69,7 @@ def run(host, user, password, network, csv_file, job_name, credential_config_nam
     new_enable_password = 'newEnablePassword'
 
     global _netld_svc
-    _netld_svc = JsonRpcProxy("https://{0}/rest".format(host), user, password)
+    _netld_svc = JsonRpcProxy("https://{0}/jsonrpc".format(host), user, password)
 
     job = {
         'managedNetwork': network,

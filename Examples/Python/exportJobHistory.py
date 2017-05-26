@@ -66,7 +66,7 @@ def main(argv):
 
       try:
          global _netld_svc
-         _netld_svc = JsonRpcProxy("https://{0}/rest".format(host), user, password)
+         _netld_svc = JsonRpcProxy("https://{0}/jsonrpc".format(host), user, password)
 
          inilastEndTime = exportJobHistory(outputFile, inilastEndTime)
          config.set(section, LAST_END_TIME, inilastEndTime)

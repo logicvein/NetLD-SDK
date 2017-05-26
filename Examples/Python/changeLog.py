@@ -14,7 +14,7 @@ netld_network = 'Core'
 
 ### Create a JSON-RPC proxy
 ###
-netld = JsonRpcProxy("https://{0}/rest".format(netld_host), netld_user, netld_pass)
+netld = JsonRpcProxy("https://{0}/jsonrpc".format(netld_host), netld_user, netld_pass)
 
 ### use the configuration service to retrieve a page of change logs
 ipAddress = raw_input('Enter an individual IP address or IP/CIDR (eg. 10.0.0.0/24): ')

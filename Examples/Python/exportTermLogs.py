@@ -67,7 +67,7 @@ def main(argv):
 
       try:
          global _netld_svc
-         _netld_svc = JsonRpcProxy("https://{0}/rest".format(host), user, password)
+         _netld_svc = JsonRpcProxy("https://{0}/jsonrpc".format(host), user, password)
 
          lastSessionEnd = exportTermLogs(output, lastSessionEnd)
          config.set(section, LAST_SESSION_END, lastSessionEnd)

@@ -39,7 +39,7 @@ class JsonRpcProxy(object):
 
    @classmethod
    def fromHost(cls, host, username, password):
-      proxy = cls("https://{0}/rest".format(host), username, password)
+      proxy = cls("https://{0}/jsonrpc".format(host), username, password)
       proxy._host = host
 
       return proxy
