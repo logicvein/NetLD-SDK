@@ -6,7 +6,7 @@ from jsonrpc import JsonRpcProxy, JsonError
 def main(*args):
    ### Create a JSON-RPC proxy for the inventory service
    ###
-   netld = JsonRpcProxy("https://{0}/rest".format('localhost'), 'admin', 'password')
+   netld = JsonRpcProxy.fromHost("192.168.20.203", "admin", "password")
 
    ### use the inventory service to query for devices
    query = raw_input('Enter an individual IP address or IP/CIDR (eg. 10.0.0.0/24): ')
@@ -21,7 +21,11 @@ def main(*args):
    print "----------------------------------------------";
 
    for device in pageData['devices']:
-      print device['ipAddress'] + "   " + device['hostname']
+      hostname = device['hostname']
+      if (hostname is None):
+         hostname = 'Not available'
+
+      print device['ipAddress'] + "   " + hostname
 
    ### Logout using the security service to be nice to the server
    ###
