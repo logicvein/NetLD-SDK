@@ -28,8 +28,8 @@ Bridge
 Methods
 ~~~~~~~
 
-Bridges.defineBridge
-^^^^^^^^^^^^^^^^^^^^
+Bridge.defineBridge
+^^^^^^^^^^^^^^^^^^^
 
 Create a new network bridge within the system.
 
@@ -53,8 +53,8 @@ Parameters
 Return: void
 ''''''''''''
 
-Bridges.getBridge
-^^^^^^^^^^^^^^^^^
+Bridge.getBridge
+^^^^^^^^^^^^^^^^
 
 Get a bridge by name.
 
@@ -70,8 +70,8 @@ Parameters
 Return: A ``Bridge`` object
 '''''''''''''''''''''''''''
 
-Bridges.getAllBridges
-^^^^^^^^^^^^^^^^^^^^^
+Bridge.getAllBridges
+^^^^^^^^^^^^^^^^^^^^
 
 Get all of the defined bridges.
 
@@ -83,8 +83,8 @@ None
 Return: An array of ``Bridge`` objects
 ''''''''''''''''''''''''''''''''''''''
 
-Bridges.deleteBridge
-^^^^^^^^^^^^^^^^^^^^
+Bridge.deleteBridge
+^^^^^^^^^^^^^^^^^^^
 
 Delete the bridge definition with the specified name
 
@@ -100,8 +100,8 @@ Parameters
 Return: void
 ''''''''''''
 
-Bridges.updateBridge
-^^^^^^^^^^^^^^^^^^^^
+Bridge.updateBridge
+^^^^^^^^^^^^^^^^^^^
 
 Get a bridge by name.
 
