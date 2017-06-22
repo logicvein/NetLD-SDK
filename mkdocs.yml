@@ -2,11 +2,13 @@ site_name: netLD SDK
 pages:
 - API Overview: Welcome.md
 - Inventory: Inventory.md
+- Networks: Networks.md
 - Configuration: Configuration.md
 - Credentials: Credentials.md
 - Scheduler: Scheduler.md
 - Plugins: Plugins.md
 - Compliance: Compliance.md
 - Telemetry: Telemetry.md
+- Bridge: Bridges.md
 - Appendix A: Appendix_A.md
 theme: readthedocs
