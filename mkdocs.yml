@@ -7,5 +7,6 @@ pages:
 - Scheduler: Scheduler.md
 - Plugins: Plugins.md
 - Compliance: Compliance.md
+- Telemetry: Telemetry.md
 - Appendix A: Appendix_A.md
 theme: readthedocs
