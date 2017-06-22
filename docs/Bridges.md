@@ -6,6 +6,7 @@ The bridges API provides the functionality of managing the smart bridge settings
 ### Objects
 #### Bridge
 | Attribute | Type | Description |
+| --------- | ---- | ----------- |
 | bridgeId | Integer | The database ID of the bridge |
 | name | String | The SmartBridge name |
 | hostOrIp | String | The host or IP address of the smart bridge |
