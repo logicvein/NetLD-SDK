@@ -9,13 +9,21 @@ Objects
 Bridge
 ^^^^^^
 
-| \| Attribute \| Type \| Description \|
-| \| bridgeId \| Integer \| The database ID of the bridge \|
-| \| name \| String \| The SmartBridge name \|
-| \| hostOrIp \| String \| The host or IP address of the smart bridge \|
-| \| port \| Integer \| The port to connect to the smart bridge on. \|
-| \| inbound \| Boolean \| True if the smart bridge initiates the connection to the core server, false if the core server initiates the connection to the smart bridge. \|
-| \| token \| String \| The authentication token used for connecting to the smart bridge. \|
++-------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| Attribute   | Type      | Description                                                                                                                                    |
++=============+===========+================================================================================================================================================+
+| bridgeId    | Integer   | The database ID of the bridge                                                                                                                  |
++-------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| name        | String    | The SmartBridge name                                                                                                                           |
++-------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| hostOrIp    | String    | The host or IP address of the smart bridge                                                                                                     |
++-------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| port        | Integer   | The port to connect to the smart bridge on.                                                                                                    |
++-------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| inbound     | Boolean   | True if the smart bridge initiates the connection to the core server, false if the core server initiates the connection to the smart bridge.   |
++-------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| token       | String    | The authentication token used for connecting to the smart bridge.                                                                              |
++-------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Methods
 ~~~~~~~
