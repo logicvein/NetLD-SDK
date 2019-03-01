@@ -11,6 +11,6 @@
    Plugins <Plugins.rst>
    Compliance <Compliance.rst>
    Telemetry <Telemetry.rst>
-   Bridge <Bridges.rst>
+   Bridges <Bridges.rst>
    Appendix A <Appendix_A.rst>
 
