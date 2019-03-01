@@ -4,7 +4,7 @@ The bridges API provides the functionality of managing the smart bridge settings
 
 
 ### Objects
-#### Bridge
+#### Bridges
 | Attribute | Type | Description |
 | --------- | ---- | ----------- |
 | bridgeId | Integer | The database ID of the bridge |
@@ -15,7 +15,7 @@ The bridges API provides the functionality of managing the smart bridge settings
 | token | String | The authentication token used for connecting to the smart bridge. |
 
 ### Methods 
-#### Bridge.defineBridge
+#### Bridges.defineBridge
 Create a new network bridge within the system.
 
 ##### Parameters
@@ -29,7 +29,7 @@ Create a new network bridge within the system.
 
 ##### Return: void
 
-#### Bridge.getBridge
+#### Bridges.getBridge
 Get a bridge by name.
 ##### Parameters
 | Parameter      | Type          | Description      |
@@ -38,7 +38,7 @@ Get a bridge by name.
 
 ##### Return: A `Bridge` object
 
-#### Bridge.getAllBridges
+#### Bridges.getAllBridges
 Get all of the defined bridges.
 
 ##### Parameters
@@ -46,7 +46,7 @@ None
 
 ##### Return: An array of `Bridge` objects
 
-#### Bridge.deleteBridge
+#### Bridges.deleteBridge
 Delete the bridge definition with the specified name
 ##### Parameters
 | Parameter      | Type          | Description      |
@@ -55,7 +55,7 @@ Delete the bridge definition with the specified name
 
 ##### Return: void
 
-#### Bridge.updateBridge
+#### Bridges.updateBridge
 Get a bridge by name.
 ##### Parameters
 | Parameter      | Type          | Description      |
