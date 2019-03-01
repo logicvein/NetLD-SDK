@@ -9,6 +9,6 @@ pages:
 - Plugins: Plugins.md
 - Compliance: Compliance.md
 - Telemetry: Telemetry.md
-- Bridge: Bridges.md
+- Bridges: Bridges.md
 - Appendix A: Appendix_A.md
 theme: readthedocs
