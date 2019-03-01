@@ -6,8 +6,8 @@ The bridges API provides the functionality of managing the smart bridge settings
 Objects
 ~~~~~~~
 
-Bridge
-^^^^^^
+Bridges
+^^^^^^^
 
 +-------------+-----------+------------------------------------------------------------------------------------------------------------------------------------------------+
 | Attribute   | Type      | Description                                                                                                                                    |
@@ -28,8 +28,8 @@ Bridge
 Methods
 ~~~~~~~
 
-Bridge.defineBridge
-^^^^^^^^^^^^^^^^^^^
+Bridges.defineBridge
+^^^^^^^^^^^^^^^^^^^^
 
 Create a new network bridge within the system.
 
@@ -53,8 +53,8 @@ Parameters
 Return: void
 ''''''''''''
 
-Bridge.getBridge
-^^^^^^^^^^^^^^^^
+Bridges.getBridge
+^^^^^^^^^^^^^^^^^
 
 Get a bridge by name.
 
@@ -70,8 +70,8 @@ Parameters
 Return: A ``Bridge`` object
 '''''''''''''''''''''''''''
 
-Bridge.getAllBridges
-^^^^^^^^^^^^^^^^^^^^
+Bridges.getAllBridges
+^^^^^^^^^^^^^^^^^^^^^
 
 Get all of the defined bridges.
 
@@ -83,8 +83,8 @@ None
 Return: An array of ``Bridge`` objects
 ''''''''''''''''''''''''''''''''''''''
 
-Bridge.deleteBridge
-^^^^^^^^^^^^^^^^^^^
+Bridges.deleteBridge
+^^^^^^^^^^^^^^^^^^^^
 
 Delete the bridge definition with the specified name
 
@@ -100,8 +100,8 @@ Parameters
 Return: void
 ''''''''''''
 
-Bridge.updateBridge
-^^^^^^^^^^^^^^^^^^^
+Bridges.updateBridge
+^^^^^^^^^^^^^^^^^^^^
 
 Get a bridge by name.
 
