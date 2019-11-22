@@ -152,7 +152,7 @@ When ``offset`` + ``pageSize`` is greater than or equal to ``total`` there are n
               "pageData": {
                            "offset": 0,
                            "pageSize": 100
-                          }
+                          },
               "sortColumn": "ipAddress",
               "descending": false
              },
