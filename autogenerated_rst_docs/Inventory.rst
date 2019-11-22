@@ -225,7 +225,7 @@ Sample Request JSON:
                   "pageData": {
                                "offset": 0,
                                "pageSize": 100
-                              }
+                              },
                   "sortColumn": "ipAddress",
                   "descending": false
                  },
