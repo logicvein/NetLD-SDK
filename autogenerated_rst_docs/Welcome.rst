@@ -10,14 +10,13 @@ In addition to the JSON-RPC 2.0 API, some import/export functions are accessed o
 
 The access URL for Net LineDancer is:
 
-https://\ ``server``/rest?j\_username=``username``\ &j\_password=\ ``password``
+https://\ ``server``/rest?j_username=\ ``username``\ &j_password=\ ``password``
 
 Where ``server``, ``username``, and ``password`` are values correct for your installation.
 
 The API documentation shows examples of "raw" JSON requests, but it is recommended that you use JSON-RPC libraries appropriate for your language of choice, which will handle the JSON generation for you.
 
-| :sup:`1` http://www.jsonrpc.org/specification 
-| :sup:`2` `http://en.wikipedia.org/wiki/JSON-RPC <http://en.wikipedia.org/wiki/JSON-RPC#Implementations>`__ 
+:sup:`1` http://www.jsonrpc.org/specification :sup:`2` `http://en.wikipedia.org/wiki/JSON-RPC <http://en.wikipedia.org/wiki/JSON-RPC#Implementations>`__
 
 .. raw:: html
 
