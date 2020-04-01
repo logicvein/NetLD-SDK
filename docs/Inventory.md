@@ -286,6 +286,6 @@ The ``Inventory.getDeviceHardware`` returns a list of hardware of the requested 
 | Parameter     | Type          | Description      |
 | ------------- | ------------- | --------------   |
 | ipAddress     | String  | IPv4 or IPv6 address |
-| network      | String   | Name of an existing network, e.g. "Default" |
+| network       | String  | Name of the device’s network |
 
 #### Return: list of ``Hardware`` Objects
