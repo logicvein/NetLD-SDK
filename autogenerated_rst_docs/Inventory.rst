@@ -351,3 +351,29 @@ pageSize  Integer The maximum number of ``Device`` objects to retrieve in a sing
 total     Integer This value is set and retrieved from the server when an ``offset`` of zero (0) is passed. This indicates the total number of ``Device`` objects available. This value is ignored when ``PageData`` is used as a parameter.
 devices   Array   An array of ``Device`` objects. This value is ignored when ``PageData`` is used as a parameter.
 ========= ======= ==========================================================================================================================================================================================================================
+
+.. raw:: html
+
+   <p class="vspacer"></p>
+
+.. _inventorygetdevicehardware:
+
+Inventory.getDeviceHardware
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``Inventory.getDeviceHardware`` returns a list of hardware of the requested device.
+
+.. _parameters-3:
+
+Parameters
+^^^^^^^^^^
+
+========= ====== ===========================================
+Parameter Type   Description
+========= ====== ===========================================
+ipAddress String IPv4 or IPv6 address
+network   String Name of an existing network, e.g. "Default"
+========= ====== ===========================================
+
+Return: list of ``Hardware`` Objects
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
