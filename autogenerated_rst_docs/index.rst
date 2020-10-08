@@ -11,6 +11,7 @@
    Plugins <Plugins.rst>
    Compliance <Compliance.rst>
    Telemetry <Telemetry.rst>
+   Terminal Proxy <TerminalProxy.rst>
    Bridges <Bridges.rst>
    Appendix A <Appendix_A.rst>
 
