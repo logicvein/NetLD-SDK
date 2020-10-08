@@ -82,7 +82,7 @@ following the login procedure.
 
 <p class="vspacer"></p>
 
-### Terminal Proxy Log Search and Retrieval
+## Terminal Proxy Log Search and Retrieval
 
 The ``TermLogs`` service provides search capability over the collection of terminal proxy logs
 stored in the system.
@@ -115,11 +115,25 @@ The ``query`` parameter defines the query criteria to be used and is in associat
 For example, if you wish to search based on scheme ``user`` and ``hostname`` you would specify a ``scheme`` parameter of "user,hostname", and
 a ``query`` parameter of "william\ntokyo*".  Note the newline character between the ``user`` query value and the ``hostname`` query value.
 
-#### Return: An array of ``TermLogSearchResult`` objects
+##### Return: An array of ``TermLogSearchResult`` objects
 
-### Terminal Proxy Objects
+Python example:
+```python
+from jsonrpc import JsonRpcProxy, JsonError
 
-#### TermLogSearchResult
+# netldHost should be defined as a variable containing the IP address/hostname of the NetLD server
+netld_svc = JsonRpcProxy.fromHost(netldHost, "admin", "password")
+
+results = netld_svc.call('TermLogs.search', 'user,session', "william\n24h", 'sessionStart', False)
+
+for record in results:
+   print '{0}, {1}, {2}-{3}, {4}'
+      .format(record['logId'], record['username'], record['sessionStart'], record['sessionEnd'], record['ipAddress'])
+```
+
+#### Terminal Proxy Objects
+
+##### TermLogSearchResult
 
 | Field           | Type          | Description      |
 | --------------- | ------------- | --------------   |
@@ -135,7 +149,7 @@ a ``query`` parameter of "william\ntokyo*".  Note the newline character between 
 
 <p class="vspacer"></p>
 
-### Individual Terminal Log Retrieval
+#### Individual Terminal Log Retrieval
 
 Once a ``TermLogSearchResult`` record of a terminal proxy log has been obtained via search, the content of a
 desired terminal log can be retrieved via a simple HTTP ``GET`` request.
@@ -150,13 +164,14 @@ Required HTTP URL parameters:
 | ipAddress       | The ``ipAddress`` value from a ``TermLogSearchResult`` record |
 | managedNetwork  | The ``managedNetwork`` value from a ``TermLogSearchResult`` record |
 
-A Python example, in continuation of the example above (some URL parameters omitted for brevity):
+A Python example, in continuation of the example above:
 ```python
 import urllib2
 ...
 
 opener = urllib2.build_opener(netld_svc._cookie_processor, netld_svc._https_handler)
-url = 'https://{0}/servlet/termlog?op=content&stripXml=true&sessionStart={1}...'.format(netld_svc._host, record['sessionStart'], ...)
+url = 'https://{0}/servlet/termlog?op=content&stripXml=true&sessionStart={1}&ipAddress={2}&managedNetwork={3}'
+   .format(netld_svc._host, record['sessionStart'], record['ipAddress'], record['managedNetwork'])
 resp = opener.open(url)
 respdata = str(resp.read())
 ```
