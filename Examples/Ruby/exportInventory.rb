@@ -3,15 +3,17 @@
 require 'jimson'
 require 'csv'
 
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
 if ARGV.empty?
   outputFile = "InventoryReport" + DateTime.parse(Time.now.to_s).strftime("%y%m%d-%H%M%S") + ".csv"
 else
   outputFile = ARGV[0]
 end
 
-netld = Jimson::Client.new("https://localhost/rest?j_username=admin&j_password=password")
+netld = Jimson::Client.new("https://10.0.40.50/rest?j_username=admin&j_password=password")
 
-pageData = { 'offset' => 0, 'pageSize' => 500 }
+pageData = { 'offset' => 0, 'pageSize' => 100, 'total' => 500 }
 
 until pageData['offset'] + pageData['pageSize'] >= pageData['total'] do   
   pageData = netld['Inventory.search', 'Default', 'ipAddress', "", pageData, 'ipAddress', false]

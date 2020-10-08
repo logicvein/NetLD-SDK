@@ -2,9 +2,11 @@
 
 require 'jimson'
 
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
 ### Create a JSON-RPC proxy for the inventory service
 ###
-netld = Jimson::Client.new("https://localhost/rest?j_username=admin&j_password=password")
+netld = Jimson::Client.new("https://10.0.40.50/rest?j_username=admin&j_password=password")
 
 ### Search the inventory
 print "Enter an individual IP address or IP/CIDR (eg. 10.0.0.0/24): ";

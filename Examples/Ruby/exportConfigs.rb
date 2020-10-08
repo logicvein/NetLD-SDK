@@ -7,8 +7,10 @@ require 'optparse'
 require 'inifile'
 require 'fileutils'
 
-HOST='host'
-USERNAME='username'
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
+HOST='10.0.40.50'
+USERNAME='admin'
 PASSWORD='password'
 LAST_TIMESTAMP='lastConfigTimestamp'
 
