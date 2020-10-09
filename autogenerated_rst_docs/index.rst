@@ -5,6 +5,7 @@
    API Overview <Welcome.rst>
    Inventory <Inventory.rst>
    Networks <Networks.rst>
+   Jumphosts <Jumphost.rst>
    Configuration <Configuration.rst>
    Credentials <Credentials.rst>
    Scheduler <Scheduler.rst>

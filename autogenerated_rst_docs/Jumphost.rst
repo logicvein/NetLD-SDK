@@ -1,0 +1,105 @@
+Jumphosts
+---------
+
+The ``Jumphost`` service allows configuration of jumphost parameters on specific networks.
+
+Methods
+~~~~~~~
+
+.. _jumphostgetjumphostfornetwork:
+
+Jumphost.getJumphostForNetwork
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Get the jumphost configuration for a specified network, if it exists.
+
+Parameters
+''''''''''
+
+=========== ====== ================
+Parameter   Type   Description
+=========== ====== ================
+networkName String The network name
+=========== ====== ================
+
+Return: a hashmap (key/value pairs) of jumphost settings, or null if none exist for the specified network
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Python example:
+
+.. code:: python
+
+   from jsonrpc import JsonRpcProxy, JsonError
+
+   # netldHost should be defined as a variable containing the IP address/hostname of the NetLD server
+   netld_svc = JsonRpcProxy.fromHost(netldHost, "admin", "password")
+
+   network = "Default"
+
+   properties = netld_svc.call('Jumphost.getJumphostForNetwork', network)
+
+   for key in properties.keys():
+      print key + ": " + properties[key]
+
+   netld_svc.call('Security.logoutCurrentUser')
+
+*Note: The ``jsonrpc`` functions are defined in ``jsonrpc.py`` in the SDK ``Examples/Python`` folder. Simply include that file in the same directory as your script.*
+
+.. _jumphostsavejumphost:
+
+Jumphost.saveJumphost
+^^^^^^^^^^^^^^^^^^^^^
+
+Create/update jumphost setting for a specified network.
+
+.. _parameters-1:
+
+Parameters
+''''''''''
+
+=========== ====== ==================================================
+Parameter   Type   Description
+=========== ====== ==================================================
+networkName String The network name
+properties  Map    A JSON map of key/value pairs, as documented below
+=========== ====== ==================================================
+
+Return: void
+''''''''''''
+
+The following are the required *keys* that must be present in the ``properties`` parameter:
+
+======== ====================== ======================================================
+Field    Value                  Description
+======== ====================== ======================================================
+enabled  ``"true"``/``"false"`` whether the jumphost is enabled or not
+host     IP address/hostname    The IP address/hostname of the jumphost
+username String                 the username required to login to the jumphost
+password String                 the password required to login to the jumphost
+adapter  String                 must be either ``"Cisco::IOS"`` or ``"Linux::Redhat"``
+======== ====================== ======================================================
+
+Python example:
+
+.. code:: python
+
+   from jsonrpc import JsonRpcProxy, JsonError
+
+   # netldHost should be defined as a variable containing the IP address/hostname of the NetLD server
+   netld_svc = JsonRpcProxy.fromHost(netldHost, "admin", "password")
+
+   network = "Default"
+
+   properties = {
+      "enabled": "true",
+      "host": "10.0.0.1",
+      "username": "jsmith",
+      "password": "mysecret",
+      "adapter": "Linux::Redhat"
+   }
+
+   netld_svc.call('Jumphost.saveJumphost', network, properties)
+
+   netld_svc.call('Security.logoutCurrentUser')
+
+*Note: The ``jsonrpc`` functions are defined in ``jsonrpc.py`` in the SDK ``Examples/Python`` folder. Simply include that file in the same directory as your script.*
