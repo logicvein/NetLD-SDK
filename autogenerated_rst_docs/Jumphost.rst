@@ -43,14 +43,14 @@ Python example:
 
    netld_svc.call('Security.logoutCurrentUser')
 
-*Note: The ``jsonrpc`` functions are defined in ``jsonrpc.py`` in the SDK ``Examples/Python`` folder. Simply include that file in the same directory as your script.*
+*Note: The* ``jsonrpc`` *functions are defined in* ``jsonrpc.py`` *in the SDK* ``Examples/Python`` *folder. Simply include that file in the same directory as your script.*
 
 .. _jumphostsavejumphost:
 
 Jumphost.saveJumphost
 ^^^^^^^^^^^^^^^^^^^^^
 
-Create/update jumphost setting for a specified network. Ideally, when *updating* jumphost settings for a specific network it is recommended to first retrieve the properties via ``Jumphost.getJumphostForNetwork``, modify them, and then use this method to save them. This ensures that any *internal use* properties that exists are not overwritten.
+Create/update jumphost settings for a specified network. Ideally, when *updating* jumphost settings for a specific network it is recommended to first retrieve the properties via ``Jumphost.getJumphostForNetwork``, modify them, and then use this method to save them. This ensures that any *internal use* properties that exists are not overwritten.
 
 .. _parameters-1:
 
@@ -102,4 +102,4 @@ Python example:
 
    netld_svc.call('Security.logoutCurrentUser')
 
-*Note: The ``jsonrpc`` functions are defined in ``jsonrpc.py`` in the SDK ``Examples/Python`` folder. Simply include that file in the same directory as your script.*
+*Note: The* ``jsonrpc`` *functions are defined in* ``jsonrpc.py`` *in the SDK* ``Examples/Python`` *folder. Simply include that file in the same directory as your script.*
