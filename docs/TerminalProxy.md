@@ -55,6 +55,8 @@ print "Token: " + token
 Note: The authentication token expires 30 seconds after creation, and therefore must be used
 within that time.
 
+*Note: The* ``jsonrpc`` *functions are defined in* ``jsonrpc.py`` *in the SDK* ``Examples/Python`` *folder. Simply include that file in the same directory as your script.*
+
 <p class="vspacer"></p>
 
 #### Complete Flow
@@ -130,6 +132,8 @@ for record in results:
    print '{0}, {1}, {2}-{3}, {4}'
       .format(record['logId'], record['username'], record['sessionStart'], record['sessionEnd'], record['ipAddress'])
 ```
+
+*Note: The* ``jsonrpc`` *functions are defined in* ``jsonrpc.py`` *in the SDK* ``Examples/Python`` *folder. Simply include that file in the same directory as your script.*
 
 #### Terminal Proxy Objects
 
