@@ -3,6 +3,7 @@ pages:
 - API Overview: Welcome.md
 - Inventory: Inventory.md
 - Networks: Networks.md
+- Jumphosts: Jumphost.md
 - Configuration: Configuration.md
 - Credentials: Credentials.md
 - Scheduler: Scheduler.md
