@@ -1,4 +1,4 @@
-site_name: netLD SDK
+site_name: netLD/ThirdEye SDK
 pages:
 - API Overview: Welcome.md
 - Inventory: Inventory.md
