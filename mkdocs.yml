@@ -12,5 +12,6 @@ pages:
 - Telemetry: Telemetry.md
 - Terminal Proxy: TerminalProxy.md
 - Bridges: Bridges.md
+- ZeroTouch: ZeroTouch.md
 - Appendix A: Appendix_A.md
 theme: readthedocs
