@@ -1,7 +1,7 @@
 JSON-RPC
 ^^^^^^^^
 
-This documentation provides technical details of the Net LineDancer integration API. The Net LineDancer server exposes a JSON-RPC\ :sup:`1` 2.0 API over HTTPS for language neutral integration from external systems. There are many JSON-RPC 2.0 client libraries available for all major languages\ :sup:`2`. See the *Examples* directory for sample scripts in
+This documentation provides technical details of the NetLD/ThirdEye integration API. The NetLD/ThirdEye server exposes a JSON-RPC\ :sup:`1` 2.0 API over HTTPS for language neutral integration from external systems. There are many JSON-RPC 2.0 client libraries available for all major languages\ :sup:`2`. See the *Examples* directory for sample scripts in
 various languages.
 
 The use of JSON-RPC means that the underlying data sent to or received from the server is in JSON (JavaScript Object Notation) format. All strings are encoded using UTF-8 encoding, no other encodings are supported.
