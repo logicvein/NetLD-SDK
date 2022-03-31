@@ -96,6 +96,53 @@ An example ```PageData``` object is expressed in JSON format seen here:
 
 <hr>
 
+#### Important Note
+Maintaining session is important for this API to work correctly. The first invocation will assign to you a session ID by a cookie called ``JSESSIONID``. Use this cookie to maintain session.
+
+After ``commitEdits`` or ``discardEdits`` is invoked, you may discard this cookie.
+
+<hr>
+
+#### Credentials.commitEdits
+Commits edits made in this session.
+
+##### Parameters: none
+
+##### Return: nothing
+
+##### Sample Request JSON:
+
+```javascript
+{
+   "jsonrpc": "2.0",
+   "method": "Credentials.commitEdits",
+   "params": {},
+   "id": 1
+}
+```
+
+<hr>
+
+#### Credentials.discardEdits
+Discards edits made in this session.
+
+##### Parameters: none
+
+##### Return: nothing
+
+##### Sample Request JSON:
+
+```javascript
+{
+   "jsonrpc": "2.0",
+   "method": "Credentials.discardEdits",
+   "params": {},
+   "id": 1
+}
+```
+
+<hr>
+
 #### Credentials.getCredentialConfig
 Retrieves a single credential configuration ``CredentialConfig`` object.
 
@@ -334,7 +381,7 @@ should be made before a final call to ``commitEdits``.
                      "priority": 0
                   }
               ]
-             }
+             },
    "id": 1
 }
 ```
