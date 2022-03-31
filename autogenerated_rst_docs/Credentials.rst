@@ -106,6 +106,81 @@ credentialSets Array   An array of ``CredentialSet`` objects
 
    <hr>
 
+Important Note
+^^^^^^^^^^^^^^
+
+Maintaining session is important for this API to work correctly. The first invocation will assign to you a session ID by a cookie called ``JSESSIONID``. Use this cookie to maintain session.
+
+After ``commitEdits`` or ``discardEdits`` is invoked, you may discard this cookie.
+
+.. raw:: html
+
+   <hr>
+
+.. _credentialscommitedits:
+
+Credentials.commitEdits
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Commits edits made in this session.
+
+Parameters: none
+''''''''''''''''
+
+Return: nothing
+'''''''''''''''
+
+Sample Request JSON:
+''''''''''''''''''''
+
+.. code:: javascript
+
+   {
+      "jsonrpc": "2.0",
+      "method": "Credentials.commitEdits",
+      "params": {},
+      "id": 1
+   }
+
+.. raw:: html
+
+   <hr>
+
+.. _credentialsdiscardedits:
+
+Credentials.discardEdits
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Discards edits made in this session.
+
+.. _parameters-none-1:
+
+Parameters: none
+''''''''''''''''
+
+.. _return-nothing-1:
+
+Return: nothing
+'''''''''''''''
+
+.. _sample-request-json-1:
+
+Sample Request JSON:
+''''''''''''''''''''
+
+.. code:: javascript
+
+   {
+      "jsonrpc": "2.0",
+      "method": "Credentials.discardEdits",
+      "params": {},
+      "id": 1
+   }
+
+.. raw:: html
+
+   <hr>
+
 .. _credentialsgetcredentialconfig:
 
 Credentials.getCredentialConfig
@@ -125,6 +200,8 @@ configName String Name of a dynamic or static credential configuration
 
 Return: a ``CredentialConfig`` object
 '''''''''''''''''''''''''''''''''''''
+
+.. _sample-request-json-2:
 
 Sample Request JSON:
 ''''''''''''''''''''
@@ -189,7 +266,7 @@ credentialConfig Object A ``CredentialConfig`` object
 Return: the updated ``CredentialConfig`` object
 '''''''''''''''''''''''''''''''''''''''''''''''
 
-.. _sample-request-json-1:
+.. _sample-request-json-3:
 
 Sample Request JSON:
 ''''''''''''''''''''
@@ -238,10 +315,12 @@ network    String Name of an existing network, e.g. "Default"
 configName String Name of a dynamic or static credential configuration
 ========== ====== ====================================================
 
+.. _return-nothing-2:
+
 Return: nothing
 '''''''''''''''
 
-.. _sample-request-json-2:
+.. _sample-request-json-4:
 
 Sample Request JSON:
 ''''''''''''''''''''
@@ -291,7 +370,7 @@ Return: A ``PageData`` object containing a collection of ``CredentialSet`` objec
 The ``PageData`` object that is returned will contain a property called ``credentialSets``, which is an array of ``CredentialSet`` objects. If the initial ``offset`` that is passed is zero (0), the returned ``PageData`` object will also contain a populated ``total`` attribute, telling you how many total results are available. By incrementing the ``offset``
 by ``pageSize`` you can retrieve subsequent pages of results. When ``offset`` + ``pageSize`` is greater than or equal to ``total`` there are no more results available.
 
-.. _sample-request-json-3:
+.. _sample-request-json-5:
 
 Sample Request JSON:
 ''''''''''''''''''''
@@ -386,12 +465,12 @@ configName     String Name of a dynamic or static credential configuration
 credentialSets Array  An array of ``CredentialSet`` objects
 ============== ====== ====================================================
 
-.. _return-nothing-1:
+.. _return-nothing-3:
 
 Return: nothing
 '''''''''''''''
 
-.. _sample-request-json-4:
+.. _sample-request-json-6:
 
 Sample Request JSON:
 ''''''''''''''''''''
@@ -418,7 +497,7 @@ Sample Request JSON:
                         "priority": 0
                      }
                  ]
-                }
+                },
       "id": 1
    }
 
@@ -446,12 +525,12 @@ configName     String Name of a dynamic or static credential configuration
 credentialSets Array  An array of ``CredentialSet`` objects
 ============== ====== ====================================================
 
-.. _return-nothing-2:
+.. _return-nothing-4:
 
 Return: nothing
 '''''''''''''''
 
-.. _sample-request-json-5:
+.. _sample-request-json-7:
 
 Sample Request JSON:
 ''''''''''''''''''''
