@@ -26,19 +26,19 @@ attributes JSON Object A JSON "map" that contains required attributes documented
 
 The ``attributes`` parameter is a JSON map containing two key/value pairs:
 
-============== ===================================
+============== ============================================================================================
 Key            Value
-============== ===================================
-targetDevice   the IP address of the target device
+============== ============================================================================================
+targetDevice   the IP address of the target device and its network name in the format ipAddress@networkName
 targetProtocol either "SSH" or "Telnet"
-============== ===================================
+============== ============================================================================================
 
 Example of the ``attributes`` map as expressed in JSON:
 
 .. code:: json
 
    {
-      "targetDevice": "10.0.0.1",
+      "targetDevice": "10.0.0.1@Default",
       "targetProtocol": "SSH"
    }
 
@@ -57,7 +57,7 @@ Python example:
    netld_svc = JsonRpcProxy.fromHost(netldHost, "admin", "password")
 
    attributes = {
-      "targetDevice": "10.0.0.1",
+      "targetDevice": "10.0.0.1@Default",
       "targetProtocol": "SSH"
    }
 
