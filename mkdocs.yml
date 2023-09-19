@@ -13,5 +13,6 @@ pages:
 - Terminal Proxy: TerminalProxy.md
 - Bridges: Bridges.md
 - ZeroTouch: ZeroTouch.md
+- Incidents: Incidents.md
 - Appendix A: Appendix_A.md
 theme: readthedocs
