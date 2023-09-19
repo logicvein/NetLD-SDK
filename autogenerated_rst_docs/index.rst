@@ -15,5 +15,6 @@
    Terminal Proxy <TerminalProxy.rst>
    Bridges <Bridges.rst>
    ZeroTouch <ZeroTouch.rst>
+   Incidents <Incidents.rst>
    Appendix A <Appendix_A.rst>
 
