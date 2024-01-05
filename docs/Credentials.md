@@ -8,7 +8,7 @@ Methods in this API return various "credentials objects" (e.g. CredentialConfig)
 
 A *dynamic* ```CredentialConfig``` object is expressed in JSON format seen here:
 
-```javascript
+```json
 {  
    "priority": 1,
    "addressSet": {  
@@ -24,7 +24,7 @@ A *dynamic* ```CredentialConfig``` object is expressed in JSON format seen here:
 
 Here is an example of a *static* ``CredentialConfig`` object.  Note the empty ``addresses`` list and ``flat`` value of ``true``:
 
-```javascript
+```json
 {  
    "priority": 0,
    "addressSet": {  
@@ -47,7 +47,7 @@ Here is an example of a *static* ``CredentialConfig`` object.  Note the empty ``
 
 An example ``CredentialSet`` object is expressed in JSON format seen here:
 
-```javascript
+```json
 {
    "name": "Lab Credentials #1",
    "username": "lvi",
@@ -77,7 +77,7 @@ An example ``CredentialSet`` object is expressed in JSON format seen here:
 
 An example ```PageData``` object is expressed in JSON format seen here:
 
-```javascript
+```json
 {
     "offset": 0,
     "pageSize": 10,
@@ -112,7 +112,7 @@ Commits edits made in this session.
 
 ##### Sample Request JSON:
 
-```javascript
+```json
 {
    "jsonrpc": "2.0",
    "method": "Credentials.commitEdits",
@@ -132,7 +132,7 @@ Discards edits made in this session.
 
 ##### Sample Request JSON:
 
-```javascript
+```json
 {
    "jsonrpc": "2.0",
    "method": "Credentials.discardEdits",
@@ -156,21 +156,21 @@ Retrieves a single credential configuration ``CredentialConfig`` object.
 
 ##### Sample Request JSON:
 
-```javascript
+```json
 {
    "jsonrpc": "2.0",
    "method": "Credentials.getCredentialConfig",
    "params": {
-              "network": "Default",
-              "configName": "LogicVein"
-             },
+       "network": "Default",
+       "configName": "LogicVein"
+   },
    "id": 1
 }
 ```
 
 ##### Sample Response JSON:
 
-```javascript
+```json
 {  
    "jsonrpc": "2.0",
    "id": 1,
@@ -205,23 +205,22 @@ Save a single credential configuration.  This method can be used to save a new c
 
 ##### Sample Request JSON:
 
-```javascript
+```json
 {
    "jsonrpc": "2.0",
    "method": "Credentials.saveCredentialConfig",
    "params": {
-              "network": "Default",
-              "oldConfigName": "LogicVein",
-              "credentialConfig": {
-                                   "priority": 1,
-                                   "addressSet": {  
-                                                  "addresses": [ "0.0.0.0/0" ]
-                                                 },
-                                   "name": "LogicVein2",
-                                   "managedNetwork": "Default",
-                                   "flat": false
-                                  }
-             },
+       "network": "Default",
+       "oldConfigName": "LogicVein",
+       "credentialConfig": {
+           "priority": 1,
+           "addressSet": {  
+               "addresses": [ "0.0.0.0/0" ]
+            },
+           "name": "LogicVein2",
+           "managedNetwork": "Default",
+           "flat": false
+      },
    "id": 1
 }
 ```
@@ -243,14 +242,14 @@ should be made before a final call to ``commitEdits``.
 
 ##### Sample Request JSON:
 
-```javascript
+```json
 {
    "jsonrpc": "2.0",
    "method": "Credentials.deleteCredentialConfig",
    "params": {
-              "network": "Default",
-              "configName": "LogicVein"
-             },
+       "network": "Default", 
+       "configName": "LogicVein"
+    },
    "id": 1
 }
 ```
@@ -279,30 +278,30 @@ retrieve subsequent pages of results.  When ```offset``` + ```pageSize``` is gre
 
 ##### Sample Request JSON:
 
-```javascript
+```json
 {
    "jsonrpc": "2.0",
    "method": "Credentials.getCredentialSets",
    "params": {
-              "pageData": {
-                           "offset": 0,
-                           "pageSize": 10,
-                           "total": 0,
-                           "credentialSets": [ ]
-                          },
-              "network": "Default",
-              "configName": "LogicVein",
-              "ipOrCidr": null,
-              "sortColumn": "ipAddress",
-              "descending": false
-             },
+      "pageData": {
+          "offset": 0,
+          "pageSize": 10,
+          "total": 0,
+          "credentialSets": [ ]
+       },
+      "network": "Default",
+      "configName": "LogicVein",
+      "ipOrCidr": null,
+      "sortColumn": "ipAddress",
+      "descending": false
+     },
    "id": 1
 }
 ```
 
 ##### Sample Response JSON:
 
-```javascript
+```json
 {
    "jsonrpc": "2.0",
    "id": 1,
@@ -360,28 +359,28 @@ should be made before a final call to ``commitEdits``.
 
 ##### Sample Request JSON:
 
-```javascript
+```json
 {
    "jsonrpc": "2.0",
    "method": "Credentials.saveCredentialSets",
    "params": {
-              "network": "Default",
-              "configName": "LogicVein",
-              "credentialSets": [
-                  {
-                     "name": "Lab Credentials #1",
-                     "username": "newUsername",
-                     "password": "lvi",
-                     "enableUsername": "newEnable",
-                     "enablePassword": "lvi",
-                     "roCommunityString": "public",
-                     "snmpUsername": "",
-                     "snmpAuthPassword": "",
-                     "snmpPrivPassword": "",
-                     "priority": 0
-                  }
-              ]
-             },
+       "network": "Default",
+       "configName": "LogicVein",
+       "credentialSets": [
+           {
+              "name": "Lab Credentials #1",
+              "username": "newUsername",
+              "password": "lvi",
+              "enableUsername": "newEnable",
+              "enablePassword": "lvi",
+              "roCommunityString": "public",
+              "snmpUsername": "",
+              "snmpAuthPassword": "",
+              "snmpPrivPassword": "",
+              "priority": 0
+           }
+       ]
+    },
    "id": 1
 }
 ```
@@ -403,40 +402,40 @@ Delete a collection of credential sets.  Note: after call this method you must c
 
 ##### Sample Request JSON:
 
-```javascript
+```json
 {
    "jsonrpc": "2.0",
    "method": "Credentials.deleteCredentialSets",
    "params": {
-              "network": "Default",
-              "configName": "LogicVein",
-              "credentialSets": [
-                  {
-                     "name": "Old Credentials #1",
-                     "username": "lvi",
-                     "password": "lvi",
-                     "enableUsername": "newEnable",
-                     "enablePassword": "lvi",
-                     "roCommunityString": "public",
-                     "snmpUsername": "",
-                     "snmpAuthPassword": "",
-                     "snmpPrivPassword": "",
-                     "priority": 0
-                  },
-                  {
-                     "name": "Old Credentials #2",
-                     "username": "test",
-                     "password": "test",
-                     "enableUsername": "test",
-                     "enablePassword": "test",
-                     "roCommunityString": "public",
-                     "snmpUsername": "",
-                     "snmpAuthPassword": "",
-                     "snmpPrivPassword": "",
-                     "priority": 1
-                  }
-              ]
-             }
+      "network": "Default",
+      "configName": "LogicVein",
+      "credentialSets": [
+           {
+              "name": "Old Credentials #1",
+              "username": "lvi",
+              "password": "lvi",
+              "enableUsername": "newEnable",
+              "enablePassword": "lvi",
+              "roCommunityString": "public",
+              "snmpUsername": "",
+              "snmpAuthPassword": "",
+              "snmpPrivPassword": "",
+              "priority": 0
+           },
+           {
+              "name": "Old Credentials #2",
+              "username": "test",
+              "password": "test",
+              "enableUsername": "test",
+              "enablePassword": "test",
+              "roCommunityString": "public",
+              "snmpUsername": "",
+              "snmpAuthPassword": "",
+              "snmpPrivPassword": "",
+              "priority": 1
+           }
+       ]
+    }
    "id": 1
 }
 ```
