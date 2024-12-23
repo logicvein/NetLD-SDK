@@ -176,8 +176,8 @@ Retrieves a single credential configuration ``CredentialConfig`` object.
    "id": 1,
    "result": {  
       "priority": 2,
-      "addressSet": {  
-         "addresses": [  
+      "addressSet": {
+         "addresses": [
             "0.0.0.0/0"
          ]
       },
@@ -214,7 +214,7 @@ Save a single credential configuration.  This method can be used to save a new c
        "oldConfigName": "LogicVein",
        "credentialConfig": {
            "priority": 1,
-           "addressSet": {  
+           "addressSet": {
                "addresses": [ "0.0.0.0/0" ]
             },
            "name": "LogicVein2",
@@ -247,7 +247,7 @@ should be made before a final call to ``commitEdits``.
    "jsonrpc": "2.0",
    "method": "Credentials.deleteCredentialConfig",
    "params": {
-       "network": "Default", 
+       "network": "Default",
        "configName": "LogicVein"
     },
    "id": 1

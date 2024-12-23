@@ -11,7 +11,7 @@ Methods in this API return various "credentials objects" (e.g. CredentialConfig)
 
 A *dynamic* ``CredentialConfig`` object is expressed in JSON format seen here:
 
-.. code:: javascript
+.. code:: json
 
    {  
       "priority": 1,
@@ -27,7 +27,7 @@ A *dynamic* ``CredentialConfig`` object is expressed in JSON format seen here:
 
 Here is an example of a *static* ``CredentialConfig`` object. Note the empty ``addresses`` list and ``flat`` value of ``true``:
 
-.. code:: javascript
+.. code:: json
 
    {  
       "priority": 0,
@@ -52,7 +52,7 @@ flat           Boolean      ``true if`` the ``CredentialConfig`` represents a "s
 
 An example ``CredentialSet`` object is expressed in JSON format seen here:
 
-.. code:: javascript
+.. code:: json
 
    {
       "name": "Lab Credentials #1",
@@ -84,7 +84,7 @@ priority          Integer A lower priority number indicates higher placement in 
 
 An example ``PageData`` object is expressed in JSON format seen here:
 
-.. code:: javascript
+.. code:: json
 
    {
        "offset": 0,
@@ -133,7 +133,7 @@ Return: nothing
 Sample Request JSON:
 ''''''''''''''''''''
 
-.. code:: javascript
+.. code:: json
 
    {
       "jsonrpc": "2.0",
@@ -168,7 +168,7 @@ Return: nothing
 Sample Request JSON:
 ''''''''''''''''''''
 
-.. code:: javascript
+.. code:: json
 
    {
       "jsonrpc": "2.0",
@@ -206,30 +206,30 @@ Return: a ``CredentialConfig`` object
 Sample Request JSON:
 ''''''''''''''''''''
 
-.. code:: javascript
+.. code:: json
 
    {
       "jsonrpc": "2.0",
       "method": "Credentials.getCredentialConfig",
       "params": {
-                 "network": "Default",
-                 "configName": "LogicVein"
-                },
+          "network": "Default",
+          "configName": "LogicVein"
+      },
       "id": 1
    }
 
 Sample Response JSON:
 '''''''''''''''''''''
 
-.. code:: javascript
+.. code:: json
 
    {  
       "jsonrpc": "2.0",
       "id": 1,
       "result": {  
          "priority": 2,
-         "addressSet": {  
-            "addresses": [  
+         "addressSet": {
+            "addresses": [
                "0.0.0.0/0"
             ]
          },
@@ -271,24 +271,23 @@ Return: the updated ``CredentialConfig`` object
 Sample Request JSON:
 ''''''''''''''''''''
 
-.. code:: javascript
+.. code:: json
 
    {
       "jsonrpc": "2.0",
       "method": "Credentials.saveCredentialConfig",
       "params": {
-                 "network": "Default",
-                 "oldConfigName": "LogicVein",
-                 "credentialConfig": {
-                                      "priority": 1,
-                                      "addressSet": {  
-                                                     "addresses": [ "0.0.0.0/0" ]
-                                                    },
-                                      "name": "LogicVein2",
-                                      "managedNetwork": "Default",
-                                      "flat": false
-                                     }
-                },
+          "network": "Default",
+          "oldConfigName": "LogicVein",
+          "credentialConfig": {
+              "priority": 1,
+              "addressSet": {
+                  "addresses": [ "0.0.0.0/0" ]
+               },
+              "name": "LogicVein2",
+              "managedNetwork": "Default",
+              "flat": false
+         },
       "id": 1
    }
 
@@ -325,15 +324,15 @@ Return: nothing
 Sample Request JSON:
 ''''''''''''''''''''
 
-.. code:: javascript
+.. code:: json
 
    {
       "jsonrpc": "2.0",
       "method": "Credentials.deleteCredentialConfig",
       "params": {
-                 "network": "Default",
-                 "configName": "LogicVein"
-                },
+          "network": "Default",
+          "configName": "LogicVein"
+       },
       "id": 1
    }
 
@@ -375,24 +374,24 @@ by ``pageSize`` you can retrieve subsequent pages of results. When ``offset`` + 
 Sample Request JSON:
 ''''''''''''''''''''
 
-.. code:: javascript
+.. code:: json
 
    {
       "jsonrpc": "2.0",
       "method": "Credentials.getCredentialSets",
       "params": {
-                 "pageData": {
-                              "offset": 0,
-                              "pageSize": 10,
-                              "total": 0,
-                              "credentialSets": [ ]
-                             },
-                 "network": "Default",
-                 "configName": "LogicVein",
-                 "ipOrCidr": null,
-                 "sortColumn": "ipAddress",
-                 "descending": false
-                },
+         "pageData": {
+             "offset": 0,
+             "pageSize": 10,
+             "total": 0,
+             "credentialSets": [ ]
+          },
+         "network": "Default",
+         "configName": "LogicVein",
+         "ipOrCidr": null,
+         "sortColumn": "ipAddress",
+         "descending": false
+        },
       "id": 1
    }
 
@@ -401,7 +400,7 @@ Sample Request JSON:
 Sample Response JSON:
 '''''''''''''''''''''
 
-.. code:: javascript
+.. code:: json
 
    {
       "jsonrpc": "2.0",
@@ -475,29 +474,29 @@ Return: nothing
 Sample Request JSON:
 ''''''''''''''''''''
 
-.. code:: javascript
+.. code:: json
 
    {
       "jsonrpc": "2.0",
       "method": "Credentials.saveCredentialSets",
       "params": {
-                 "network": "Default",
-                 "configName": "LogicVein",
-                 "credentialSets": [
-                     {
-                        "name": "Lab Credentials #1",
-                        "username": "newUsername",
-                        "password": "lvi",
-                        "enableUsername": "newEnable",
-                        "enablePassword": "lvi",
-                        "roCommunityString": "public",
-                        "snmpUsername": "",
-                        "snmpAuthPassword": "",
-                        "snmpPrivPassword": "",
-                        "priority": 0
-                     }
-                 ]
-                },
+          "network": "Default",
+          "configName": "LogicVein",
+          "credentialSets": [
+              {
+                 "name": "Lab Credentials #1",
+                 "username": "newUsername",
+                 "password": "lvi",
+                 "enableUsername": "newEnable",
+                 "enablePassword": "lvi",
+                 "roCommunityString": "public",
+                 "snmpUsername": "",
+                 "snmpAuthPassword": "",
+                 "snmpPrivPassword": "",
+                 "priority": 0
+              }
+          ]
+       },
       "id": 1
    }
 
@@ -535,40 +534,40 @@ Return: nothing
 Sample Request JSON:
 ''''''''''''''''''''
 
-.. code:: javascript
+.. code:: json
 
    {
       "jsonrpc": "2.0",
       "method": "Credentials.deleteCredentialSets",
       "params": {
-                 "network": "Default",
-                 "configName": "LogicVein",
-                 "credentialSets": [
-                     {
-                        "name": "Old Credentials #1",
-                        "username": "lvi",
-                        "password": "lvi",
-                        "enableUsername": "newEnable",
-                        "enablePassword": "lvi",
-                        "roCommunityString": "public",
-                        "snmpUsername": "",
-                        "snmpAuthPassword": "",
-                        "snmpPrivPassword": "",
-                        "priority": 0
-                     },
-                     {
-                        "name": "Old Credentials #2",
-                        "username": "test",
-                        "password": "test",
-                        "enableUsername": "test",
-                        "enablePassword": "test",
-                        "roCommunityString": "public",
-                        "snmpUsername": "",
-                        "snmpAuthPassword": "",
-                        "snmpPrivPassword": "",
-                        "priority": 1
-                     }
-                 ]
-                }
+         "network": "Default",
+         "configName": "LogicVein",
+         "credentialSets": [
+              {
+                 "name": "Old Credentials #1",
+                 "username": "lvi",
+                 "password": "lvi",
+                 "enableUsername": "newEnable",
+                 "enablePassword": "lvi",
+                 "roCommunityString": "public",
+                 "snmpUsername": "",
+                 "snmpAuthPassword": "",
+                 "snmpPrivPassword": "",
+                 "priority": 0
+              },
+              {
+                 "name": "Old Credentials #2",
+                 "username": "test",
+                 "password": "test",
+                 "enableUsername": "test",
+                 "enablePassword": "test",
+                 "roCommunityString": "public",
+                 "snmpUsername": "",
+                 "snmpAuthPassword": "",
+                 "snmpPrivPassword": "",
+                 "priority": 1
+              }
+          ]
+       }
       "id": 1
    }
