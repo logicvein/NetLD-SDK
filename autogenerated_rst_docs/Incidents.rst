@@ -9,12 +9,12 @@ See the `Incident Objects <#incident-objects>`__ section for a description of th
 
    <p></p>
 
-.. _incidentsearch:
+.. _incidentssearchincidents:
 
-Incident.search
-~~~~~~~~~~~~~~~
+Incidents.searchIncidents
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``Incidents.search`` method is the fundemental way of retrieving incidents from the server. Search supports many criteria, and the criteria can be combined to perform powerful searches.
+The ``Incidents.searchIncidents`` method is the fundemental way of retrieving incidents from the server. Search supports many criteria, and the criteria can be combined to perform powerful searches.
 
 ========== ======= ===========================================================================================
 Parameter  Type    Description
@@ -54,7 +54,7 @@ Sample Request JSON:
 
    {
       "jsonrpc": "2.0",
-      "method": "Incidents.search",
+      "method": "Incidents.searchIncidents",
       "params": {
            "pageData": {
                "offset": 0,
