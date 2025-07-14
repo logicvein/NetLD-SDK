@@ -18,7 +18,8 @@ A *dynamic* ```CredentialConfig``` object is expressed in JSON format seen here:
    },
    "name": "LVI",
    "managedNetwork": "Default",
-   "flat": false
+   "flat": false,
+   "type": "DYNAMIC"
 }
 ```
 
@@ -32,7 +33,8 @@ Here is an example of a *static* ``CredentialConfig`` object.  Note the empty ``
    },
    "name": "Static",
    "managedNetwork": "Default",
-   "flat": true
+   "flat": true,
+   "type": "STATIC"
 }
 ```
 
@@ -41,11 +43,69 @@ Here is an example of a *static* ``CredentialConfig`` object.  Note the empty ``
 | priority       | Integer       | A lower priority number indicates higher placement in the list of credential configurations.  These credentials will be tried before others with a higher number. |
 | addressSet     | Object        | A container for "addresses".  Consider this a "fixed" element. |
 | addresses      | String Array  | An array of IP Addresses, IP Wildcards, and IP/CIDR expressions the a "dynamic" ``CredentialConfig`` applies to.  *This should be empty for static credential configurations.*
-| name           | String  | The name of the ``CredentialConfig`` as seen in the user interface. |
-| managedNetwork | String  | The name of the network that this configuration applies to. If there are no user-created networks this value should be ``Default``. |
-| flat           | Boolean       | ``true if`` the ``CredentialConfig`` represents a "static" configuration, ``false`` if it is dynamic. |
+| name           | String  		 | The name of the ``CredentialConfig`` as seen in the user interface. |
+| managedNetwork | String  		 | The name of the network that this configuration applies to. If there are no user-created networks this value should be ``Default``. |
+| flat*          | Boolean       | ``true`` if the ``CredentialConfig`` represents a "static" configuration, ``false`` if it is dynamic. |
+| type  		 | String 		 | Specifies the credential configuration type: STATIC, DYNAMIC and CLOUD. |
 
-An example ``CredentialSet`` object is expressed in JSON format seen here:
+<hr>
+
+**_NOTE:_** **: The `flat: Boolean` attribute is deprecated and will soon be removed**
+
+The `type` field is a new attribute introduced to the `CredentialConfig` object to specify the type of credential configuration.
+
+An example of the new ``CredentialSet`` `type` attribute is expressed in JSON format here:
+
+
+```json
+ {
+    "priority": 0,
+    "addressSet": {
+      "addresses": []
+    },
+    "name": "Static",
+    "managedNetwork": "Default",
+    "flat": true,
+    "type": "STATIC"
+  }
+  ```
+
+```json
+  {
+    "priority": 1,
+    "addressSet": {
+      "addresses": ["0.0.0.0/0"]
+    },
+    "name": "LVI",
+    "managedNetwork": "Default",
+    "flat": false,
+    "type": "DYNAMIC"
+  }
+  ```
+
+```json
+  {
+    "priority": 2,
+    "addressSet": {
+      "addresses": ["192.168.1.0/24"]
+    },
+    "name": "CloudConfig",
+    "managedNetwork": "Default",
+    "flat": false,
+    "type": "CLOUD"
+  }
+  ```
+
+This field will replace the deprecated `flat` attribute, which previously indicated whether a configuration was static (`true`) or dynamic (`false`).
+
+During the transition period, both `flat` and `type` fields will be included in the `getCredentialConfig`, `getAllCredentialConfigs`, and `saveCredentialConfig` APIs. The type field provides a clearer and more extensible way to define credential configurations, accommodating the new "`CLOUD`" credential type alongside existing static and dynamic types.
+
+
+
+
+<hr>
+
+An example ``CredentialSet`` object is expressed in JSON format here:
 
 ```json
 {
@@ -75,7 +135,7 @@ An example ``CredentialSet`` object is expressed in JSON format seen here:
 | snmpAuthPriv      | String  | The SNMPv3 private password |
 | priority          | Integer       | A lower priority number indicates higher placement in the list of credential sets. These credentials will be tried before others with a higher number. *Inapplicable to static credentials* |
 
-An example ```PageData``` object is expressed in JSON format seen here:
+An example ```PageData``` object is expressed in JSON format here:
 
 ```json
 {
@@ -229,8 +289,7 @@ Save a single credential configuration.  This method can be used to save a new c
 
 #### Credentials.deleteCredentialConfig
 
-Delete a single credential configuration.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are
-should be made before a final call to ``commitEdits``.
+Delete a single credential configuration.  Note: after call this method you must call the ``commitEdits`` or ``discardEdits`` method.  If you are making many changes, it is recommended that all changes are should be made before a final call to ``commitEdits``.
 
 ##### Parameters
 | Parameter     | Type          | Description      |
