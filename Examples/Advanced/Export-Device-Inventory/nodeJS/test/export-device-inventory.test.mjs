@@ -48,3 +48,33 @@ test("quotes CSV metacharacters and parses network lists", () => {
   assert.deepEqual(parseNetworks("Default, Lab"), ["Default", "Lab"]);
   assert.throws(() => parseNetworks(" , "), /at least one/);
 });
+
+test("JSON output is an array with native values and explicit nulls", async () => {
+  const client = {
+    async searchInventory() {
+      return { pageSize: 1, total: 1, devices: [
+        { network: "Default", ipAddress: "192.0.2.1", complianceState: 2 },
+      ] };
+    },
+  };
+  const directory = await mkdtemp(path.join(os.tmpdir(), "netld-inventory-"));
+  try {
+    const outputFile = path.join(directory, "inventory.json");
+    const count = await exportInventory(client, {
+      networks: ["Default"], scheme: "ipAddress", query: "", pageSize: 1, outputFile, format: "json",
+    });
+    const devices = JSON.parse(await readFile(outputFile, "utf8"));
+    assert.equal(count, 1);
+    assert.ok(Array.isArray(devices));
+    assert.equal(devices[0].complianceState, 2);
+    assert.equal(devices[0].hostname, null);
+    assert.deepEqual(Object.keys(devices[0]), [
+      "network", "ipAddress", "hostname", "adapterId", "deviceType",
+      "hardwareVendor", "model", "serialNumber", "softwareVendor", "osVersion",
+      "backupStatus", "complianceState", "lastBackup", "lastTelemetry", "memoSummary",
+      "custom1", "custom2", "custom3", "custom4", "custom5",
+    ]);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});

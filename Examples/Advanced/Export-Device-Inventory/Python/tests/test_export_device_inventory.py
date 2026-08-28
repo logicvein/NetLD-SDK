@@ -1,4 +1,5 @@
 import csv
+import json
 import sys
 import tempfile
 import unittest
@@ -49,6 +50,27 @@ class ExportInventoryTests(unittest.TestCase):
     def test_rejects_empty_network_list(self):
         with self.assertRaises(ExampleError):
             parse_networks(" , ")
+
+    def test_json_output_is_an_array_with_native_values(self):
+        client = FakeClient()
+        client.search_inventory = lambda networks, scheme, query, offset, page_size: {
+            "pageSize": 1, "total": 1,
+            "devices": [{"network": "Default", "ipAddress": "192.0.2.1", "complianceState": 2}],
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "inventory.json"
+            count = export_inventory(client, ["Default"], "ipAddress", "", 1, output, "json")
+            devices = json.loads(output.read_text(encoding="utf-8"))
+        self.assertEqual(count, 1)
+        self.assertIsInstance(devices, list)
+        self.assertEqual(devices[0]["complianceState"], 2)
+        self.assertIsNone(devices[0]["hostname"])
+        self.assertEqual(set(devices[0]), set([
+            "network", "ipAddress", "hostname", "adapterId", "deviceType",
+            "hardwareVendor", "model", "serialNumber", "softwareVendor", "osVersion",
+            "backupStatus", "complianceState", "lastBackup", "lastTelemetry", "memoSummary",
+            "custom1", "custom2", "custom3", "custom4", "custom5",
+        ]))
 
 
 if __name__ == "__main__":

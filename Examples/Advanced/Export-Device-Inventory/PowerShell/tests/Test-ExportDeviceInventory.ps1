@@ -13,7 +13,7 @@ $fetchPage = {
         return [pscustomobject]@{
             offset = 0; pageSize = 2; total = 5
             devices = @(
-                [pscustomobject]@{ network = 'Default'; ipAddress = '192.0.2.1'; hostname = 'core,one' },
+                [pscustomobject]@{ network = 'Default'; ipAddress = '192.0.2.1'; hostname = 'core,one'; complianceState = 2 },
                 [pscustomobject]@{ network = 'Lab'; ipAddress = '192.0.2.2'; memoSummary = "first`nsecond" }
             )
         }
@@ -46,6 +46,12 @@ try {
     Assert-Equal 5 $rows.Count 'CSV row count failed.'
     Assert-Equal 'core,one' $rows[0].hostname 'CSV comma quoting failed.'
     Assert-Equal "first`nsecond" $rows[1].memoSummary 'CSV newline quoting failed.'
+    $jsonOutput = Join-Path $directory 'inventory.json'
+    Export-NetLDInventoryJson -Devices $devices -OutputPath $jsonOutput
+    $jsonRows = @(Get-Content -LiteralPath $jsonOutput -Raw | ConvertFrom-Json)
+    Assert-Equal 5 $jsonRows.Count 'JSON row count failed.'
+    Assert-Equal 2 $jsonRows[0].complianceState 'JSON numeric type failed.'
+    if ($null -ne $jsonRows[2].hostname) { throw 'JSON missing value was not null.' }
 }
 finally {
     Remove-Item -LiteralPath $directory -Recurse -Force -ErrorAction SilentlyContinue

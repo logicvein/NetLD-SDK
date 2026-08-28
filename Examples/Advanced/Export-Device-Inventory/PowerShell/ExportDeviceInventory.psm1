@@ -136,8 +136,29 @@ function Export-NetLDInventoryCsv {
     }
 }
 
+function Export-NetLDInventoryJson {
+    param(
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Devices,
+        [Parameter(Mandatory)][string]$OutputPath
+    )
+    $directory = Split-Path -Parent $OutputPath
+    if (-not $directory) { $directory = '.' }
+    [void](New-Item -ItemType Directory -Path $directory -Force)
+    $temporaryPath = Join-Path $directory ".$([IO.Path]::GetFileName($OutputPath)).$([guid]::NewGuid()).tmp"
+    try {
+        $records = @($Devices | Select-Object -Property $script:CsvFields)
+        $json = ConvertTo-Json -InputObject $records -Depth 20
+        Set-Content -LiteralPath $temporaryPath -Value $json -Encoding utf8
+        Move-Item -LiteralPath $temporaryPath -Destination $OutputPath -Force
+    }
+    catch {
+        Remove-Item -LiteralPath $temporaryPath -Force -ErrorAction SilentlyContinue
+        throw
+    }
+}
+
 function Invoke-ExportDeviceInventory {
-    param([Parameter(Mandatory)][string]$EnvPath)
+    param([Parameter(Mandatory)][string]$EnvPath, [string]$Format)
     Import-DotEnv $EnvPath
     $baseUrl = Get-RequiredEnvironmentValue 'NETLD_BASE_URL'
     $apiKey = Get-RequiredEnvironmentValue 'NETLD_API_KEY'
@@ -147,9 +168,13 @@ function Invoke-ExportDeviceInventory {
     $scheme = if ($env:NETLD_SEARCH_SCHEME) { $env:NETLD_SEARCH_SCHEME } else { 'ipAddress' }
     $query = if ($null -ne $env:NETLD_SEARCH_QUERY) { $env:NETLD_SEARCH_QUERY } else { '' }
     if (-not $query.EndsWith("`n")) { $query = "$query`n" }
-    $outputPath = if ($env:NETLD_OUTPUT_FILE) { $env:NETLD_OUTPUT_FILE } else { 'inventory.csv' }
+    $outputFormat = $(if ($Format) { $Format } elseif ($env:NETLD_OUTPUT_FORMAT) { $env:NETLD_OUTPUT_FORMAT } else { 'csv' }).ToLowerInvariant()
+    if ($outputFormat -notin @('csv', 'json')) {
+        throw [AdvancedExampleError]::new('NETLD_OUTPUT_FORMAT must be either csv or json.')
+    }
+    $outputPath = if ($env:NETLD_OUTPUT_FILE) { $env:NETLD_OUTPUT_FILE } else { "inventory.$outputFormat" }
     if (-not [IO.Path]::IsPathRooted($outputPath)) {
-        $outputPath = Join-Path (Split-Path -Parent $EnvPath) $outputPath
+        $outputPath = Join-Path $PSScriptRoot $outputPath
     }
     $timeout = if ($env:REQUEST_TIMEOUT_SECONDS) { [int]$env:REQUEST_TIMEOUT_SECONDS } else { 30 }
     $connection = @{
@@ -168,11 +193,16 @@ function Invoke-ExportDeviceInventory {
         }
     }
     $devices = @(Get-NetLDInventoryDevices -FetchPage $fetchPage -PageSize $pageSize)
-    Export-NetLDInventoryCsv -Devices $devices -OutputPath $outputPath
+    if ($outputFormat -eq 'json') {
+        Export-NetLDInventoryJson -Devices $devices -OutputPath $outputPath
+    }
+    else {
+        Export-NetLDInventoryCsv -Devices $devices -OutputPath $outputPath
+    }
     Write-Host "Wrote $($devices.Count) devices to $outputPath"
 }
 
 Export-ModuleMember -Function @(
-    'ConvertTo-ManagedNetworkList', 'Export-NetLDInventoryCsv',
+    'ConvertTo-ManagedNetworkList', 'Export-NetLDInventoryCsv', 'Export-NetLDInventoryJson',
     'Get-NetLDInventoryDevices', 'Invoke-ExportDeviceInventory'
 )

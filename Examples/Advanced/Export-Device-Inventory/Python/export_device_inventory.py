@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Export the complete netLD/ThirdEye device inventory to CSV."""
+"""Export the complete netLD/ThirdEye device inventory to CSV or JSON."""
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import os
@@ -49,12 +50,16 @@ class Config:
     api_key: str
     networks: list[str]
     output_path: Path
+    output_format: str
     page_size: int
     scheme: str
     query: str
 
     @classmethod
-    def from_env(cls, env_path: Path) -> "Config":
+    def from_env(
+        cls, env_path: Path, output_base: Path | None = None,
+        format_override: str | None = None,
+    ) -> "Config":
         if load_dotenv is None:
             raise ExampleError("Install the Python dependencies from requirements.txt.")
         load_dotenv(env_path, override=True)
@@ -70,13 +75,17 @@ class Config:
             raise ExampleError("NETLD_PAGE_SIZE must be a positive integer.") from exc
         if page_size <= 0:
             raise ExampleError("NETLD_PAGE_SIZE must be a positive integer.")
-        output_path = Path(os.getenv("NETLD_OUTPUT_FILE", "inventory.csv"))
+        output_format = (format_override or os.getenv("NETLD_OUTPUT_FORMAT", "csv")).strip().lower()
+        if output_format not in {"csv", "json"}:
+            raise ExampleError("NETLD_OUTPUT_FORMAT must be either csv or json.")
+        output_name = os.getenv("NETLD_OUTPUT_FILE", "").strip() or f"inventory.{output_format}"
+        output_path = Path(output_name)
         if not output_path.is_absolute():
-            output_path = env_path.parent / output_path
+            output_path = (output_base or env_path.parent) / output_path
         return cls(
             base_url=base_url.rstrip("/"), api_key=api_key,
             networks=parse_networks(os.getenv("NETLD_NETWORKS", "Default")),
-            output_path=output_path, page_size=page_size,
+            output_path=output_path, output_format=output_format, page_size=page_size,
             scheme=os.getenv("NETLD_SEARCH_SCHEME", "ipAddress").strip() or "ipAddress",
             query=os.getenv("NETLD_SEARCH_QUERY", ""),
         )
@@ -165,8 +174,11 @@ def inventory_pages(
 
 def export_inventory(
     client: Any, networks: list[str], scheme: str, query: str,
-    page_size: int, output_path: Path,
+    page_size: int, output_path: Path, output_format: str = "csv",
 ) -> int:
+    output_format = output_format.lower()
+    if output_format not in {"csv", "json"}:
+        raise ExampleError("Output format must be either csv or json.")
     output_path.parent.mkdir(parents=True, exist_ok=True)
     temporary_path: Path | None = None
     count = 0
@@ -176,12 +188,27 @@ def export_inventory(
             suffix=".tmp", dir=output_path.parent, delete=False,
         ) as output:
             temporary_path = Path(output.name)
-            writer = csv.DictWriter(output, fieldnames=CSV_FIELDS, extrasaction="ignore")
-            writer.writeheader()
+            writer = None
+            if output_format == "csv":
+                writer = csv.DictWriter(output, fieldnames=CSV_FIELDS, extrasaction="ignore")
+                writer.writeheader()
+            else:
+                output.write("[\n")
+            first_json_record = True
             for devices in inventory_pages(client, networks, scheme, query, page_size):
                 for device in devices:
-                    writer.writerow({field: device.get(field) for field in CSV_FIELDS})
+                    record = {field: device.get(field) for field in CSV_FIELDS}
+                    if writer is not None:
+                        writer.writerow(record)
+                    else:
+                        if not first_json_record:
+                            output.write(",\n")
+                        rendered = json.dumps(record, indent=2, ensure_ascii=False)
+                        output.write("\n".join(f"  {line}" for line in rendered.splitlines()))
+                        first_json_record = False
                     count += 1
+            if output_format == "json":
+                output.write("\n]\n")
         os.replace(temporary_path, output_path)
         return count
     except Exception:
@@ -191,13 +218,17 @@ def export_inventory(
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--env", type=Path, default=Path(__file__).with_name(".env"))
+    parser.add_argument("--format", choices=("csv", "json"))
+    args = parser.parse_args()
     try:
-        config = Config.from_env(Path(__file__).with_name(".env"))
+        config = Config.from_env(args.env, Path(__file__).resolve().parent, args.format)
         client = NetLDClient(config.base_url, config.api_key)
         client.login()
         count = export_inventory(
             client, config.networks, config.scheme, config.query,
-            config.page_size, config.output_path,
+            config.page_size, config.output_path, config.output_format,
         )
         print(f"Wrote {count} devices to {config.output_path}")
         return 0

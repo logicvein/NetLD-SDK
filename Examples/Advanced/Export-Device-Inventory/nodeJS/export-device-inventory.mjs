@@ -47,18 +47,21 @@ async function loadDotEnv(file) {
   }
 }
 
-async function loadConfig(directory) {
-  await loadDotEnv(path.join(directory, ".env"));
+async function loadConfig(directory, envFile, formatOverride) {
+  await loadDotEnv(envFile);
   for (const name of ["NETLD_BASE_URL", "NETLD_API_KEY"]) {
     if (!process.env[name]?.trim()) throw new ExampleError(`Set ${name} in .env before running this example.`);
   }
   const pageSize = Number.parseInt(process.env.NETLD_PAGE_SIZE || "500", 10);
   if (!Number.isInteger(pageSize) || pageSize <= 0) throw new ExampleError("NETLD_PAGE_SIZE must be a positive integer.");
+  const format = (formatOverride || process.env.NETLD_OUTPUT_FORMAT || "csv").trim().toLowerCase();
+  if (!["csv", "json"].includes(format)) throw new ExampleError("NETLD_OUTPUT_FORMAT must be either csv or json.");
   return {
     baseUrl: process.env.NETLD_BASE_URL.replace(/\/$/, ""),
     apiKey: process.env.NETLD_API_KEY,
     networks: parseNetworks(process.env.NETLD_NETWORKS || "Default"),
-    outputFile: path.resolve(directory, process.env.NETLD_OUTPUT_FILE || "inventory.csv"),
+    outputFile: path.resolve(directory, process.env.NETLD_OUTPUT_FILE || `inventory.${format}`),
+    format,
     pageSize,
     scheme: process.env.NETLD_SEARCH_SCHEME?.trim() || "ipAddress",
     query: process.env.NETLD_SEARCH_QUERY || "",
@@ -125,14 +128,17 @@ function splitSetCookie(header) {
 }
 
 export async function exportInventory(client, options) {
-  const { networks, scheme, query, pageSize, outputFile } = options;
+  const { networks, scheme, query, pageSize, outputFile, format = "csv" } = options;
+  if (!["csv", "json"].includes(format)) throw new ExampleError("Output format must be either csv or json.");
   await mkdir(path.dirname(outputFile), { recursive: true });
   const temporaryFile = path.join(path.dirname(outputFile), `.${path.basename(outputFile)}.${randomUUID()}.tmp`);
   let handle;
   let count = 0;
   try {
     handle = await open(temporaryFile, "wx");
-    await handle.write(csvRow(CSV_FIELDS));
+    if (format === "csv") await handle.write(csvRow(CSV_FIELDS));
+    else await handle.write("[\n");
+    let firstJsonRecord = true;
     let offset = 0;
     let total;
     while (true) {
@@ -140,7 +146,15 @@ export async function exportInventory(client, options) {
       const devices = page.devices || [];
       if (!Array.isArray(devices)) throw new ExampleError("Inventory.search returned an invalid devices collection.");
       for (const device of devices) {
-        await handle.write(csvRow(CSV_FIELDS.map((field) => device[field])));
+        if (format === "csv") {
+          await handle.write(csvRow(CSV_FIELDS.map((field) => device[field])));
+        } else {
+          const record = Object.fromEntries(CSV_FIELDS.map((field) => [field, device[field] ?? null]));
+          if (!firstJsonRecord) await handle.write(",\n");
+          const rendered = JSON.stringify(record, null, 2).split("\n").map((line) => `  ${line}`).join("\n");
+          await handle.write(rendered);
+          firstJsonRecord = false;
+        }
         count += 1;
       }
       const returnedPageSize = Number(page.pageSize || pageSize);
@@ -153,6 +167,7 @@ export async function exportInventory(client, options) {
       if (!devices.length) throw new ExampleError("Inventory.search returned an empty page before the reported total.");
       offset += returnedPageSize;
     }
+    if (format === "json") await handle.write("\n]\n");
     await handle.close();
     handle = undefined;
     await rename(temporaryFile, outputFile);
@@ -166,7 +181,12 @@ export async function exportInventory(client, options) {
 
 export async function main() {
   const directory = path.dirname(fileURLToPath(import.meta.url));
-  const config = await loadConfig(directory);
+  const envOffset = process.argv.indexOf("--env");
+  const formatOffset = process.argv.indexOf("--format");
+  if (envOffset >= 0 && !process.argv[envOffset + 1]) throw new ExampleError("--env requires a file path.");
+  if (formatOffset >= 0 && !process.argv[formatOffset + 1]) throw new ExampleError("--format requires csv or json.");
+  const envFile = envOffset >= 0 ? path.resolve(process.argv[envOffset + 1]) : path.join(directory, ".env");
+  const config = await loadConfig(directory, envFile, formatOffset >= 0 ? process.argv[formatOffset + 1] : undefined);
   const client = new NetLDClient(config.baseUrl, config.apiKey);
   await client.login();
   const count = await exportInventory(client, config);
