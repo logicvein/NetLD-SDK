@@ -24,6 +24,8 @@ yarn-error.log*
 Examples/Advanced/Run-Cmd-And-Export-Log/**/commands.txt
 Examples/Advanced/Run-Cmd-And-Export-Log/**/output/
 Examples/Advanced/Export-Device-Inventory/**/inventory.csv
+Examples/Advanced/Export-Device-Interfaces/**/interfaces.csv
+Examples/Advanced/Export-Device-Interfaces/**/interface-failures.csv
 
 # Editors and operating systems
 .DS_Store
