@@ -1,4 +1,4 @@
-# PRTG Integrations
+# LiveAction Integrations
 
 These examples connect LogicVein products with BlueCat Networks' LiveNX.
 
