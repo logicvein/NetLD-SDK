@@ -13,7 +13,7 @@ from jsonrpc import JsonRpcProxy, JsonError
 
 liveNxHost = "10.0.0.1"
 liveNxApiPort = "8093"
-liveNxToken = "5WuHhswF5CzGOZ7v12g8iu5+F8PqpmHoOGSt3wWP9rs="
+liveNxToken = "token-goes-here"
 
 thirdeyeHost = "10.0.40.110"
 thirdeyeUser = "admin"
