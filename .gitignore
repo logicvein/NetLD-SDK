@@ -18,6 +18,10 @@ yarn-error.log*
 .env.local
 .env.*.local
 
+# Advanced example runtime files
+Examples/Advanced/Run-Cmd-And-Export-Log/**/commands.txt
+Examples/Advanced/Run-Cmd-And-Export-Log/**/output/
+
 # Editors and operating systems
 .DS_Store
 .AppleDouble
