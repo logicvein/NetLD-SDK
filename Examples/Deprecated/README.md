@@ -13,6 +13,10 @@ automation or run them against a production system.**
 
 For current, documented examples, see [Getting Started](../Getting-Started/).
 
+## Create Device
+
+The historical Python 3, Perl, and Ruby create-device demonstrations are grouped under [Create-Device](Create-Device/). Use the maintained [Create a Device](../Getting-Started/Create-Device/) example instead.
+
 ## Python 2
 
 The `Python-2` collection requires Python 2, which is end-of-life. It is
