@@ -33,6 +33,9 @@ Examples/Advanced/Backup-Saved-Jobs/**/saved-job-failures.json
 Examples/Advanced/Archive-Configuration-Revisions/**/configuration-archive/
 Examples/Advanced/Archive-Configuration-Revisions/**/configuration-archive-state.json
 Examples/Advanced/Archive-Configuration-Revisions/**/configuration-archive-run.json
+Examples/Advanced/Export-Hardware-Inventory/**/hardware-inventory.csv
+Examples/Advanced/Export-Hardware-Inventory/**/hardware-inventory.json
+Examples/Advanced/Export-Hardware-Inventory/**/hardware-failures.csv
 
 # Editors and operating systems
 .DS_Store

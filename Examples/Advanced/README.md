@@ -7,3 +7,4 @@ These examples combine multiple LogicVein APIs into complete operational workflo
 - [Export Device Interfaces](Export-Device-Interfaces/) retrieves the stored interfaces for every matching device and records per-device lookup failures separately.
 - [Back Up Saved Jobs](Backup-Saved-Jobs/) retrieves complete saved-job definitions and writes a versioned JSON backup without modifying the scheduler.
 - [Archive Configuration Revisions](Archive-Configuration-Revisions/) incrementally saves stored device configurations and their revision metadata using documented APIs.
+- [Export Hardware Inventory](Export-Hardware-Inventory/) exports collected chassis, cards, memory, CPU, and lifecycle details to CSV or JSON.
