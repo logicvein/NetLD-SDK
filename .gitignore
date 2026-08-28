@@ -12,6 +12,7 @@ venv/
 node_modules/
 npm-debug.log*
 yarn-error.log*
+/Examples/**/package*.json
 
 # Local configuration
 .env
@@ -29,6 +30,9 @@ Examples/Advanced/Export-Device-Interfaces/**/interfaces.csv
 Examples/Advanced/Export-Device-Interfaces/**/interface-failures.csv
 Examples/Advanced/Backup-Saved-Jobs/**/saved-jobs.json
 Examples/Advanced/Backup-Saved-Jobs/**/saved-job-failures.json
+Examples/Advanced/Archive-Configuration-Revisions/**/configuration-archive/
+Examples/Advanced/Archive-Configuration-Revisions/**/configuration-archive-state.json
+Examples/Advanced/Archive-Configuration-Revisions/**/configuration-archive-run.json
 
 # Editors and operating systems
 .DS_Store

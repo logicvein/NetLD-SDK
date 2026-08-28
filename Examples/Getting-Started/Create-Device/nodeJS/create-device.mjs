@@ -1,13 +1,25 @@
 #!/usr/bin/env node
 
-import { config as loadDotEnv } from "dotenv";
+import fs from "node:fs";
 import { isIP } from "node:net";
 import process from "node:process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { NetLDClient, NetLDError } from "./netld-example-client.mjs";
 
-loadDotEnv({ path: fileURLToPath(new URL(".env", import.meta.url)), override: true, quiet: true });
+function loadEnv(file) {
+  if (!fs.existsSync(file)) return;
+  for (const raw of fs.readFileSync(file, "utf8").split(/\r?\n/)) {
+    const match = raw.match(/^\s*(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
+    if (!match || raw.trimStart().startsWith("#")) continue;
+    let value = match[2];
+    if ((value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'"))) value = value.slice(1, -1);
+    process.env[match[1]] = value;
+  }
+}
+
+loadEnv(fileURLToPath(new URL(".env", import.meta.url)));
 
 export function createParameters(network, ipAddress, adapterId) {
   const address = ipAddress.trim();

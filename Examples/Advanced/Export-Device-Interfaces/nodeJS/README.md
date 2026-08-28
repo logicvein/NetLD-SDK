@@ -13,4 +13,4 @@ For repository testing, use the shared environment file without copying it:
 node export-device-interfaces.mjs --env ../../../.env.netld
 ```
 
-Run tests with `npm test`.
+Run tests with `node --test`.

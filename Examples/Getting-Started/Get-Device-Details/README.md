@@ -81,7 +81,6 @@ On Windows, activate the virtual environment with:
 From the `nodeJS` directory:
 
 ```bash
-npm install dotenv
 node get-device-details.mjs
 ```
 

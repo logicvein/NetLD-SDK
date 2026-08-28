@@ -101,7 +101,6 @@ pwsh ./create-device.ps1
 
 ```shell
 cd nodeJS
-npm install
 cp .env.example .env
 node create-device.mjs
 ```
