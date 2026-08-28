@@ -1,6 +1,7 @@
 # Palo Alto Operational Collection
 
-Last updated: 2026-08-28  
+Last updated: 2026-08-28
+
 Tested against: Palo Alto Networks VM-Series firewall with PAN-OS 11.2 MIBs
 
 This example monitor set provides operational visibility into a Palo Alto

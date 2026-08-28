@@ -1,6 +1,7 @@
 # Cisco Catalyst 9800 WLC Operational Collection
 
-Last updated: 2026-08-28  
+Last updated: 2026-08-28
+
 Tested against: Cisco C9800-CL running IOS XE 17.15.4d
 
 This example monitor set provides operational visibility into the wireless

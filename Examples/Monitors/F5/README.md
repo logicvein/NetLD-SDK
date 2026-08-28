@@ -1,6 +1,7 @@
 # F5 BIG-IP Operational Collection
 
-Last updated: 2026-08-28  
+Last updated: 2026-08-28
+
 Tested against: F5 BIG-IP Virtual Edition 21.1.0.1
 
 This example monitor set provides baseline operational visibility for F5

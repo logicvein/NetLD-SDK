@@ -1,6 +1,7 @@
 # FortiGate Operational Collection
 
-Last updated: 2026-08-28  
+Last updated: 2026-08-28
+
 Tested against: FortiGate-VM64-KVM running FortiOS 7.6.7
 
 This example monitor set provides operational visibility into the FortiGate's

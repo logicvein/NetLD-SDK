@@ -1,6 +1,7 @@
 # ArubaOS Mobility Controller Operational Collection
 
-Last updated: 2026-08-28  
+Last updated: 2026-08-28
+
 Tested against: Aruba 7010 running ArubaOS 8.12.0.1 SSR (build 89864)
 
 This example monitor set provides operational visibility into an ArubaOS
