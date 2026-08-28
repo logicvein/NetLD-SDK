@@ -1,0 +1,12 @@
+{
+  "name": "logicvein-live-nx-inventory-bridge",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "csv-parse": "^6.1.0",
+    "dotenv": "^17.2.0"
+  }
+}
