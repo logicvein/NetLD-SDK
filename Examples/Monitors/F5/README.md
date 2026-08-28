@@ -67,7 +67,7 @@ Review the set before enabling automatic assignment in your environment.
 
 All six monitors use SNMP and have a one-minute collection interval.
 
-### Appliance Baseline
+### F5 BIG-IP - Appliance Baseline — 1 minute
 
 Collects general appliance resource and connection statistics:
 
@@ -87,7 +87,7 @@ Collects general appliance resource and connection statistics:
 The set collects the raw used and total memory values. It does not define
 derived memory or swap percentages.
 
-### HA and Config Sync
+### F5 BIG-IP - HA and Config Sync — 1 minute
 
 Collects device-group synchronization and failover state:
 
@@ -98,7 +98,7 @@ Collects device-group synchronization and failover state:
 - `sysCmFailoverStatusStatus`
 - `sysCmFailoverStatusSummary`
 
-### Traffic Groups
+### F5 BIG-IP - Traffic Groups — 1 minute
 
 Collects traffic-group ownership and failover status from
 `F5-BIGIP-SYSTEM-MIB::sysCmTrafficGroupStatusTable`, including:
@@ -107,7 +107,7 @@ Collects traffic-group ownership and failover status from
 - `sysCmTrafficGroupStatusDeviceName`
 - `sysCmTrafficGroupStatusFailoverStatus`
 
-### Virtual Server Status
+### F5 BIG-IP - Virtual Server Status — 1 minute
 
 Collects virtual-server availability and enabled state from
 `F5-BIGIP-LOCAL-MIB::ltmVirtualServTable`, including:
@@ -117,7 +117,7 @@ Collects virtual-server availability and enabled state from
 - `ltmVirtualServEnabledState`
 - `ltmVirtualServStatusReason`
 
-### Pool Status
+### F5 BIG-IP - Pool Status — 1 minute
 
 Collects pool availability and enabled state from
 `F5-BIGIP-LOCAL-MIB::ltmPoolStatusTable`, including:
@@ -127,7 +127,7 @@ Collects pool availability and enabled state from
 - `ltmPoolStatusEnabledState`
 - `ltmPoolStatusDetailReason`
 
-### Pool Member Status
+### F5 BIG-IP - Pool Member Status — 1 minute
 
 Collects pool-member identity, availability, and enabled state from
 `F5-BIGIP-LOCAL-MIB::ltmPoolMbrStatusTable`, including:
