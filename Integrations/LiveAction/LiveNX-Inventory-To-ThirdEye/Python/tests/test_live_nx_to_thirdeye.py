@@ -1,6 +1,7 @@
 import pathlib
 import sys
 import unittest
+from typing import Any, cast
 
 
 sys.path.insert(0, str(pathlib.Path(__file__).parents[1]))
@@ -78,6 +79,9 @@ class LiveNXClientTests(unittest.TestCase):
                 return None
 
         class Session:
+            url: str
+            kwargs: dict[str, Any]
+
             def get(self, url, **kwargs):
                 self.url = url
                 self.kwargs = kwargs
@@ -88,17 +92,18 @@ class LiveNXClientTests(unittest.TestCase):
             "secret-token",
             "/v1/devices/export/csv",
         )
-        client.session = Session()
+        session = Session()
+        client.session = cast(Any, session)
 
         client.export_devices_csv()
 
-        self.assertNotIn("secret-token", client.session.url)
+        self.assertNotIn("secret-token", session.url)
         self.assertEqual(
-            client.session.kwargs["headers"]["Authorization"],
+            session.kwargs["headers"]["Authorization"],
             "Bearer secret-token",
         )
-        self.assertTrue(client.session.kwargs["verify"])
-        self.assertFalse(client.session.kwargs["allow_redirects"])
+        self.assertTrue(session.kwargs["verify"])
+        self.assertFalse(session.kwargs["allow_redirects"])
 
 
 class NetLDClientTests(unittest.TestCase):

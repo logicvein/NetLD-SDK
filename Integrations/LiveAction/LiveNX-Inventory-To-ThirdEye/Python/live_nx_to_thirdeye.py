@@ -151,7 +151,7 @@ class BridgeConfig:
 
 
 class LiveNXClient:
-    def __init__(self, base_url, api_token, export_path, timeout=30):
+    def __init__(self, base_url, api_token, export_path, timeout: float = 30):
         self.base_url = base_url.rstrip("/")
         self.api_token = api_token
         self.export_path = "/" + export_path.lstrip("/")
@@ -193,7 +193,7 @@ class LiveNXClient:
 
 
 class NetLDClient:
-    def __init__(self, base_url, api_key, timeout=30, debug=False):
+    def __init__(self, base_url, api_key, timeout: float = 30, debug=False):
         self.base_url = base_url.rstrip("/")
         self.api_key = api_key
         self.timeout = timeout

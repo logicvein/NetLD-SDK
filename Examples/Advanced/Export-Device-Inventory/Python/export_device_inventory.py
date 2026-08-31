@@ -18,7 +18,7 @@ import requests
 from dotenv import load_dotenv
 
 
-CSV_FIELDS = (
+CSV_FIELDS: tuple[str, ...] = (
     "network", "ipAddress", "hostname", "adapterId", "deviceType",
     "hardwareVendor", "model", "serialNumber", "softwareVendor", "osVersion",
     "backupStatus", "complianceState", "lastBackup", "lastTelemetry", "memoSummary",

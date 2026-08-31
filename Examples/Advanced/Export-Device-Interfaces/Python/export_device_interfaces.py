@@ -18,12 +18,12 @@ import requests
 from dotenv import load_dotenv
 
 
-INTERFACE_FIELDS = (
+INTERFACE_FIELDS: tuple[str, ...] = (
     "network", "deviceIpAddress", "hostname", "interfaceId", "interfaceIndex",
     "name", "ifName", "type", "description", "comment", "macAddress", "mtu",
     "speed", "adminUp", "vrfName", "ipAddresses",
 )
-FAILURE_FIELDS = ("network", "deviceIpAddress", "hostname", "error")
+FAILURE_FIELDS: tuple[str, ...] = ("network", "deviceIpAddress", "hostname", "error")
 
 
 class ExampleError(RuntimeError):

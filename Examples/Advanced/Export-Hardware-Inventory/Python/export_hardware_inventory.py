@@ -10,7 +10,7 @@ from typing import Any, Iterator
 import requests
 from dotenv import load_dotenv
 
-HARDWARE_FIELDS = (
+HARDWARE_FIELDS: tuple[str, ...] = (
     "network",
     "deviceIpAddress",
     "hostname",
@@ -38,7 +38,7 @@ HARDWARE_FIELDS = (
     "latest",
     "cardParentId",
 )
-FAILURE_FIELDS = ("network", "deviceIpAddress", "hostname", "error")
+FAILURE_FIELDS: tuple[str, ...] = ("network", "deviceIpAddress", "hostname", "error")
 
 
 class ExampleError(RuntimeError):
