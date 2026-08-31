@@ -15,15 +15,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
-try:
-    import requests
-except ModuleNotFoundError:  # Pure unit tests do not require the HTTP client.
-    requests = None  # type: ignore[assignment]
-
-try:
-    from dotenv import load_dotenv
-except ModuleNotFoundError:  # Pure unit tests do not require .env loading.
-    load_dotenv = None  # type: ignore[assignment]
+import requests
+from dotenv import load_dotenv
 
 
 class ProbeError(RuntimeError):
@@ -57,8 +50,6 @@ class Config:
 
     @classmethod
     def from_env(cls, env_path: Path) -> "Config":
-        if load_dotenv is None:
-            raise ProbeError("Install the Python dependencies from requirements.txt.")
         load_dotenv(env_path, override=True)
         base_url = os.getenv("NETLD_BASE_URL", "").strip()
         api_key = os.getenv("NETLD_API_KEY", "").strip()
@@ -125,8 +116,6 @@ class StateStore:
 
 class NetLDClient:
     def __init__(self, base_url: str, api_key: str, timeout: int):
-        if requests is None:
-            raise ProbeError("Install the Python dependencies from requirements.txt.")
         self.url = f"{base_url.rstrip('/')}/rest"
         self.timeout = timeout
         self.session = requests.Session()

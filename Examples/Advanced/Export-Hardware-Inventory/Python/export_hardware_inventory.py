@@ -7,14 +7,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterator
 
-try:
-    import requests
-except ModuleNotFoundError:
-    requests = None
-try:
-    from dotenv import load_dotenv
-except ModuleNotFoundError:
-    load_dotenv = None
+import requests
+from dotenv import load_dotenv
 
 HARDWARE_FIELDS = (
     "network",
@@ -72,8 +66,6 @@ class Config:
 
     @classmethod
     def from_env(cls, env_path: Path, base: Path, format_override: str | None = None):
-        if load_dotenv is None:
-            raise ExampleError("Install the Python dependencies from requirements.txt.")
         load_dotenv(env_path, override=True)
         url, key = (
             os.getenv("NETLD_BASE_URL", "").strip(),
@@ -114,8 +106,6 @@ class Config:
 
 class NetLDClient:
     def __init__(self, base_url, api_key, timeout=30):
-        if requests is None:
-            raise ExampleError("Install the Python dependencies from requirements.txt.")
         self.base_url, self.timeout, self.session = (
             base_url,
             timeout,

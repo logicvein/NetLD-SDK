@@ -15,14 +15,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-try:
-    import requests
-except ModuleNotFoundError:
-    requests = None  # type: ignore[assignment]
-try:
-    from dotenv import load_dotenv
-except ModuleNotFoundError:
-    load_dotenv = None  # type: ignore[assignment]
+import requests
+from dotenv import load_dotenv
+
 
 STATE_FORMAT = "logicvein-netld-terminal-log-export-state"
 RUN_FORMAT = "logicvein-netld-terminal-log-export-run"
@@ -76,8 +71,6 @@ class Config:
 
     @classmethod
     def from_env(cls, env_path: Path, base: Path) -> "Config":
-        if load_dotenv is None:
-            raise ExampleError("Install the Python dependencies from requirements.txt.")
         load_dotenv(env_path, override=True)
         url = os.getenv("NETLD_BASE_URL", "").strip()
         key = os.getenv("NETLD_API_KEY", "").strip()
@@ -115,8 +108,6 @@ class Config:
 
 class NetLDClient:
     def __init__(self, config: Config, timeout: float = 30):
-        if requests is None:
-            raise ExampleError("Install the Python dependencies from requirements.txt.")
         self.config = config
         self.timeout = timeout
         self.session = requests.Session()

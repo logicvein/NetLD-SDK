@@ -2,15 +2,8 @@ import json
 import os
 import uuid
 
-try:
-    import requests
-except ModuleNotFoundError:
-    requests = None
-
-try:
-    from dotenv import load_dotenv
-except ModuleNotFoundError:
-    load_dotenv = None
+import requests
+from dotenv import load_dotenv
 
 
 class NetLDError(RuntimeError):
@@ -18,17 +11,11 @@ class NetLDError(RuntimeError):
 
 
 def load_environment(path):
-    if load_dotenv is None:
-        if os.path.exists(path):
-            raise NetLDError("Install the Python dependencies from requirements.txt.")
-        return
     load_dotenv(path, override=True)
 
 
 class NetLDClient:
     def __init__(self, base_url, api_key, timeout=10):
-        if requests is None:
-            raise NetLDError("Install the Python dependencies from requirements.txt.")
         self.base_url = base_url.rstrip("/")
         self.api_key = api_key
         self.timeout = timeout
