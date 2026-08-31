@@ -27,8 +27,9 @@ The following historical Perl and Ruby examples have maintained replacements:
 - [Export Device Inventory](Export-Device-Inventory/) replaces the old CSV inventory exporters.
 - [Back Up Saved Jobs](Backup-Saved-Jobs/) replaces the old saved-job JSON exporter.
 - [Search Inventory](Search-Inventory/) replaces the old interactive device-search scripts.
+- [Export Terminal Proxy Logs](Export-Terminal-Logs/) replaces the old incremental terminal-log exporters.
 
-Each directory identifies the maintained example and explains why the original implementation is retained only for historical inspection. Legacy job-history, terminal-log, job-import, ThirdEye-violation, and static-credential workflows remain outside these groups until maintained replacements exist.
+Each directory identifies the maintained example and explains why the original implementation is retained only for historical inspection. Legacy job-history, job-import, ThirdEye-violation, and static-credential workflows remain outside these groups until maintained replacements exist.
 
 ## Python 2
 

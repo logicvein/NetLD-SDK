@@ -36,6 +36,9 @@ Examples/Advanced/Archive-Configuration-Revisions/**/configuration-archive-run.j
 Examples/Advanced/Export-Hardware-Inventory/**/hardware-inventory.csv
 Examples/Advanced/Export-Hardware-Inventory/**/hardware-inventory.json
 Examples/Advanced/Export-Hardware-Inventory/**/hardware-failures.csv
+Examples/Advanced/Export-Terminal-Logs/**/terminal-logs/
+Examples/Advanced/Export-Terminal-Logs/**/terminal-log-export-state.json
+Examples/Advanced/Export-Terminal-Logs/**/terminal-log-export-run.json
 
 # Editors and operating systems
 .DS_Store

@@ -8,3 +8,4 @@ These examples combine multiple LogicVein APIs into complete operational workflo
 - [Back Up Saved Jobs](Backup-Saved-Jobs/) retrieves complete saved-job definitions and writes a versioned JSON backup without modifying the scheduler.
 - [Archive Configuration Revisions](Archive-Configuration-Revisions/) incrementally saves stored device configurations and their revision metadata using documented APIs.
 - [Export Hardware Inventory](Export-Hardware-Inventory/) exports collected chassis, cards, memory, CPU, and lifecycle details to CSV or JSON.
+- [Export Terminal Proxy Logs](Export-Terminal-Logs/) incrementally archives documented terminal proxy session content and metadata.
