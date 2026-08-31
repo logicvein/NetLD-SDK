@@ -11,11 +11,24 @@ They may fail without warning or make unintended changes to a system.
 **LogicVein strongly recommends that you do not use these examples for new
 automation or run them against a production system.**
 
-For current, documented examples, see [Getting Started](../Getting-Started/).
+For current, documented examples, see [Getting Started](../Getting-Started/)
+and [Advanced Examples](../Advanced/).
 
 ## Create Device
 
 The historical Python 3, Perl, and Ruby create-device demonstrations are grouped under [Create-Device](Create-Device/). Use the maintained [Create a Device](../Getting-Started/Create-Device/) example instead.
+
+## Reimplemented Workflows
+
+The following historical Perl and Ruby examples have maintained replacements:
+
+- [Archive Configuration Revisions](Archive-Configuration-Revisions/) replaces the old incremental configuration exporters.
+- [Export Hardware Inventory](Export-Hardware-Inventory/) replaces the old Hardware Report exporters.
+- [Export Device Inventory](Export-Device-Inventory/) replaces the old CSV inventory exporters.
+- [Back Up Saved Jobs](Backup-Saved-Jobs/) replaces the old saved-job JSON exporter.
+- [Search Inventory](Search-Inventory/) replaces the old interactive device-search scripts.
+
+Each directory identifies the maintained example and explains why the original implementation is retained only for historical inspection. Legacy job-history, terminal-log, job-import, ThirdEye-violation, and static-credential workflows remain outside these groups until maintained replacements exist.
 
 ## Python 2
 
