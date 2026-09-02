@@ -1,27 +1,15 @@
-Online documentation can be found hosted on [Read the Docs](http://www.readthedocs.org):
+# LogicVein SDK Examples
 
-- [API Documentation](http://netld-sdk.readthedocs.org/en/master/)
+This repository contains practical examples for extending and integrating LogicVein netLD and ThirdEye. It complements the [API reference](https://docs.logicvein.com/manuals/logicvein-api/) with working starting points that show how to authenticate, call the JSON-RPC API, page through results, handle errors, and turn product data and operations into useful automation.
 
-Example scripts are available in the [Examples](https://github.com/logicvein/NetLD-SDK/tree/14.06/Examples) folder of this project.
+If you are new to the API, begin with [Getting Started](Examples/Getting-Started/). These focused examples cover common tasks in Python 3, Node.js, and PowerShell. The [Advanced Examples](Examples/Advanced/) build on the same patterns to create more complete workflows, including exports, backups, configuration archives, and job execution. Each maintained example includes its own prerequisites, configuration, run instructions, and expected output.
 
-## API Support Policy
+The repository also includes [Integrations](Integrations/) that connect LogicVein products with other platforms and [Monitor Sets](Monitors/) that can be imported into ThirdEye. Examples are intended to be reviewed and adapted for your environment: use appropriately scoped API keys, test changes safely, and protect credentials and exported data. Content under [Deprecated](Examples/Deprecated/) is retained for historical reference and should not be used as the basis for new automation.
 
-> [!NOTE]
-> LogicVein will make best efforts to ensure relative stability in the product SDK API, as it is documented. In addition, LogicVein will maintain a Technical Announcements page on our website whereon changes to the public API will be announced sixty (60) days prior to such changes appearing in the product.
->
-> https://logicvein.com/netld-api/
->
-> Exceptions to this policy would include any public API change required to address a security concern or exposure; any public API change required to address a product's stability concern, or any API that is documented but marked as beta. In such a case, the Technical Announcements page will be updated, but no warranty regarding advance notification can be provided.
->
-> LogicVein will make best efforts, through internal processes, to ensure compliance with this policy.
+Example scripts are available in the [Examples](Examples/) folder of this project.
 
-## API Support Policy (Japanese)
+## Terms of Use
 
-> [!NOTE]
-> LogicVeinは、ドキュメント化された製品 SDK API の相対的な安定性を確保するため、最善の努力を行います。また、LogicVein はウェブサイト上に「技術発表（Technical Announcements）」ページを維持し、パブリック API への変更が製品に反映される 60 日前 に、当該変更を同ページにて事前告知いたします。
->
-> https://lvi.co.jp/support/technical-announcements
->
-> このポリシーの例外には、セキュリティ上の懸念または露出に対処するために必要な公開APIの変更、製品の安定性に関する懸念に対処するために必要な公開APIの変更、またはドキュメント化されているがベータ版としてマークされているAPIが含まれます。このような場合、技術発表ページは更新されますが、事前通知に関する保証は提供されません。
->
-> LogicVeinは、内部プロセスを通じて本ポリシーの遵守を確保するため、最善の努力を行います。
+These examples are provided as guides to help users extend the capabilities of the platform. We appreciate reports of bugs or other issues found in the examples; however, the examples are provided “AS IS” and “WITH ALL FAULTS,” without warranties of any kind.
+
+These examples are not eligible for technical support coverage. By installing or using the example content on a licensed Net LineDancer or ThirdEye system, you acknowledge that you have read and agree to these terms of use.
