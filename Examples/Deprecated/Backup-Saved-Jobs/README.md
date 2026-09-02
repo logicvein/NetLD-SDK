@@ -6,4 +6,4 @@ It is retained only for historical inspection and should not be used on a curren
 
 Use the maintained [Back Up Saved Jobs](../../Advanced/Backup-Saved-Jobs/) example instead. It provides tested Python, Node.js, and PowerShell implementations with API-key authentication, multiple managed networks, complete pagination, full job definitions, versioned output, deduplication, and failure reporting.
 
-The old `importJobs.pl` script remains outside this directory because a maintained restore/import workflow has not yet been implemented.
+The old [`importJobs.pl`](../Import-Saved-Jobs/) workflow is archived separately because it mutates the saved-job registry and has no maintained replacement.

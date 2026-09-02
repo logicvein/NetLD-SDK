@@ -31,7 +31,19 @@ The following historical Perl and Ruby examples have maintained replacements:
 - [Archive Job Execution Outputs](Archive-Job-Execution-Outputs/) replaces the old incremental job-output exporters.
 - [Export ThirdEye Violations](Export-ThirdEye-Violations/) replaces the old PowerShell servlet-based violation exporter.
 
-Each directory identifies the maintained example and explains why the original implementation is retained only for historical inspection. Legacy job-import and static-credential workflows remain outside these groups until maintained replacements exist.
+Each directory identifies the maintained example and explains why the original implementation is retained only for historical inspection.
+
+## Archived Write Examples
+
+These mutating examples have no maintained replacements and are preserved only
+to explain their historical use cases:
+
+- [Import Saved Jobs](Import-Saved-Jobs/) used an obsolete API with unconditional replacement enabled.
+- [Import Static Credentials](Import-Static-Credentials/) uploaded device secrets through an obsolete servlet workflow.
+
+Neither example should be run against a current appliance. A future replacement
+would need preview-first behavior, explicit execution controls, and a tested
+rollback or transaction boundary.
 
 ## Python 2
 
