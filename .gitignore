@@ -19,7 +19,7 @@ yarn-error.log*
 .env.local
 .env.*.local
 /Examples/.env.netld
-/Examples/.env.thirdeye
+/Examples/.env.tes
 
 # Advanced example runtime files
 Examples/Advanced/Run-Cmd-And-Export-Log/**/commands.txt
