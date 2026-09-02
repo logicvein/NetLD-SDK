@@ -11,7 +11,7 @@ formatted JSON. If the device does not exist, `Inventory.getDevice` returns
 For an introduction to the API, see
 [Getting Started with the netLD API](https://logicvein.com/netld-api-get-started/).
 The complete method reference is available in the
-[netLD SDK API documentation](https://netld-sdk.readthedocs.io/en/latest/).
+[LogicVein API manual](https://docs.logicvein.com/manuals/logicvein-api/).
 
 ## Request Shape
 
@@ -81,7 +81,6 @@ On Windows, activate the virtual environment with:
 From the `nodeJS` directory:
 
 ```bash
-npm install dotenv
 node get-device-details.mjs
 ```
 

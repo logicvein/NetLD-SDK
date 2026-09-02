@@ -13,7 +13,7 @@ a JSON-RPC request to `POST /rest`, and print the complete paged incident result
 as formatted JSON.
 
 The complete method reference is available in the
-[netLD SDK API documentation](https://netld-sdk.readthedocs.io/en/latest/Incidents.html).
+[LogicVein API manual](https://docs.logicvein.com/manuals/logicvein-api/).
 
 ## Request Shape
 
