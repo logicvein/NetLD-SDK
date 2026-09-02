@@ -8,12 +8,12 @@ The repository also includes [Integrations](Integrations/) that connect LogicVei
 
 If you'd like examples on how to use LogicVein's Playbook functionality, we maintain [Playbook Examples](https://github.com/LogicVein-org/Playbooks) in a separate repository.
 
-Examples are intended to be reviewed and adapted for your environment: use appropriately scoped API keys, test changes safely, and protect credentials and exported data. Content under [Deprecated](Examples/Deprecated/) is retained for historical reference and should not be used as the basis for new automation.
+Examples are intended to be reviewed and adapted for your environment: use appropriately scoped API keys, test changes safely, and protect credentials and exported data.
 
-Example scripts are available in the [Examples](Examples/) folder of this project.
+Content under [Deprecated](Examples/Deprecated/) is retained for historical reference and should not be used as the basis for new automation.
 
-## Terms of Use
+## License and Support
 
-These examples are provided as guides to help users extend the capabilities of the platform. We appreciate reports of bugs or other issues found in the examples; however, the examples are provided “AS IS” and “WITH ALL FAULTS,” without warranties of any kind.
+This repository is licensed under the [Apache License, Version 2.0](LICENSE).
 
-These examples are not eligible for technical support coverage. By installing or using the example content on a licensed Net LineDancer or ThirdEye system, you acknowledge that you have read and agree to these terms of use.
+The examples are provided “AS IS,” without warranties of any kind, and are not eligible for technical support unless otherwise agreed in writing. We welcome reports of bugs and other issues found in the examples.
