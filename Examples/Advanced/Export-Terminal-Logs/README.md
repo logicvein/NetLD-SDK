@@ -1,6 +1,6 @@
 # Export Terminal Proxy Logs
 
-This example incrementally exports terminal proxy session logs stored by netLD or ThirdEye. It uses the documented `TermLogs.search` JSON-RPC method and the documented `/servlet/termlog` HTTP retrieval endpoint described in the [Terminal Proxy API](https://netld-sdk.readthedocs.io/en/latest/TerminalProxy.html#terminal-proxy-log-search-and-retrieval).
+This example incrementally exports terminal proxy session logs stored by netLD or ThirdEye. It uses the documented `TermLogs.search` JSON-RPC method and the documented `/servlet/termlog` HTTP retrieval endpoint described in the [LogicVein API manual](https://docs.logicvein.com/manuals/logicvein-api/).
 
 Implementations are provided for [Python](Python/), [Node.js](nodeJS/), and [PowerShell](PowerShell/). They use API-key authentication, verify TLS certificates, URL-encode retrieval parameters, write content and metadata atomically, and maintain an incremental watermark.
 
