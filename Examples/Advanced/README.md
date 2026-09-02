@@ -9,3 +9,4 @@ These examples combine multiple LogicVein APIs into complete operational workflo
 - [Archive Configuration Revisions](Archive-Configuration-Revisions/) incrementally saves stored device configurations and their revision metadata using documented APIs.
 - [Export Hardware Inventory](Export-Hardware-Inventory/) exports collected chassis, cards, memory, CPU, and lifecycle details to CSV or JSON.
 - [Export Terminal Proxy Logs](Export-Terminal-Logs/) incrementally archives documented terminal proxy session content and metadata.
+- [Export ThirdEye Violations](Export-ThirdEye-Violations/) incrementally exports ThirdEye trigger events to CSV or JSON using the product's structured, paged search contract.

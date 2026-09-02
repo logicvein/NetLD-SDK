@@ -29,8 +29,9 @@ The following historical Perl and Ruby examples have maintained replacements:
 - [Search Inventory](Search-Inventory/) replaces the old interactive device-search scripts.
 - [Export Terminal Proxy Logs](Export-Terminal-Logs/) replaces the old incremental terminal-log exporters.
 - [Archive Job Execution Outputs](Archive-Job-Execution-Outputs/) replaces the old incremental job-output exporters.
+- [Export ThirdEye Violations](Export-ThirdEye-Violations/) replaces the old PowerShell servlet-based violation exporter.
 
-Each directory identifies the maintained example and explains why the original implementation is retained only for historical inspection. Legacy job-import, ThirdEye-violation, and static-credential workflows remain outside these groups until maintained replacements exist.
+Each directory identifies the maintained example and explains why the original implementation is retained only for historical inspection. Legacy job-import and static-credential workflows remain outside these groups until maintained replacements exist.
 
 ## Python 2
 

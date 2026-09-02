@@ -42,6 +42,9 @@ Examples/Advanced/Export-Terminal-Logs/**/terminal-log-export-run.json
 Examples/Advanced/Archive-Job-Execution-Outputs/**/job-execution-outputs/
 Examples/Advanced/Archive-Job-Execution-Outputs/**/job-execution-output-state.json
 Examples/Advanced/Archive-Job-Execution-Outputs/**/job-execution-output-run.json
+Examples/Advanced/Export-ThirdEye-Violations/**/violation-exports/
+Examples/Advanced/Export-ThirdEye-Violations/**/violation-export-state.json
+Examples/Advanced/Export-ThirdEye-Violations/**/violation-export-run.json
 
 # Editors and operating systems
 .DS_Store
